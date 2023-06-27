@@ -1,0 +1,158 @@
+body {
+    margin: 0px;
+    width: 100vw;
+    height: 100vh;
+    font-family: Helvetica Neue, Arial, sans-serif;
+    overflow: hidden;
+}
+
+#content{
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    z-index: 0;
+}
+
+#info-column{
+    align-items: center;
+    justify-content: center;
+}
+
+#device-column{
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+#info{
+    position: relative;
+    width: 70%;
+    aspect-ratio: 10 / 7;
+    border: 3px solid black;
+    display: flex;
+    flex-direction: column;
+    padding: 2vw;
+}
+
+.info-subtitle{
+    font-size: 2vw;
+}
+
+.info-row{
+    width: 100%;
+    margin-bottom: 0.5vw;
+    margin-top: 0.5vw;
+}
+
+.bar-container{
+    display: flex;
+    justify-content: space-between;
+    height: 7%;
+    font-size: 1.2vw;
+}
+
+.bar{
+    border: 2px solid black;
+    display: flex;
+    justify-content: left;
+    width: 85%;
+}
+
+.bar-fill{
+    background-color: blue;
+    transition: width 0.1s ease-in-out;
+    width: 3%;
+}
+
+#device{
+    aspect-ratio: 18 / 39;  /* Based off of iPhone device dimension, 19.5:9 */
+    position: relative;
+    width: 50%;
+    border: 7px solid black;
+    border-radius: 45px;
+    overflow: hidden;
+}
+
+#screen{
+    width: 100%;
+    height: 100%;
+    user-select: none;
+}
+
+.post{
+    width: 100%;
+    height: 100%;
+}
+
+#modal{
+    width: 100vw;
+    height: 100vh;
+    background: rgb(0, 0, 0, .2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    position: absolute;
+    display: none;
+}
+
+#modal-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background-color: white;
+    border: 3px solid black;
+    text-align: center;
+}
+
+#modal-title{
+    font-size: 40px;
+}
+
+#modal-body{
+    font-size: 24px;
+    height: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* desktop */
+@media only screen and (min-width: 768px) {
+    #content{
+        display: flex;
+    }
+
+    #info-column{
+        width: 65vw;
+        height: 100vh;
+        display: flex;
+    }
+
+    #device-column{
+        width: 35vw;
+        height: 100vh;
+    }
+
+    #modal-box{
+        aspect-ratio: 5 / 3;
+        width: 450px;
+        padding: 30px;
+    }
+}
+
+/* mobile */
+@media only screen and (max-width: 767px) {
+    #info-column{
+        width: 100vw;
+        height: 100vh;
+        display: none;
+    }
+
+    #device-column{
+        width: 100w;
+        height: 100vh;
+    }
+}
+
+
