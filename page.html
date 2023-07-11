@@ -20,6 +20,10 @@
 </head>
 
 <body>
+    <div id="debug">Follows: <span id="debug-follows"> 0 </span> <br> 
+                    Likes: <span id="debug-likes"> 0 </span><br> 
+                    Shares: <span id="debug-shares"> 0 </span><br> 
+    </div>
     <div id="content">
         <div class="column" id="info-column">
             <div id="info">
@@ -80,8 +84,45 @@
 
         <div class="column" id="device-column">
             <div id="device">
+                <div id="intro">
+                    <div id="intro-0" class="intro-page" style="display:none">
+                        <div class="intro-title">Welcome!</div>
+                        <div class="intro-paragraph">You are helping test our new social media app and inform its development.</div>
+                        <div class="intro-paragraph">Click below to start.</div>
+                        <button class="intro-button">Try App</button>
+                    </div>
+
+                    <div id="intro-1" class="intro-page" style="display:none">
+                        <div class="intro-title">Getting started</div>
+                        <div class="intro-paragraph">Select 3 or more interests so we can get you started with some recommended content.</div>
+                        <div id="intro-button-container"></div>
+                        <button class="intro-button" id="interest-finished">Done</button>
+                    </div>
+
+                    <div id="intro-2" class="intro-page" style="display:none">
+                        <div id="intro-loading-ring">
+                            <div class="ring" id="ring1"></div>
+                            <div class="ring" id="ring2"></div>
+                            <div class="ring" id="ring3"></div>
+                            <div class="ring" id="ring4"></div>
+                         </div>
+                        <div class="intro-paragraph">Gathering more information about you...</div>
+                    </div>
+
+                    <div id="intro-3" class="intro-page" style="display:none">
+                        <div class="intro-paragraph">We found XXXXX posts that match your interests and demographic.</div>
+                        <div class="intro-paragraph">We will start by showing you a random selection, and improving our recommendations over time based on what we continue learning about you.</div>
+                        <button class="intro-button">Done</button>
+                    </div>
+
+                </div>
                 <img id="info-icon" src="images/bar-graph.png"\>
                 <div id="device-screen"> 
+                    <div id="device-buttons">
+                        <img id="follow" class="device-button" src="images/follow.png"\>
+                        <img id="like" class="device-button" src="images/like.png"\>
+                        <img id="share" class="device-button" src="images/share.png"\>
+                    </div>
                 </div>
             </div>
         </div>

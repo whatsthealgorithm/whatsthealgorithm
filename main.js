@@ -1,27 +1,41 @@
-var lastYPos = -1;
-var startingYPos = -1;
-var percentToSwipe = 15;
 var postHeight;
-var posts = [];
-var currentPost = 0;
 var device;
 var menu;
 var menuButton;
+var debugMenu;
+var introPages;
+
+var posts = [];
+var buttonCounts = {follows: 0, likes: 0, shares: 0};
+var introSequence = [];
+var interestDict = {};
+
 var waitingToProceed = false;
 var animating = false;
+var isMobile = false;
+var menuShowing = false;
+var debug = false;
+var inIntro = false;
 
 const initialPostLoad = 10;
 var mobileCutoff = 767;
-var isMobile;
-var menuShowing;
+var lastYPos = -1;
+var startingYPos = -1;
+var percentToSwipe = 15;
+var currentPost = 0;
+var introIndex = 0;
+var interestsPicked = 0;
 
 var mockMessage = {title: "Test Message", body: "We are interrupting your scrolling to tell you..." };
+var interests = ["Interest 1", "Interest 2", "Interest 3", "Interest 4", "Interest 5", "Interest 6", "Interest 7"];
 
 // On Page Load
 $(document).ready(function() { 
     device = document.getElementById("device-screen");
     menu = document.getElementById("info");
     menuButton = document.getElementById("info-icon");
+    debugMenu = document.getElementById("debug");
+
     loadContent();
 
     document.addEventListener("dragstart", dragStart);
@@ -32,8 +46,23 @@ $(document).ready(function() {
     document.addEventListener("touchend", touchEnd);
 
     device.addEventListener("click", click);
-    
+    var buttons = document.getElementsByClassName("device-button");
+    for (var i = 0; i < buttons.length; i++){
+        buttons[i].addEventListener("click", onDeviceButtonClicked);
+    };
+
+    var introButtons = document.getElementsByClassName("intro-button");
+    for (var i = 0; i < introButtons.length; i++){
+        introButtons[i].addEventListener("click", onIntroButtonClicked);
+    };
+
     window.addEventListener("resize", resize);
+
+    addEventListener("keypress", (e) => {
+        if (e.key == "d"){
+            toggleDebug();
+        }
+    });
 
     isMobile = $(window).width() < 767;
     if (isMobile){
@@ -44,8 +73,71 @@ $(document).ready(function() {
         menuButton.addEventListener("click", toggleInfoMenu);
         document.getElementById("info-exit-button").addEventListener("click", toggleInfoMenu);
         menu.style.top = info.offsetHeight + "px";
-    }
+    };
+
+    startIntro();
 });
+
+function startIntro(){
+    inIntro = true;
+    introPages = document.getElementsByClassName("intro-page");
+    for (var i = 0; i < introPages.length; i++){
+        introPages[i].style.display = "flex";
+        introPages[i].style.zIndex = 5 + introPages.length - i;
+        introSequence.push(introPages[i]);
+    }
+    introPages[0].style.opacity = 1;
+
+    var buttonContainer = document.getElementById("intro-button-container");
+    for (var i = 0; i < interests.length; i++){
+        var interestButton = document.createElement("button");
+        interestButton.className = "interest-selection";
+        interestButton.innerHTML = interests[i];
+        interestButton.onclick = onInterestButtonClicked;
+        buttonContainer.appendChild(interestButton);
+        interestDict[interests[i]] = false;
+    }
+    $("#interest-finished")[0].disabled = true;
+}
+
+function onIntroButtonClicked(){
+    var page =  introSequence[introIndex];
+    page.style.opacity = 0;
+    setTimeout(() => { page.style.display = "none"; }, 100);
+    introIndex++;
+
+    // Check if we need to wait
+    if (introIndex == 2){
+        setTimeout(onIntroButtonClicked, 4000);
+    }
+
+    if (introIndex >= introPages.length){
+        setTimeout(() => {
+            document.getElementById("intro").style.display = "none";
+            inIntro = false;
+        }, 100);
+    };
+}
+
+function onInterestButtonClicked(e){
+    if (!interestDict[e.target.innerHTML]){
+        e.target.style.backgroundColor = "#1ad631";
+        interestDict[e.target.innerHTML] = true;
+        interestsPicked++;
+    }
+    else{
+        e.target.style.backgroundColor = "antiquewhite";
+        interestDict[e.target.innerHTML] = false;
+        interestsPicked--;
+    }
+
+    if (interestsPicked >= 3){
+        $("#interest-finished")[0].disabled = false;
+    }
+    else{
+        $("#interest-finished")[0].disabled = true;
+    }
+}
 
 
 function loadContent(){
@@ -122,6 +214,10 @@ function touchMove(e){
 }
 
 function move(currentY){
+    if (inIntro){
+        return;
+    }
+
     // Detect if dragging has just started
     if (lastYPos == -1){
         lastYPos = currentY;
@@ -158,6 +254,10 @@ function touchEnd(e){
 }
 
 function moveEnd(){
+    if (inIntro){
+        return;
+    }
+
     var difference = startingYPos - lastYPos;
     var percentDragged = 100 * (difference / screen.height);
 
@@ -174,7 +274,7 @@ function moveEnd(){
 }
 
 function click(e){
-    if (animating){
+    if (animating || inIntro){
         return;
     }
     // Top forty percent of screen = scroll up
@@ -219,7 +319,16 @@ function snapToCurrentPost(){
         marginTop: '+=' + diff + 'px'
     }, 400, "swing", () => {animating = false});
 
-
+    if (waitingForMessage()){
+        setTimeout(() => {
+            $('#device-buttons')[0].style.opacity = 0;
+        }, 200);
+    }
+    else if ($('#device-buttons')[0].style.opacity == 0){
+        setTimeout(() => {
+            $('#device-buttons')[0].style.opacity = 1;
+        }, 500);
+    }
 }
 
 function setInfoWindow(){
@@ -242,6 +351,30 @@ function onMessageButtonClicked(){
 
     //lighten screen
     document.getElementById("info").style.backgroundColor = "";
+}
+
+function onDeviceButtonClicked(e){
+    if (e.target.id == "follow"){
+        buttonCounts.follows++;
+        document.getElementById("debug-follows").innerHTML =  buttonCounts.follows;
+    }
+    else if (e.target.id == "like"){
+        buttonCounts.likes++;
+        document.getElementById("debug-likes").innerHTML = buttonCounts.likes;
+    }
+    else if (e.target.id == "share"){
+        buttonCounts.shares++;
+        document.getElementById("debug-shares").innerHTML = buttonCounts.shares;
+    }
+
+    e.target.classList.remove('button-clicked')
+    void e.target.offsetWidth; // trigger reflow
+    e.target.classList.add('button-clicked');
+}
+
+function toggleDebug(){
+    debugMenu.style.display = debug ? "none" : "block";
+    debug = !debug;
 }
 
 function resize(){
