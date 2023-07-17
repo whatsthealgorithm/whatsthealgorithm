@@ -17,14 +17,17 @@ var menuShowing = false;
 var debug = false;
 var inIntro = false;
 
-const initialPostLoad = 10;
+const initialPostLoad = 5;
 var mobileCutoff = 767;
 var lastYPos = -1;
 var startingYPos = -1;
 var percentToSwipe = 15;
 var currentPost = 0;
+var totalPosts = 0;
 var introIndex = 0;
 var interestsPicked = 0;
+
+var heartSize = 1;
 
 var mockMessage = {title: "Test Message", body: "We are interrupting your scrolling to tell you..." };
 var interests = ["Interest 1", "Interest 2", "Interest 3", "Interest 4", "Interest 5", "Interest 6", "Interest 7"];
@@ -36,7 +39,7 @@ $(document).ready(function() {
     menuButton = document.getElementById("info-icon");
     debugMenu = document.getElementById("debug");
 
-    loadContent();
+    loadContent(initialPostLoad);
 
     document.addEventListener("dragstart", dragStart);
     document.addEventListener("dragend", dragEnd);
@@ -45,7 +48,6 @@ $(document).ready(function() {
     document.addEventListener("touchmove", touchMove);
     document.addEventListener("touchend", touchEnd);
 
-    device.addEventListener("click", click);
     var buttons = document.getElementsByClassName("device-button");
     for (var i = 0; i < buttons.length; i++){
         buttons[i].addEventListener("click", onDeviceButtonClicked);
@@ -75,10 +77,11 @@ $(document).ready(function() {
         menu.style.top = info.offsetHeight + "px";
     };
 
-    startIntro();
+    //startIntro();
 });
 
 function startIntro(){
+    document.getElementById("intro").style.display = "flex";
     inIntro = true;
     introPages = document.getElementsByClassName("intro-page");
     for (var i = 0; i < introPages.length; i++){
@@ -139,30 +142,34 @@ function onInterestButtonClicked(e){
     }
 }
 
-
-function loadContent(){
-    // Generate our posts, right now just colored divs
-    for (var i = 0; i < initialPostLoad; i++){
-        var post = insertMessage(i) ? createMessagePost(mockMessage, i) : createContentPost();
-        post.id = "post-" + i; 
+function loadContent(amount){
+    for (var i = totalPosts; i < totalPosts + amount; i++){
+        var post = insertMessage(i) ? createMessagePost(mockMessage, i) : createContentPost(i);
         post.setAttribute('draggable', true);
         device.appendChild(post);
         var entry = {div: post, type: insertMessage(i) ? "message" : "content", confirmed: false};
         posts.push(entry);
     }
+    totalPosts += amount;
     postHeight = $("#post-0")[0].clientHeight;
 }
 
-function createContentPost(){
+function createContentPost(index){
     var post = document.createElement("div");
+    post.id = "post-" + index; 
+    var content = new p5(heartContent, post);
+    content.heartSize = heartSize;
+    content.id = "content-" + index;
     post.style.backgroundColor = generateRandomColor();
     post.className = "post";
+    post.addEventListener("click", click);
     return post;
 }
 
 function createMessagePost(message, index){
     var messagePost = document.createElement("div");
     messagePost.className = "post message-div";
+    messagePost.id = "post-" + index; 
 
     var messageBox = document.createElement("div");
     messageBox.className = "message-box";
@@ -186,12 +193,13 @@ function createMessagePost(message, index){
     messageBox.appendChild(messageButton);
 
     messagePost.appendChild(messageBox);
+    messagePost.addEventListener("click", click);
     return messagePost;
 }
 
 function insertMessage(index){
     // Just arbitrary for now
-    return index == 3 || index == 6;
+    return index == 3;
 }
 
 // This prevents us from dragging a phantom version of the div
@@ -290,10 +298,20 @@ function click(e){
 }
 
 function tryNextPost(){
-    if (currentPost + 1 < initialPostLoad && !waitingForMessage()) {
+    if (currentPost + 1 < totalPosts && !waitingForMessage()) {
         currentPost++;
         setInfoWindow();
+
+        // See if we need to load more posts
+        if (currentPost + 1 >= totalPosts){
+            adjustContent();
+            loadContent(3);
+        }
     }
+}
+
+function adjustContent(){
+    heartSize = 1 + buttonCounts.likes * 0.1;
 }
 
 function tryLastPost(){
@@ -346,7 +364,7 @@ function setInfoWindow(){
 
 function onMessageButtonClicked(){
     posts[currentPost].confirmed = true; 
-    currentPost++;
+    tryNextPost();
     snapToCurrentPost();
 
     //lighten screen

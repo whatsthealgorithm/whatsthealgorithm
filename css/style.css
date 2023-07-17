@@ -1,0 +1,381 @@
+body {
+    margin: 0px;
+    width: 100vw;
+    height: 100vh;
+    font-family: Helvetica Neue, Arial, sans-serif;
+    overflow: hidden;
+    touch-action: manipulation;
+}
+
+#content{
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    z-index: 0;
+}
+
+#info-column{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+#device-column{
+    display: flex;
+    align-items: center;
+}
+
+#info{
+    position: relative;
+    width: 70%;
+    border: 3px solid black;
+    display: flex;
+    flex-direction: column;
+    transition: background-color 0.1s ease-in-out;
+}
+
+.info-subtitle{
+    font-size: 2vw;
+}
+
+.info-row{
+    width: 100%;
+    margin-bottom: 0.5vw;
+    margin-top: 0.5vw;
+}
+
+.bar-container{
+    display: flex;
+    justify-content: space-between;
+    height: 7%;
+    font-size: 1.2vw;
+}
+
+.bar{
+    border: 2px solid black;
+    display: flex;
+    justify-content: left;
+    width: 85%;
+}
+
+.bar-fill{
+    background-color: blue;
+    transition: width 0.1s ease-in-out;
+    width: 3%;
+}
+
+#device{
+    aspect-ratio: 18 / 39;  /* Based off of iPhone device dimension, 19.5:9 */
+    position: relative;
+    width: 65%;
+    border: 7px solid black;
+    border-radius: 45px;
+    overflow: hidden;
+}
+
+#device-screen{
+    width: 100%;
+    height: 100%;
+    user-select: none;
+}
+
+.post{
+    width: 100%;
+    height: 100%;
+}
+
+.message-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.message-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background-color: white;
+    border: 3px solid black;
+    text-align: center;
+    aspect-ratio: 5 / 8;
+    width: 80%;
+    align-items: center;
+}
+
+.message-title{
+    font-size: 200%;
+}
+
+.message-body{
+    font-size: 150%;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.message-button{
+    font-size: 150%;
+    margin-bottom: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#device-buttons{
+    display: flex;
+    flex-direction: column;
+    right: 5%;
+    top: 35%;
+    height: 30%;
+    position: absolute;
+    transition: opacity 0.1s ease-in-out;
+    z-index: 2;
+}
+
+.device-button{
+    height: 20%;
+    padding-bottom: 70%;
+}
+
+.button-clicked{
+    animation: animateButtonClick 0.2s;
+}
+
+#debug{
+    position: absolute;
+    border: 1px black solid;
+    background-color: rgba(41, 128, 52, 0.3);
+    width: 200px;
+    height: 100px;
+    padding: 10px;
+    line-height: 140%;
+    display: none;
+    z-index: 100;
+}
+
+#intro{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 5;
+    display: none;
+    align-items: center;
+}
+
+.intro-page{
+    position: absolute;
+    padding: 10vh 5%;
+    height: 80vh;
+    width: 90%;
+    transition: opacity 0.1s ease-in-out;
+    background-color: white;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.intro-title{
+    font-size: 300%;
+    margin-bottom: 15%;
+}
+
+.intro-paragraph{
+    font-size: 150%;
+    margin-bottom: 15%;
+}
+
+.intro-button{
+    height: 8%;
+    font-size: 150%;
+    padding: 0 8%;
+    width: fit-content;
+}
+
+.interest-selection{
+    background-color: antiquewhite;
+    padding: 3% 3%;
+    margin: 4% 4% 0 0;
+    border-radius: 5%;
+    font-size: 100%;
+}
+
+#intro-button-container{
+    margin-bottom: 15%;
+}
+
+#intro-loading-ring{
+    display: inline-block;
+    position: relative;
+    width: 25vh;
+    height: 25vh;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15%;
+}
+
+.ring{
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    margin: 8px;
+    border: 8px solid rgb(0, 0, 0);
+    border-radius: 50%;
+    animation: loadingRing 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: rgb(0, 0, 0) transparent transparent transparent;
+}
+
+#ring1{
+    animation-delay: -0.45s;
+}
+
+#ring2{
+    animation-delay: -0.3s;
+}
+
+#ring3{
+    animation-delay: -0.15s;
+}
+
+/* desktop */
+@media only screen and (min-width: 768px) {
+    #content{
+        display: flex;
+    }
+
+    #info{
+        aspect-ratio: 10 / 7;
+        width: 70%;
+        padding: 2%;
+    }
+
+    #info-column{
+        width: 65vw;
+        height: 100vh;
+    }
+
+    #device-column{
+        width: 35vw;
+        height: 100vh;
+        padding-left: 5vw;
+        justify-content: left;
+    }
+
+    #modal-box{
+        aspect-ratio: 5 / 3;
+        width: 450px;
+        padding: 30px;
+    }
+
+    #info-exit-button{
+        display: none;
+    }
+
+    #info-icon{
+        display: none;
+    }
+    
+    .message-button{
+        height: 10%;
+    }
+}
+
+/* mobile */
+@media only screen and (max-width: 767px) {
+    #info-column{
+        position: absolute;
+        z-index: 1;
+        align-items: end;
+        width: 100%;
+        height: 100%;
+        pointer-events: none; 
+    }
+
+    #info{
+        border: none;
+        padding-bottom: 8%;
+        width: 94%;
+        margin-left: 3%;
+        margin-right: 3%;
+        background-color: rgb(255, 255, 255, 0.6);
+        border-radius: 5% 5% 0 0;
+        transition: top 0.2s ease-in-out;
+        pointer-events: auto; 
+    }
+
+    #device-column{
+        width: 100w;
+        height: 100vh;
+        justify-content: center;
+    }
+
+    #device{
+        aspect-ratio: auto;
+        height: 98%;
+        width: auto;
+    }
+
+    .info-subtitle{
+        font-size: 200%;
+    }
+
+    .info-row{
+        margin-top: 2vw;
+        margin-bottom: 2vw;
+        margin-left: 5%;
+        margin-right: 5%;
+        width: 90%;
+    }
+
+    .bar-container{
+        height: 5%;
+        font-size: 120%;
+    }
+
+    .bar{
+        width: 65%;
+    }
+
+    #top-info-row{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    #info-exit-button{
+        font-size: 150%;
+        padding: 0 5%;
+    }
+
+    #info-icon{
+        display: block;
+        position: absolute;
+        width: 10%;
+        bottom: 3%;
+        left: 6%;
+        transition: opacity 0.2s ease-in-out;
+        z-index: 2;
+    }
+}
+
+@keyframes animateButtonClick {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+    0% {
+        transform: scale(1);
+      }
+  }
+
+  @keyframes loadingRing {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
