@@ -10,15 +10,13 @@ var buttonCounts = {follows: 0, likes: 0, shares: 0};
 var introSequence = [];
 var interestDict = {};
 
-var waitingToProceed = false;
 var animating = false;
 var isMobile = false;
 var menuShowing = false;
 var debug = false;
 var inIntro = false;
 
-const initialPostLoad = 5;
-var mobileCutoff = 767;
+const initialPostLoad = 10;
 var lastYPos = -1;
 var startingYPos = -1;
 var percentToSwipe = 15;
@@ -27,10 +25,9 @@ var totalPosts = 0;
 var introIndex = 0;
 var interestsPicked = 0;
 
-var heartSize = 1;
-
 var mockMessage = {title: "Test Message", body: "We are interrupting your scrolling to tell you..." };
-var interests = ["Interest 1", "Interest 2", "Interest 3", "Interest 4", "Interest 5", "Interest 6", "Interest 7"];
+
+import * as recSys from "recSys";
 
 // On Page Load
 $(document).ready(function() { 
@@ -38,8 +35,6 @@ $(document).ready(function() {
     menu = document.getElementById("info");
     menuButton = document.getElementById("info-icon");
     debugMenu = document.getElementById("debug");
-
-    loadContent(initialPostLoad);
 
     document.addEventListener("dragstart", dragStart);
     document.addEventListener("dragend", dragEnd);
@@ -77,7 +72,7 @@ $(document).ready(function() {
         menu.style.top = info.offsetHeight + "px";
     };
 
-    //startIntro();
+    recSys.setup(() => {startIntro()});
 });
 
 function startIntro(){
@@ -92,13 +87,18 @@ function startIntro(){
     introPages[0].style.opacity = 1;
 
     var buttonContainer = document.getElementById("intro-button-container");
-    for (var i = 0; i < interests.length; i++){
-        var interestButton = document.createElement("button");
-        interestButton.className = "interest-selection";
-        interestButton.innerHTML = interests[i];
-        interestButton.onclick = onInterestButtonClicked;
-        buttonContainer.appendChild(interestButton);
-        interestDict[interests[i]] = false;
+
+    var traits = recSys.getTraits();
+    for (var traitName in traits){
+        for (var i = 0; i < traits[traitName].length; i++){
+            var trait = traits[traitName][i];
+            var interestButton = document.createElement("button");
+            interestButton.className = "interest-selection";
+            interestButton.innerHTML = trait;
+            interestButton.onclick = onInterestButtonClicked;
+            buttonContainer.appendChild(interestButton);
+            interestDict[trait] = false;
+        }
     }
     $("#interest-finished")[0].disabled = true;
 }
@@ -111,6 +111,10 @@ function onIntroButtonClicked(){
 
     // Check if we need to wait
     if (introIndex == 2){
+        recSys.createNewUser(interestDict);
+        var contentIdList = recSys.initializeFeed();
+        loadContent(initialPostLoad, contentIdList);
+
         setTimeout(onIntroButtonClicked, 4000);
     }
 
@@ -142,28 +146,36 @@ function onInterestButtonClicked(e){
     }
 }
 
-function loadContent(amount){
+function loadContent(amount, idList){
     for (var i = totalPosts; i < totalPosts + amount; i++){
-        var post = insertMessage(i) ? createMessagePost(mockMessage, i) : createContentPost(i);
+        var id = idList[i - totalPosts];
+        var post = insertMessage(i) ? createMessagePost(mockMessage, i) : createContentPost(i, id);
         post.setAttribute('draggable', true);
         device.appendChild(post);
-        var entry = {div: post, type: insertMessage(i) ? "message" : "content", confirmed: false};
+        var entry = {id: id, div: post, type: insertMessage(i) ? "message" : "content", confirmed: false};
         posts.push(entry);
     }
     totalPosts += amount;
     postHeight = $("#post-0")[0].clientHeight;
 }
 
-function createContentPost(index){
+function createContentPost(index, contentId){
     var post = document.createElement("div");
     post.id = "post-" + index; 
-    var content = new p5(heartContent, post);
-    content.heartSize = heartSize;
-    content.id = "content-" + index;
-    post.style.backgroundColor = generateRandomColor();
+    var contentTemplate = new p5(testTemplate, post);
+
+    setupContentAttributes(contentTemplate, contentId);
+
+    contentTemplate.id = "content-" + index;
     post.className = "post";
     post.addEventListener("click", click);
     return post;
+}
+
+function setupContentAttributes(template, id){
+    template.userSize = recSys.getTopTrait("sizes", id);
+    template.userColor = recSys.getTopTrait("colors", id);
+    template.userShape = recSys.getTopTrait("shapes", id);
 }
 
 function createMessagePost(message, index){
@@ -294,7 +306,6 @@ function click(e){
         tryNextPost();
     }
     snapToCurrentPost();
-
 }
 
 function tryNextPost(){
@@ -304,15 +315,15 @@ function tryNextPost(){
 
         // See if we need to load more posts
         if (currentPost + 1 >= totalPosts){
-            adjustContent();
-            loadContent(3);
+            var nextContentIds = recSys.recommend(3);
+            loadContent(3, nextContentIds);
         }
+
+        //UNCOMMENT when we have enough content to not run out
+        //recSys.onContentSeen(posts[currentPost].id);
     }
 }
 
-function adjustContent(){
-    heartSize = 1 + buttonCounts.likes * 0.1;
-}
 
 function tryLastPost(){
     if (currentPost != 0 && !waitingForMessage()){
@@ -375,14 +386,17 @@ function onDeviceButtonClicked(e){
     if (e.target.id == "follow"){
         buttonCounts.follows++;
         document.getElementById("debug-follows").innerHTML =  buttonCounts.follows;
+        recSys.onContentEngagement(posts[currentPost].id, "follow");
     }
     else if (e.target.id == "like"){
         buttonCounts.likes++;
         document.getElementById("debug-likes").innerHTML = buttonCounts.likes;
+        recSys.onContentEngagement(posts[currentPost].id, "like");
     }
     else if (e.target.id == "share"){
         buttonCounts.shares++;
         document.getElementById("debug-shares").innerHTML = buttonCounts.shares;
+        recSys.onContentEngagement(posts[currentPost].id, "share");
     }
 
     e.target.classList.remove('button-clicked')

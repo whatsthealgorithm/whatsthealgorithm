@@ -1,0 +1,23 @@
+{
+  "name": "whatsthealgorithm",
+  "version": "1.0.0",
+  "description": "A web game exploring algorithmically-curated video feeds (e.g. TikTok, Instagram Reels) and the recommender systems that power them. The goal is to break down and demystify “The Algorithm” which we love to praise, blame, and game for our digital ecosystems.",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/whatsthealgorithm/whatsthealgorithm.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/whatsthealgorithm/whatsthealgorithm/issues"
+  },
+  "homepage": "https://github.com/whatsthealgorithm/whatsthealgorithm#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

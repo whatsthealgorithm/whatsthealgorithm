@@ -305,13 +305,12 @@ body {
     }
 
     #device-column{
-        width: 100w;
+        width: 100vw;
         height: 100vh;
         justify-content: center;
     }
 
     #device{
-        aspect-ratio: auto;
         height: 98%;
         width: auto;
     }
