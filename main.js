@@ -9,14 +9,20 @@ var posts = [];
 var buttonCounts = {follows: 0, likes: 0, shares: 0};
 var introSequence = [];
 var interestDict = {};
+var scriptByIndex = {};
+var scriptByTrigger = {};
 
 var animating = false;
+var disableMessages = false;
 var isMobile = false;
-var menuShowing = false;
 var debug = false;
 var inIntro = false;
+var menuShowing = false;
 
 const initialPostLoad = 10;
+const pageSwipeTime = 400;
+const numPreferencesToShow = 4;
+
 var lastYPos = -1;
 var startingYPos = -1;
 var percentToSwipe = 15;
@@ -25,12 +31,16 @@ var totalPosts = 0;
 var introIndex = 0;
 var interestsPicked = 0;
 
-var mockMessage = {title: "Test Message", body: "We are interrupting your scrolling to tell you..." };
-
 import * as recSys from "recSys";
 
 // On Page Load
 $(document).ready(function() { 
+    initialize();
+});
+
+async function initialize(){
+    await loadScript();
+    
     device = document.getElementById("device-screen");
     menu = document.getElementById("info");
     menuButton = document.getElementById("info-icon");
@@ -61,19 +71,46 @@ $(document).ready(function() {
         }
     });
 
+    // Set up Info Menu
+    var weightingsMenu = document.getElementById("weightings-template").content.cloneNode(true);
+    var preferencesMenu = document.getElementById("preferences-template").content.cloneNode(true);
+    menu.appendChild(weightingsMenu);
+    menu.appendChild(preferencesMenu);
+    setWeightings(menu, 0);
+
+    var info = document.getElementById("info-column");
+    var exit = info.getElementsByClassName("info-exit-button")[0];
+    exit.style.display = "block";
+
     isMobile = $(window).width() < 767;
     if (isMobile){
         // move info menu into device div
-        var info = document.getElementById("info-column");
         document.getElementById("device").insertBefore(info, device);
 
-        menuButton.addEventListener("click", toggleInfoMenu);
-        document.getElementById("info-exit-button").addEventListener("click", toggleInfoMenu);
+        menuButton.addEventListener("click", () => { toggleInfoMenu(true)} );
+        exit.addEventListener("click", () => { toggleInfoMenu(false) });
         menu.style.top = info.offsetHeight + "px";
+        toggleInfoMenu(false);
     };
 
-    recSys.setup(() => {startIntro()});
-});
+    await recSys.setup();
+    startIntro();
+}
+
+function loadScript(){
+    return $.getJSON('json/script.json', function(jsonData, status, xhr)
+    {
+        for (var i = 0; i < jsonData.script.length; i++){
+            var s = jsonData.script[i];
+            if (s.index != null){
+                scriptByIndex[parseInt(s.index)] = s;
+            }
+            if (s.trigger != null){
+                scriptByTrigger[s.trigger] = s;
+            }
+        }
+    });
+}
 
 function startIntro(){
     document.getElementById("intro").style.display = "flex";
@@ -112,7 +149,12 @@ function onIntroButtonClicked(){
     // Check if we need to wait
     if (introIndex == 2){
         recSys.createNewUser(interestDict);
+        setPreferences(menu);
+        if (isMobile){
+            toggleInfoMenu(false);
+        }
         var contentIdList = recSys.initializeFeed();
+        document.getElementById("total-matching").innerHTML = recSys.getInitialMatchingAmount();
         loadContent(initialPostLoad, contentIdList);
 
         setTimeout(onIntroButtonClicked, 4000);
@@ -120,6 +162,7 @@ function onIntroButtonClicked(){
 
     if (introIndex >= introPages.length){
         setTimeout(() => {
+            document.getElementById("debug-content").innerHTML = "ID: " + posts[0].id;
             document.getElementById("intro").style.display = "none";
             inIntro = false;
         }, 100);
@@ -147,13 +190,19 @@ function onInterestButtonClicked(e){
 }
 
 function loadContent(amount, idList){
-    for (var i = totalPosts; i < totalPosts + amount; i++){
-        var id = idList[i - totalPosts];
-        var post = insertMessage(i) ? createMessagePost(mockMessage, i) : createContentPost(i, id);
+    var contentIndex = 0;
+    for (var i = 0; i < amount; i++){
+        var isMessagePost = messageAtIndex(totalPosts + i);
+        var id = isMessagePost ? "message-" + (totalPosts + i) : idList[contentIndex];
+        var post = isMessagePost ? createMessagePost(scriptByIndex[totalPosts + i], totalPosts + i) : createContentPost(totalPosts + i, id);
         post.setAttribute('draggable', true);
         device.appendChild(post);
-        var entry = {id: id, div: post, type: insertMessage(i) ? "message" : "content", confirmed: false};
+        var entry = {id: id, div: post, type: isMessagePost ? "message" : "content", confirmed: false};
         posts.push(entry);
+
+        contentIndex += isMessagePost ? 0 : 1;
+        // If we just made a message post, still make sure we create the specified amount of content posts
+        amount += isMessagePost ? 1 : 0;
     }
     totalPosts += amount;
     postHeight = $("#post-0")[0].clientHeight;
@@ -186,32 +235,51 @@ function createMessagePost(message, index){
     var messageBox = document.createElement("div");
     messageBox.className = "message-box";
 
-    var messageTitle = document.createElement("div");
-    messageTitle.className = "message-title";
-    messageTitle.innerHTML += message.title;
+    if (message.dataId != null){
+        var messageData = document.createElement("div");
+        messageData.className = "message-data";
+        var content = document.getElementById(message.dataId).content.cloneNode(true);
+        messageData.append(content);
+        if (message.dataId == "weightings-template"){
+            setWeightings(messageData, 0);
+        }
+        else if (message.dataId == "preferences-template"){
+            setPreferences(messageData);
+        }
+        messageBox.appendChild(messageData);
+    }
 
-    var messageBody = document.createElement("div");
-    messageBody.className = "message-body";
-    messageBody.innerHTML += message.body;
+    if (message.title != null){
+        var messageTitle = document.createElement("div");
+        messageTitle.className = "message-title";
+        messageTitle.innerHTML += message.title;
+        messageBox.appendChild(messageTitle);
+    }
+    
+    if (message.body != null){
+        var messageBody = document.createElement("div");
+        messageBody.className = "message-body";
+        messageBody.innerHTML += message.body;
+        messageBox.appendChild(messageBody);    
+    }
+   
 
-    var messageButton = document.createElement("button");
-    messageButton.className = "message-button";
-    messageButton.innerHTML += "Okay";
-    messageButton.id = "message-button-" + index;
-    messageButton.onclick = onMessageButtonClicked;
-
-    messageBox.appendChild(messageTitle);
-    messageBox.appendChild(messageBody);
-    messageBox.appendChild(messageButton);
+    for (var i = 0; i < message.buttons.length; i++){
+        var messageButton = document.createElement("button");
+        messageButton.className = "message-button";
+        messageButton.innerHTML += message.buttons[i];
+        messageButton.id = message.buttons[i] + "-" + index;
+        messageButton.onclick = onMessageButtonClicked;
+        messageBox.appendChild(messageButton);
+    }
 
     messagePost.appendChild(messageBox);
     messagePost.addEventListener("click", click);
     return messagePost;
 }
 
-function insertMessage(index){
-    // Just arbitrary for now
-    return index == 3;
+function messageAtIndex(index){
+    return scriptByIndex[index] != null;
 }
 
 // This prevents us from dragging a phantom version of the div
@@ -256,7 +324,7 @@ function move(currentY){
     }
 
     // If waiting for message confirmation, prevent from dragging too much.
-    if (!waitingForMessage() || Math.abs(startingYPos - lastYPos) < (postHeight / 10)){
+    if (!waitingForMessage() || (startingYPos - lastYPos) < (postHeight / 20)){
         marginTop += currentY - lastYPos;
         $('#device-screen')[0].style.marginTop =  marginTop + "px";
     }
@@ -311,12 +379,11 @@ function click(e){
 function tryNextPost(){
     if (currentPost + 1 < totalPosts && !waitingForMessage()) {
         currentPost++;
-        setInfoWindow();
 
         // See if we need to load more posts
         if (currentPost + 1 >= totalPosts){
-            var nextContentIds = recSys.recommend(3);
-            loadContent(3, nextContentIds);
+            var nextContentIds = recSys.recommend(5);
+            loadContent(5, nextContentIds);
         }
 
         //UNCOMMENT when we have enough content to not run out
@@ -326,9 +393,8 @@ function tryNextPost(){
 
 
 function tryLastPost(){
-    if (currentPost != 0 && !waitingForMessage()){
+    if (currentPost != 0){
         currentPost--;
-        setInfoWindow();
     }
 }
 
@@ -346,7 +412,7 @@ function snapToCurrentPost(){
     animating = true;
     $('#device-screen').animate({
         marginTop: '+=' + diff + 'px'
-    }, 400, "swing", () => {animating = false});
+    }, pageSwipeTime, "swing", () => { animating = false});
 
     if (waitingForMessage()){
         setTimeout(() => {
@@ -358,31 +424,111 @@ function snapToCurrentPost(){
             $('#device-buttons')[0].style.opacity = 1;
         }, 500);
     }
+    document.getElementById("debug-content").innerHTML = "ID: " + posts[currentPost].id;
 }
 
-function setInfoWindow(){
-    //right now change bars randomly
-    var bars = document.getElementsByClassName("bar-fill");
-    for (var i = 0; i < bars.length; i++){
-        bars[i].style.width = Math.random() * 100 + "%";
-    }
+function setWeightings(div, algorithmIndex){
+    var algo = recSys.ALGORITHMS[algorithmIndex];
+    var likesBar = div.getElementsByClassName("likes-bar")[0];
+    likesBar.style.width = (35 * algo[0]) + "%";
 
-    //if we land on an unconfirmed message, grey out info window
-    if (waitingForMessage() && !isMobile){
-        document.getElementById("info").style.backgroundColor = "rgb(0, 0, 0, 0.2)";
+    var sharesBar = div.getElementsByClassName("shares-bar")[0];
+    sharesBar.style.width = (35 * algo[1]) + "%";
+
+    var followsBar = div.getElementsByClassName("follows-bar")[0];
+    followsBar.style.width = (35 * algo[2]) + "%";
+}
+
+function createBar(label, percent, className){
+     var barDiv = document.createElement("div");
+    barDiv.append(document.getElementById("bar-template").content.cloneNode(true));
+    barDiv.getElementsByClassName("param-name")[0].innerHTML = label;
+    var bar = barDiv.getElementsByClassName("bar-fill")[0];
+    bar.style.width = percent + "%";
+    barDiv.className = className;
+    return barDiv;
+};
+
+function setPreferences(div){
+    var interests = recSys.getTopInterests();
+    var total = interests[0][1] * 1.1;
+
+    for (var i = 0; i < numPreferencesToShow; i++){
+        var name = interests[i][0];
+        name = name.charAt(0).toUpperCase() + name.slice(1); // capitalize first letter
+        var percent = 100 * interests[i][1] / total;
+        var barDiv = div.getElementsByClassName("pref-" + i)[0];
+        barDiv.getElementsByClassName("param-" + i)[0].innerHTML = name;
+        barDiv.getElementsByClassName("bar-fill")[0].style.width = percent + "%";
     }
 }
 
-function onMessageButtonClicked(){
+function onMessageButtonClicked(e){
+    if (disableMessages){
+        return;
+    }
+
+    disableMessages = true;
+
+    //Extract index from id
+    var index = parseInt(e.target.id.split("-").slice(-1));
+    var message = scriptByIndex[index];
+    if (message == null){
+        console.log("ERROR: Cannot find message at index " + index);
+        return;
+    }
+
+    var button;
+    var trigger;
+    for (var i = 0; i < message.buttons.length; i++){
+        if (message.buttons[i] == e.target.innerHTML){
+            button = message.buttons[i];
+            trigger = message.triggers[i];
+            break;
+        }
+    }
+
+    if (!posts[currentPost].confirmed){
+        // Adds a new post if needed
+        processTrigger(trigger);
+    }
+    
     posts[currentPost].confirmed = true; 
     tryNextPost();
     snapToCurrentPost();
+    setTimeout(() => { disableMessages = false; }, pageSwipeTime);
 
     //lighten screen
     document.getElementById("info").style.backgroundColor = "";
 }
 
+function processTrigger(trigger){
+    if (scriptByTrigger.hasOwnProperty(trigger)){
+        console.log(scriptByTrigger[trigger]);
+        var post = createMessagePost(scriptByTrigger[trigger], totalPosts);
+        // Insert generated message post right after other message post
+        posts[currentPost].div.insertAdjacentElement("afterend", post);
+        post.setAttribute('draggable', true);
+        var id = "message-" + totalPosts;
+        var entry = {id: id, div: post, type: "message", confirmed: false};
+        posts.splice(currentPost + 1, 0, entry);
+        scriptByIndex[totalPosts] = scriptByTrigger[trigger];
+        totalPosts++;
+    }
+    else if (trigger == "continue"){
+        return;
+    }
+    else if (trigger == "unlock-menu"){
+        if (isMobile){
+            menuButton.style.display = "block";
+        }
+    }
+}
+
 function onDeviceButtonClicked(e){
+    if (posts[currentPost].type == "message"){
+        return;
+    }
     if (e.target.id == "follow"){
         buttonCounts.follows++;
         document.getElementById("debug-follows").innerHTML =  buttonCounts.follows;
@@ -399,6 +545,10 @@ function onDeviceButtonClicked(e){
         recSys.onContentEngagement(posts[currentPost].id, "share");
     }
 
+    if (!isMobile || menuShowing){
+        setPreferences(menu);
+    }
+    
     e.target.classList.remove('button-clicked')
     void e.target.offsetWidth; // trigger reflow
     e.target.classList.add('button-clicked');
@@ -428,22 +578,19 @@ function resize(){
     }
 }
 
-function generateRandomColor(){
-    return "#" + Math.floor(Math.random()*16777215).toString(16);
-}
-
 // MOBILE SPECIFIC
 
-function toggleInfoMenu(){
-    if (menuShowing){
+function toggleInfoMenu(show){
+    if (!show){
         menu.style.top = info.offsetHeight + "px";
         menuButton.style.opacity = 1;
+        menuShowing = true;
     }
     else{
+        setPreferences(menu);
         menu.style.top = 0;
         menuButton.style.opacity = 0;
     }
-    menuShowing = !menuShowing;
 }
 
 //

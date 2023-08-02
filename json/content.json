@@ -1,0 +1,61 @@
+{
+    "content": [
+        {
+            "id": "content1",
+            "traits": ["red", "circle", "big"]
+        },
+        {
+            "id": "content2",
+            "traits": ["blue", "square", "small"]
+        },
+        {
+            "id": "content3",
+            "traits": ["yellow", "triangle", "medium"]
+        },
+        {
+            "id": "content4",
+            "traits": ["blue", "triangle", "big"]
+        },
+        {
+            "id": "content5",
+            "traits": ["blue", "circle", "medium"]
+        },
+        {
+            "id": "content6",
+            "traits": ["red", "square", "small"]
+        },
+        {
+            "id": "content7",
+            "traits": ["yellow", "square", "medium"]
+        },
+        {
+            "id": "content8",
+            "traits": ["yellow", "square", "big"]
+        },
+        {
+            "id": "content9",
+            "traits": ["red", "square", "big"]
+        },
+        {
+            "id": "content10",
+            "traits": ["red", "circle", "small"]
+        },
+        {
+            "id": "content11",
+            "traits": ["red", "triangle", "big"]
+        },
+        {
+            "id": "content12",
+            "traits": ["yellow", "square", "small"]
+        },
+        {
+            "id": "content13",
+            "traits": ["blue", "square", "big"]
+        }
+    ],
+    "traits": {
+        "colors": ["red", "blue", "yellow"],
+        "shapes": ["circle", "square", "triangle"],
+        "sizes": ["big", "medium", "small"]
+    }
+}

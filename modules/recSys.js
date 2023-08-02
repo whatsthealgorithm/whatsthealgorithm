@@ -1,23 +1,24 @@
-const LIKE_WEIGHT = 1;
-const SHARE_WEIGHT = 0.5;
-const FOLLOW_WEIGHT = 2.5;
+//ORDER: like, share, follow
+const ALG_1_WEIGHTINGS = [1, 0.5, 2.5];
+
+const ALGORITHMS = [ALG_1_WEIGHTINGS];
 
 const MATCH_THRESHOLD = 2;
+const INITIAL_MATCHING_AMOUNT = 3;
 
 var user;
-
 var initialTraitsDict;
 var contentDict = {};
 var traits;
+var totalInitialMatching;
 
 // Start exports section
 
 /**
  * Derives necessary data objects from the content json file.
- * Calls a passed in callback function at the end of processing. 
  */
-function setup(callback){
-    $.getJSON('content.json', function(jsonData, status, xhr)
+function setup(){
+    return $.getJSON('json/content.json', function(jsonData, status, xhr)
     {
         traits = jsonData.traits;
         initialTraitsDict = getInitialTraitsDict();
@@ -37,8 +38,6 @@ function setup(callback){
                 matchScore: -1,
             };
         }
-
-        callback();
     });
 }
 
@@ -63,14 +62,23 @@ function createNewUser(statedPreferences){
  */
 function initializeFeed(){
     var [matchingContent, nonMatchingContent] = getMatchingAndNonMatchingContent();
+    totalInitialMatching = matchingContent.length;
     var selectedMatchingContent = selectAtRandom(matchingContent, 7);
-
     var selectedNonMatchingContent = selectAtRandom(nonMatchingContent, 10 - selectedMatchingContent.length);
+
+    if (selectedMatchingContent.lenth + selectedNonMatchingContent.length < 10){
+        console.log("Error: Not enough content found");
+    }
 
     console.log("Found " + selectedMatchingContent.length + " pieces of matching content and " + selectedNonMatchingContent.length + " pieces of non matching content.");
 
-    var feedList = selectedMatchingContent.concat(selectedNonMatchingContent);
-    // if random: var feedList = selectAtRandom(selectedMatchingContent.concat(selectedNonMatchingContent), 10);
+    var initialMatching = selectedMatchingContent.slice(0, INITIAL_MATCHING_AMOUNT);
+    var leftoverMatching = selectedMatchingContent.slice(INITIAL_MATCHING_AMOUNT);
+    if (leftoverMatching.length != 0){
+        selectedNonMatchingContent = selectAtRandom(leftoverMatching.concat(selectedNonMatchingContent), 10 - initialMatching.length);
+    }
+
+    var feedList = initialMatching.concat(selectedNonMatchingContent);
     for (var id in feedList){
         console.log("Added " + feedList[id] + " to initial feed with match score of " + contentDict[feedList[id]].matchScore + ", is it matching? " + (contentDict[feedList[id]].matchScore >= MATCH_THRESHOLD));
     }
@@ -92,13 +100,13 @@ function onContentEngagement(contentId, interaction){
     for (var trait in contentTraits){
         if (contentTraits[trait] != 0){
             if (interaction == "like"){
-                user.staticPreferences[trait] += LIKE_WEIGHT;
+                user.staticPreferences[trait] += ALG_1_WEIGHTINGS[0];
             }
             else if (interaction == "follow"){
-                user.staticPreferences[trait] += FOLLOW_WEIGHT;
+                user.staticPreferences[trait] += ALG_1_WEIGHTINGS[1];
             }
             else if (interaction == "share"){
-                user.staticPreferences[trait] += SHARE_WEIGHT;
+                user.staticPreferences[trait] += ALG_1_WEIGHTINGS[2];
             }
         }
     }
@@ -121,7 +129,6 @@ function recommend(amount){
     unseenContent.sort(function(id1, id2) { return calculateSimilarity(ideal, contentDict[id2].traits) - calculateSimilarity(ideal, contentDict[id1].traits); });
 
     var topContent = unseenContent.slice(0, amount);
-    console.log(topContent)
     for (var i = 0; i < topContent.length; i++){
         console.log("Recommending " + topContent[i] + ", similarity to ideal is " + calculateSimilarity(ideal, contentDict[topContent[i]].traits));
     }
@@ -150,6 +157,20 @@ function getTopTrait(categoryName, id){
     }
     // TODO: make random? 
     return traitList[0];
+}
+
+function getInitialMatchingAmount(){
+    return totalInitialMatching;
+}
+
+function getTopInterests(){
+    var arr = [];
+    for (var pref in user.staticPreferences){
+        arr.push([pref, user.staticPreferences[pref]]);
+    } 
+
+    arr.sort(function(a, b) { return b[1] - a[1]; });
+    return arr;
 }
 
 // End exports
@@ -248,4 +269,4 @@ function selectAtRandom(array, num){
     return selection;
 }
 
-export { setup, createNewUser, initializeFeed, onContentSeen, onContentEngagement, recommend, getTraits, getTopTrait };
+export { ALGORITHMS, setup, createNewUser, initializeFeed, onContentSeen, onContentEngagement, recommend, getTraits, getTopTrait, getInitialMatchingAmount, getTopInterests };

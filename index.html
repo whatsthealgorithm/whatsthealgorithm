@@ -40,60 +40,7 @@
     </div>
     <div id="content">
         <div class="column" id="info-column">
-            <div id="info">
-                <div class="info-row" id="top-info-row">
-                    <div id="weightings" class="info-subtitle">
-                        Weightings
-                    </div>
-                    <div id="info-exit-button">x</div>
-                </div>
-
-                <div class="info-row bar-container"> Param 1:
-                     <div class="bar">
-                        <div class="bar-fill"></div> 
-                     </div> 
-                </div>
-
-                <div class="info-row bar-container"> Param 2:
-                    <div class="bar">
-                       <div class="bar-fill"></div> 
-                    </div> 
-               </div>
-
-               <div class="info-row bar-container"> Param 3:
-                    <div class="bar">
-                        <div class="bar-fill"></div> 
-                    </div> 
-                </div>
-
-                <div id="preferences" class="info-subtitle info-row">
-                    Your Preferences
-                </div>
-
-                <div class="info-row bar-container"> Param 1:
-                    <div class="bar">
-                       <div class="bar-fill" style="background-color: yellow;"></div> 
-                    </div> 
-                </div>
-
-                <div class="info-row bar-container"> Param 2:
-                   <div class="bar">
-                      <div class="bar-fill" style="background-color: yellow;"></div> 
-                   </div> 
-               </div>
-
-                <div class="info-row bar-container"> Param 3:
-                   <div class="bar">
-                       <div class="bar-fill" style="background-color: yellow;"></div> 
-                   </div> 
-                </div>
-
-                <div class="info-row bar-container"> Param 4:
-                    <div class="bar">
-                        <div class="bar-fill" style="background-color: yellow;"></div> 
-                    </div> 
-                 </div>
-            </div>
+            <div id="info"></div>
         </div>
 
         <div class="column" id="device-column">
@@ -124,7 +71,7 @@
                     </div>
 
                     <div id="intro-3" class="intro-page" style="display:none">
-                        <div class="intro-paragraph">We found XXXXX posts that match your interests and demographic.</div>
+                        <div class="intro-paragraph">We found <span id="total-matching"></span> posts that match your interests and demographic.</div>
                         <div class="intro-paragraph">We will start by showing you a random selection, and improving our recommendations over time based on what we continue learning about you.</div>
                         <button class="intro-button">Done</button>
                     </div>
@@ -142,4 +89,66 @@
         </div>
     </div>
 </body>
+
+<template id="weightings-template">
+    <div class="top-info-row info-row">
+        <div class="weightings info-subtitle">
+            Weightings
+        </div>
+        <div class="info-exit-button">x</div>
+    </div>
+
+    <div class="info-row bar-container"> Likes:
+         <div class="bar">
+            <div class="bar-fill likes-bar"></div> 
+         </div> 
+    </div>
+
+    <div class="info-row bar-container"> Shares:
+        <div class="bar">
+           <div class="bar-fill shares-bar"></div> 
+        </div> 
+   </div>
+
+   <div class="info-row bar-container"> Follows:
+        <div class="bar">
+            <div class="bar-fill follows-bar"></div> 
+        </div> 
+    </div>
+</template>
+
+<template id="preferences-template">
+    <div class="preferences info-subtitle info-row">
+        Your Preferences
+    </div>
+
+    <div class="info-row bar-container pref-0"> <span class="param-0">???:</span> 
+        <div class="bar">
+           <div class="bar-fill" style="background-color: yellow;"></div> 
+        </div> 
+    </div>
+
+    <div class="info-row bar-container pref-1"> <span class="param-1">???:</span> 
+       <div class="bar">
+          <div class="bar-fill" style="background-color: yellow;"></div> 
+       </div> 
+   </div>
+
+    <div class="info-row bar-container pref-2"> <span class="param-2">???:</span> 
+       <div class="bar">
+           <div class="bar-fill" style="background-color: yellow;"></div> 
+       </div> 
+    </div>
+
+    <div class="info-row bar-container pref-3"> <span class="param-3">???:</span> 
+        <div class="bar">
+            <div class="bar-fill" style="background-color: yellow;"></div> 
+        </div> 
+     </div>
+</template>
+
+<template id="">
+
+    
+</template>
 </html>

@@ -1,0 +1,68 @@
+{
+    "script": [
+        {
+            "index": "10",
+            "title": "Great Work",
+            "body": "We're adjusting our recs based on your interactions. if you enjoy what you're seeing something, make sure you use the buttons to give the algorithm a signal.",
+            "buttons": ["Okay"],
+            "triggers":  ["continue"]
+        },
+        {
+            "index": "15",
+            "title": "We Want Your Feedback",
+            "body": "Is this content matching your interests?",
+            "buttons": ["Yes", "No", "Sometimes"],
+            "triggers": ["content-matches", "content-doesnt-match", "content-sometimes-matches"]
+        },
+        {
+            "trigger": "content-matches",
+            "title": "Great!",
+            "body": "But the algorithm isn't magic. Here's what we know about you: ",
+            "buttons": ["See Data"],
+            "triggers": ["show-preferences"]
+        },
+        {
+            "trigger": "content-doesnt-match",
+            "title": "Good to know.",
+            "body": "We'll show you what we know about you and you can tell us if it's right: ",
+            "buttons": ["See Data"],
+            "triggers": ["show-preferences"]
+        },
+        {
+            "trigger": "content-sometimes-matches",
+            "title": "Good to know.",
+            "body": "We're showing you some new content, but we might not be getting the balance right. We'll show you what we know about you: ",
+            "buttons": ["See Data"],
+            "triggers": ["show-preferences"]
+        },
+        {
+            "trigger": "show-preferences",
+            "dataId": "preferences-template",
+            "title": "Feedback Needed",
+            "body": "Are these inferences accurate?",
+            "buttons": ["Yes", "No", "Some of them"],
+            "triggers": ["preferences-match", "preferences-dont-match", "preferences-dont-match"]
+        },
+        {
+            "trigger": "preferences-match",
+            "title": "Great!",
+            "body": "But remember, these can always change. Here are the signals that we pick up on to make these inferences. Knowing how we measure can help you customize your feed: ",
+            "buttons": ["See Data"],
+            "triggers": ["show-weightings"]
+        },
+        {
+            "trigger": "preferences-dont-match",
+            "title": "Got it.",
+            "body": "There can be a mismatch between the signals we pick up on and what you intend. Knowing how we measure can help you customize your feed: ",
+            "buttons": ["See Data"],
+            "triggers": ["show-weightings"]
+        },
+        {
+            "trigger": "show-weightings",
+            "dataId": "weightings-template",
+            "body": "You can review how your data is changing by clicking the icon on the lower left as you continue to scroll.",
+            "buttons": ["Show me more!"],
+            "triggers": ["unlock-menu"]
+        }
+    ]
+}
