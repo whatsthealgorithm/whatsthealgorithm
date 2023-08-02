@@ -80,7 +80,6 @@ async function initialize(){
 
     var info = document.getElementById("info-column");
     var exit = info.getElementsByClassName("info-exit-button")[0];
-    exit.style.display = "block";
 
     isMobile = $(window).width() < 767;
     if (isMobile){
@@ -90,6 +89,7 @@ async function initialize(){
         menuButton.addEventListener("click", () => { toggleInfoMenu(true)} );
         exit.addEventListener("click", () => { toggleInfoMenu(false) });
         menu.style.top = info.offsetHeight + "px";
+        exit.style.display = "block";
         toggleInfoMenu(false);
     };
 
@@ -548,7 +548,7 @@ function onDeviceButtonClicked(e){
     if (!isMobile || menuShowing){
         setPreferences(menu);
     }
-    
+
     e.target.classList.remove('button-clicked')
     void e.target.offsetWidth; // trigger reflow
     e.target.classList.add('button-clicked');
