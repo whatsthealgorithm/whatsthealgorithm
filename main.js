@@ -19,7 +19,7 @@ var debug = false;
 var inIntro = false;
 var menuShowing = false;
 
-const initialPostLoad = 10;
+const initialPostLoad = 2;  //10;       //ANDY EDIT FOR TESTING
 const pageSwipeTime = 400;
 const numPreferencesToShow = 4;
 
@@ -95,6 +95,10 @@ async function initialize(){
 
     await recSys.setup();
     startIntro();
+
+    //andy edits for testing
+    introIndex = 1;
+    onIntroButtonClicked();
 }
 
 function loadScript(){
@@ -148,6 +152,7 @@ function onIntroButtonClicked(){
 
     // Check if we need to wait
     if (introIndex == 2){
+        console.log("create content")
         recSys.createNewUser(interestDict);
         setPreferences(menu);
         if (isMobile){
@@ -157,7 +162,8 @@ function onIntroButtonClicked(){
         document.getElementById("total-matching").innerHTML = recSys.getInitialMatchingAmount();
         loadContent(initialPostLoad, contentIdList);
 
-        setTimeout(onIntroButtonClicked, 4000);
+        //setTimeout(onIntroButtonClicked, 4000);
+        setTimeout(onIntroButtonClicked, 40);   //ANDY EDIT FOR TESTING
     }
 
     if (introIndex >= introPages.length){
@@ -170,6 +176,7 @@ function onIntroButtonClicked(){
 }
 
 function onInterestButtonClicked(e){
+    console.log("interest clicked");
     if (!interestDict[e.target.innerHTML]){
         e.target.style.backgroundColor = "#1ad631";
         interestDict[e.target.innerHTML] = true;
@@ -211,7 +218,8 @@ function loadContent(amount, idList){
 function createContentPost(index, contentId){
     var post = document.createElement("div");
     post.id = "post-" + index; 
-    var contentTemplate = new p5(testTemplate, post);
+    //var contentTemplate = new p5(testTemplate, post);
+    var contentTemplate = new p5(andyTemplate, post);
 
     setupContentAttributes(contentTemplate, contentId);
 
