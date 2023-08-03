@@ -152,7 +152,6 @@ function onIntroButtonClicked(){
 
     // Check if we need to wait
     if (introIndex == 2){
-        console.log("create content")
         recSys.createNewUser(interestDict);
         setPreferences(menu);
         if (isMobile){
@@ -176,7 +175,6 @@ function onIntroButtonClicked(){
 }
 
 function onInterestButtonClicked(e){
-    console.log("interest clicked");
     if (!interestDict[e.target.innerHTML]){
         e.target.style.backgroundColor = "#1ad631";
         interestDict[e.target.innerHTML] = true;
