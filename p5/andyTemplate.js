@@ -2,7 +2,7 @@ const andyTemplate = ( sketch ) => {
     var bgColor;
     var color;
 
-    var t=0
+    
 
     sketch.setup = () => {
       var canvas = sketch.createCanvas(device.offsetWidth, device.offsetHeight);
@@ -13,6 +13,7 @@ const andyTemplate = ( sketch ) => {
       
     };
 
+    var t=0
     sketch.draw = () => {
         sketch.setColor();
         sketch.background(bgColor);
@@ -35,11 +36,10 @@ const andyTemplate = ( sketch ) => {
             }
         }
 
-        //console.log(t)
-
         sketch.fill(0)
         sketch.text("fps "+sketch.frameRate(), w-150, device.offsetHeight-40);
     };
+
 
     sketch.quick_map = (n) => {
         return sketch.map(sketch.sin(n),-.5,.5,-1,1,1);

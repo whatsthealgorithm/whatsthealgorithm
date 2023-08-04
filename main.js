@@ -217,7 +217,8 @@ function createContentPost(index, contentId){
     var post = document.createElement("div");
     post.id = "post-" + index; 
     //var contentTemplate = new p5(testTemplate, post);
-    var contentTemplate = new p5(andyTemplate, post);
+    //var contentTemplate = new p5(andyTemplate, post);
+    var contentTemplate = new p5(emojiTemplate, post);
 
     setupContentAttributes(contentTemplate, contentId);
 
