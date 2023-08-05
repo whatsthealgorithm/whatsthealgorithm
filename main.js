@@ -42,11 +42,11 @@ const feed_testing = 0;
 
 // To test for content with specific attributes, set these. Otherwise, comment it out.
 
-let test_attributes = {
-    'userSize': 'large',
-    'userColor': 'red',
-    'userShape': 'triangle'
-}
+// let test_attributes = {
+//     'userSize': 'large',
+//     'userColor': 'red',
+//     'userShape': 'triangle'
+// }
 
 
 // On Page Load
