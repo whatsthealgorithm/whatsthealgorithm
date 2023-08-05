@@ -23,23 +23,28 @@ const initialPostLoad = 10;
 const pageSwipeTime = 400;
 const numPreferencesToShow = 4;
 
+var introIndex = 0;
 var lastYPos = -1;
 var startingYPos = -1;
 var percentToSwipe = 15;
 var currentPost = 0;
 var totalPosts = 0;
-var introIndex = 0;
+
 var interestsPicked = 0;
 
 import * as recSys from "recSys";
 
 // FOR TESTING
 
+// default 0. set to 1 to skip intro screens
+
+const feed_testing = 1;
+
 // To test for content with specific attributes, set these. Otherwise, comment it out.
 
 let test_attributes = {
     'userSize': 'large',
-    'userColor': 'blue',
+    'userColor': 'red',
     'userShape': 'triangle'
 }
 
@@ -105,7 +110,21 @@ async function initialize(){
     };
 
     await recSys.setup();
-    startIntro();
+
+    if(feed_testing === 1) {
+           recSys.createNewUser(interestDict);
+        setPreferences(menu);
+        if (isMobile){
+            toggleInfoMenu(false);
+        }
+        var contentIdList = recSys.initializeFeed();
+        document.getElementById("total-matching").innerHTML = recSys.getInitialMatchingAmount();
+        loadContent(initialPostLoad, contentIdList);
+    }
+    else {
+            startIntro();
+    }
+
 }
 
 function loadScript(){
@@ -152,6 +171,7 @@ function startIntro(){
 }
 
 function onIntroButtonClicked(){
+
     var page =  introSequence[introIndex];
     page.style.opacity = 0;
     setTimeout(() => { page.style.display = "none"; }, 100);
@@ -201,6 +221,8 @@ function onInterestButtonClicked(e){
 }
 
 function loadContent(amount, idList){
+
+
     var contentIndex = 0;
     for (var i = 0; i < amount; i++){
         var isMessagePost = messageAtIndex(totalPosts + i);
@@ -210,7 +232,6 @@ function loadContent(amount, idList){
         device.appendChild(post);
         var entry = {id: id, div: post, type: isMessagePost ? "message" : "content", confirmed: false};
         posts.push(entry);
-
         contentIndex += isMessagePost ? 0 : 1;
         // If we just made a message post, still make sure we create the specified amount of content posts
         amount += isMessagePost ? 1 : 0;
@@ -219,7 +240,9 @@ function loadContent(amount, idList){
     postHeight = $("#post-0")[0].clientHeight;
 }
 
+
 function createContentPost(index, contentId){
+
     var post = document.createElement("div");
     post.id = "post-" + index; 
     var contentTemplate = new p5(testTemplate, post);
@@ -227,8 +250,10 @@ function createContentPost(index, contentId){
     setupContentAttributes(contentTemplate, contentId);
 
     contentTemplate.id = "content-" + index;
+
     post.className = "post";
     post.addEventListener("click", click);
+
     return post;
 }
 
@@ -400,7 +425,10 @@ function click(e){
 }
 
 function tryNextPost(){
+
     if (currentPost + 1 < totalPosts && !waitingForMessage()) {
+        //update render here
+
         currentPost++;
 
         // See if we need to load more posts

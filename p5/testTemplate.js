@@ -1,4 +1,6 @@
 const testTemplate = ( sketch ) => {
+
+
     var bgColor;
     var color;
 
@@ -12,6 +14,7 @@ const testTemplate = ( sketch ) => {
     };
 
     sketch.draw = () => {
+
         sketch.setColor();
         sketch.background(bgColor);
         sketch.fill(color);
@@ -36,6 +39,7 @@ const testTemplate = ( sketch ) => {
         else{
             sketch.triangle(device.offsetWidth / 2, device.offsetHeight / 2, device.offsetWidth / 2 - size / 2, device.offsetHeight / 2 + size, device.offsetWidth / 2 + size / 2, device.offsetHeight / 2 + size);
         }
+        
     };
 
     sketch.setColor = () => {
