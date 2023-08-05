@@ -33,6 +33,17 @@ var interestsPicked = 0;
 
 import * as recSys from "recSys";
 
+// FOR TESTING
+
+// To test for content with specific attributes, set these. Otherwise, comment it out.
+
+let test_attributes = {
+    'userSize': 'large',
+    'userColor': 'blue',
+    'userShape': 'triangle'
+}
+
+
 // On Page Load
 $(document).ready(function() { 
     initialize();
@@ -221,10 +232,22 @@ function createContentPost(index, contentId){
     return post;
 }
 
+
 function setupContentAttributes(template, id){
-    template.userSize = recSys.getTopTrait("sizes", id);
-    template.userColor = recSys.getTopTrait("colors", id);
-    template.userShape = recSys.getTopTrait("shapes", id);
+
+    if (typeof test_attributes == 'undefined') {
+        template.userSize = recSys.getTopTrait("sizes", id);
+        template.userColor = recSys.getTopTrait("colors", id);
+        template.userShape = recSys.getTopTrait("shapes", id);
+    }
+
+    else {
+        template.userSize = test_attributes.userSize;
+        template.userColor = test_attributes.userColor;
+        template.userShape = test_attributes.userShape;
+    }
+
+    console.log(template.userSize, template.userColor, template.userShape);
 }
 
 function createMessagePost(message, index){
