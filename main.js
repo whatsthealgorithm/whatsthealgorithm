@@ -11,6 +11,7 @@ var introSequence = [];
 var interestDict = {};
 var scriptByIndex = {};
 var scriptByTrigger = {};
+var sketchDict = {};
 
 var animating = false;
 var disableMessages = false;
@@ -120,11 +121,35 @@ async function initialize(){
         var contentIdList = recSys.initializeFeed();
         document.getElementById("total-matching").innerHTML = recSys.getInitialMatchingAmount();
         loadContent(initialPostLoad, contentIdList);
+        setContentDraw();
+        document.getElementById("debug-content").innerHTML = "ID: " + posts[0].id;
+        document.getElementById("debug-post-count").innerHTML = "Post #: " + currentPost;
     }
     else {
-            startIntro();
+        startIntro();
     }
 
+}
+
+/**
+ * Sets the upcoming two posts to draw their sketches, and the previous sketch to not draw
+ */
+function setContentDraw(){
+    // Turn previous post off (if exists)
+    if (posts[currentPost-1] != null && sketchDict[posts[currentPost-1].id] != null){
+        console.log("Turning post " + (currentPost-1) + " off")
+        sketchDict[posts[currentPost-1].id].setDraw(false);
+    }
+    // Turn current post on 
+    if (posts[currentPost] != null && sketchDict[posts[currentPost].id] != null){
+        console.log("Turning post " + currentPost + " on")
+        sketchDict[posts[currentPost].id].setDraw(true);
+    }
+    // Turn next post on
+    if (posts[currentPost + 1] != null && sketchDict[posts[currentPost + 1].id] != null){
+        console.log("Turning post " + (currentPost+1) + " on")
+        sketchDict[posts[currentPost + 1].id].setDraw(true);
+    }
 }
 
 function loadScript(){
@@ -171,7 +196,6 @@ function startIntro(){
 }
 
 function onIntroButtonClicked(){
-
     var page =  introSequence[introIndex];
     page.style.opacity = 0;
     setTimeout(() => { page.style.display = "none"; }, 100);
@@ -191,9 +215,11 @@ function onIntroButtonClicked(){
         setTimeout(onIntroButtonClicked, 4000);
     }
 
+    setContentDraw();
     if (introIndex >= introPages.length){
         setTimeout(() => {
             document.getElementById("debug-content").innerHTML = "ID: " + posts[0].id;
+            document.getElementById("debug-post-count").innerHTML = "Post #: " + currentPost;
             document.getElementById("intro").style.display = "none";
             inIntro = false;
         }, 100);
@@ -221,8 +247,6 @@ function onInterestButtonClicked(e){
 }
 
 function loadContent(amount, idList){
-
-
     var contentIndex = 0;
     for (var i = 0; i < amount; i++){
         var isMessagePost = messageAtIndex(totalPosts + i);
@@ -242,7 +266,6 @@ function loadContent(amount, idList){
 
 
 function createContentPost(index, contentId){
-
     var post = document.createElement("div");
     post.id = "post-" + index; 
     var contentTemplate = new p5(testTemplate, post);
@@ -253,19 +276,19 @@ function createContentPost(index, contentId){
 
     post.className = "post";
     post.addEventListener("click", click);
+    contentTemplate.setDraw(false);
+    sketchDict[contentId] = contentTemplate;
 
     return post;
 }
 
 
 function setupContentAttributes(template, id){
-
     if (typeof test_attributes == 'undefined') {
         template.userSize = recSys.getTopTrait("sizes", id);
         template.userColor = recSys.getTopTrait("colors", id);
         template.userShape = recSys.getTopTrait("shapes", id);
     }
-
     else {
         template.userSize = test_attributes.userSize;
         template.userColor = test_attributes.userColor;
@@ -294,6 +317,9 @@ function createMessagePost(message, index){
         else if (message.dataId == "preferences-template"){
             setPreferences(messageData);
         }
+        else if (message.dataId == "algorithm-template"){
+            setAlgorithms(messageData);
+        }
         messageBox.appendChild(messageData);
     }
 
@@ -312,13 +338,15 @@ function createMessagePost(message, index){
     }
    
 
-    for (var i = 0; i < message.buttons.length; i++){
-        var messageButton = document.createElement("button");
-        messageButton.className = "message-button";
-        messageButton.innerHTML += message.buttons[i];
-        messageButton.id = message.buttons[i] + "-" + index;
-        messageButton.onclick = onMessageButtonClicked;
-        messageBox.appendChild(messageButton);
+    if (message.buttons != null){
+        for (var i = 0; i < message.buttons.length; i++){
+            var messageButton = document.createElement("button");
+            messageButton.className = "message-button";
+            messageButton.innerHTML += message.buttons[i];
+            messageButton.id = message.buttons[i] + "-" + index;
+            messageButton.onclick = onMessageButtonClicked;
+            messageBox.appendChild(messageButton);
+        }
     }
 
     messagePost.appendChild(messageBox);
@@ -428,7 +456,6 @@ function tryNextPost(){
 
     if (currentPost + 1 < totalPosts && !waitingForMessage()) {
         //update render here
-
         currentPost++;
 
         // See if we need to load more posts
@@ -475,30 +502,22 @@ function snapToCurrentPost(){
             $('#device-buttons')[0].style.opacity = 1;
         }, 500);
     }
+    setContentDraw();
     document.getElementById("debug-content").innerHTML = "ID: " + posts[currentPost].id;
+    document.getElementById("debug-post-count").innerHTML = "Post #: " + currentPost;
 }
 
 function setWeightings(div, algorithmIndex){
-    var algo = recSys.ALGORITHMS[algorithmIndex];
+    var algoWeightings = recSys.ALGORITHMS[algorithmIndex][0];
     var likesBar = div.getElementsByClassName("likes-bar")[0];
-    likesBar.style.width = (35 * algo[0]) + "%";
+    likesBar.style.width = (35 * algoWeightings[0]) + "%";
 
     var sharesBar = div.getElementsByClassName("shares-bar")[0];
-    sharesBar.style.width = (35 * algo[1]) + "%";
+    sharesBar.style.width = (35 * algoWeightings[1]) + "%";
 
     var followsBar = div.getElementsByClassName("follows-bar")[0];
-    followsBar.style.width = (35 * algo[2]) + "%";
+    followsBar.style.width = (35 * algoWeightings[2]) + "%";
 }
-
-function createBar(label, percent, className){
-     var barDiv = document.createElement("div");
-    barDiv.append(document.getElementById("bar-template").content.cloneNode(true));
-    barDiv.getElementsByClassName("param-name")[0].innerHTML = label;
-    var bar = barDiv.getElementsByClassName("bar-fill")[0];
-    bar.style.width = percent + "%";
-    barDiv.className = className;
-    return barDiv;
-};
 
 function setPreferences(div){
     var interests = recSys.getTopInterests();
@@ -511,6 +530,30 @@ function setPreferences(div){
         var barDiv = div.getElementsByClassName("pref-" + i)[0];
         barDiv.getElementsByClassName("param-" + i)[0].innerHTML = name;
         barDiv.getElementsByClassName("bar-fill")[0].style.width = percent + "%";
+    }
+}
+
+function setAlgorithms(div){
+    // populate the algorithms div with the rest of the algorithms 
+    var algCard = div.querySelector(".alg-card");
+    for (var i = 1; i < recSys.ALGORITHMS.length; i++){
+        div.appendChild(algCard.cloneNode(true));
+    }
+    // now go in and set all data for the algorithms 
+    var algCards = div.getElementsByClassName("alg-card");
+    for (var i = 0; i < algCards.length; i++){
+        algCards[i].getElementsByClassName("alg-title")[0].innerHTML = "Algorithm " + i;
+        var buttonContainer = algCards[i].getElementsByClassName("alg-interest-list")[0];
+        for (var j = 0; j < recSys.ALGORITHMS[i][1].length; j++){
+            var interestButton = document.createElement("button");
+            interestButton.className = "interest-selection";
+            interestButton.innerHTML = recSys.ALGORITHMS[i][1][j];
+            buttonContainer.appendChild(interestButton);
+        }
+        var weightingsMenu = document.getElementById("weightings-template").content.cloneNode(true);
+        var weightingsContainer = algCards[i].getElementsByClassName("alg-weightings")[0];
+        weightingsContainer.appendChild(weightingsMenu);
+        setWeightings(weightingsContainer, i);
     }
 }
 

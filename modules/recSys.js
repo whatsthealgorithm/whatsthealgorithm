@@ -1,7 +1,9 @@
-//ORDER: like, share, follow
-const ALG_1_WEIGHTINGS = [1, 0.5, 2.5];
+//ORDER: [[like weight, share weight, follow weight], [prioritizations]]
+const ALG_1 = [[1, 0.5, 2.5], []];
+const ALG_2 = [[0.5, 2, 1], ["science", "sports", "MENA"]];
+const ALG_3 = [[1, 1, 1], ["USA", "food", "travel"]];
 
-const ALGORITHMS = [ALG_1_WEIGHTINGS];
+const ALGORITHMS = [ALG_1, ALG_2, ALG_3];
 
 const MATCH_THRESHOLD = 2;
 const INITIAL_MATCHING_AMOUNT = 3;
