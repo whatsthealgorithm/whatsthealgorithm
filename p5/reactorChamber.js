@@ -29,7 +29,7 @@ const reactorChamber = ( sketch ) => {
         sketch.background(bgColor);
         sketch.fill(color);
 
-        s=400 * scale
+        s=300 * scale
 
         t-=.004
         //m=sketch.translate

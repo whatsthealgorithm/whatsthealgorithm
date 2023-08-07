@@ -272,8 +272,8 @@ function createContentPost(index, contentId){
     //var contentTemplate = new p5(andyTemplate, post);
     //var contentTemplate = new p5(emojiTemplate, post);
     //var contentTemplate = new p5(vaporwaveTemplate, post);
-    //var contentTemplate = new p5(reactorChamber, post);
-    var contentTemplate = new p5(tunnel, post);
+    var contentTemplate = new p5(reactorChamber, post);
+    //var contentTemplate = new p5(tunnel, post);
 
     setupContentAttributes(contentTemplate, contentId);
 
