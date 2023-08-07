@@ -1,4 +1,4 @@
-const emojiTemplate = ( sketch ) => {
+const emoji = ( sketch ) => {
     var bgColor;
     var color;
 

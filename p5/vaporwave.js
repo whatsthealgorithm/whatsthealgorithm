@@ -1,4 +1,4 @@
-const vaporwaveTemplate = ( sketch ) => {
+const vaporwave = ( sketch ) => {
 
     var index = 0;
     var bgColor;
@@ -13,6 +13,7 @@ const vaporwaveTemplate = ( sketch ) => {
       
     };
 
+    let time = 0;
     sketch.draw = () => {
 
         // sketch.setColor();
@@ -22,7 +23,7 @@ const vaporwaveTemplate = ( sketch ) => {
         sketch.colorMode(sketch.HSB, 360, 100, 100);
 
 
-        let time = sketch.millis() / 1000;
+        time += sketch.deltaTime / 1000;
 
         // sketch.push();
         // sketch.translate(-device.offsetWidth/2, -device.offsetHeight/2 - 150);

@@ -269,9 +269,9 @@ function createContentPost(index, contentId){
     var post = document.createElement("div");
     post.id = "post-" + index; 
     //var contentTemplate = new p5(testTemplate, post);
-    //var contentTemplate = new p5(andyTemplate, post);
-    //var contentTemplate = new p5(emojiTemplate, post);
-    //var contentTemplate = new p5(vaporwaveTemplate, post);
+    //var contentTemplate = new p5(crimsonRoom, post);
+    //var contentTemplate = new p5(emoji, post);
+    //var contentTemplate = new p5(vaporwave, post);
     var contentTemplate = new p5(reactorChamber, post);
     //var contentTemplate = new p5(tunnel, post);
 

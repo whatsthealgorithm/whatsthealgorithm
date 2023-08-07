@@ -1,4 +1,4 @@
-const andyTemplate = ( sketch ) => {
+const crimsonRoom = ( sketch ) => {
     var bgColor;
     var color;
 
