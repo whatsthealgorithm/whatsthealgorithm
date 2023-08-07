@@ -39,7 +39,7 @@ import * as recSys from "recSys";
 
 // default 0. set to 1 to skip intro screens
 
-const feed_testing = 0;
+const feed_testing = 1;
 
 // To test for content with specific attributes, set these. Otherwise, comment it out.
 
@@ -268,7 +268,10 @@ function loadContent(amount, idList){
 function createContentPost(index, contentId){
     var post = document.createElement("div");
     post.id = "post-" + index; 
-    var contentTemplate = new p5(testTemplate, post);
+    //var contentTemplate = new p5(testTemplate, post);
+    //var contentTemplate = new p5(andyTemplate, post);
+    //var contentTemplate = new p5(emojiTemplate, post);
+    var contentTemplate = new p5(vaporwaveTemplate, post);
 
     setupContentAttributes(contentTemplate, contentId);
 
