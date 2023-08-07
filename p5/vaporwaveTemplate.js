@@ -15,36 +15,9 @@ const vaporwaveTemplate = ( sketch ) => {
 
     sketch.draw = () => {
 
-        sketch.setColor();
-        sketch.background(bgColor);
-        sketch.fill(color);
-
-        // var size;
-        // if (sketch.userSize == "small"){
-        //     size = 10;
-        // }
-        // else if (sketch.userSize == "medium"){
-        //     size = 50;
-        // }
-        // else{
-        //     size = 100;
-        // }
-
-        // size += index;
-        // index += 0.2;
-        // if (index > 20){
-        //     index = 0;
-        // }
-
-        // if (sketch.userShape == "square"){
-        //     sketch.square(device.offsetWidth / 2, device.offsetHeight / 2, size);
-        // }
-        // else if (sketch.userShape == "circle"){
-        //     sketch.circle(device.offsetWidth / 2, device.offsetHeight / 2, size);
-        // }
-        // else{
-        //     sketch.triangle(device.offsetWidth / 2, device.offsetHeight / 2, device.offsetWidth / 2 - size / 2, device.offsetHeight / 2 + size, device.offsetWidth / 2 + size / 2, device.offsetHeight / 2 + size);
-        // }
+        // sketch.setColor();
+        // sketch.background(bgColor);
+        // sketch.fill(color);
 
         sketch.colorMode(sketch.HSB, 360, 100, 100);
 
@@ -127,8 +100,6 @@ const vaporwaveTemplate = ( sketch ) => {
             
         }
 
-        // sketch.push();
-        // sketch.rotateX(Math.PI/8)
         let x_dist = device.offsetWidth * 2;
         let start_x = device.offsetWidth/2 - x_dist;
         let end_x = device.offsetWidth/2 + x_dist;
@@ -136,23 +107,14 @@ const vaporwaveTemplate = ( sketch ) => {
         grid_size = 80;
         for (let x=start_x; x<=end_x; x+=grid_size){
 
-            let prc = sketch.map(x, start_x,end_x, -1,1);// (x / device.offsetWidth)*2 - 1;
-            //console.log("prc: "+prc)
+            let prc = sketch.map(x, start_x,end_x, -1,1);
             let sign = Math.sign(prc);
             prc = Math.pow( Math.abs(prc), 1.5) * sign;
 
-            //let top_x = device.offsetWidth/2 * prc *  x_dist;//(1.0-prc)*start_x + prc*end_x;
             let top_x = sketch.map(prc, -1, 1, start_x, end_x);
 
             sketch.line(top_x, y_padding, x, device.offsetHeight);
         }
-
-        
-        //sketch.pop();
-
-
-
-        
        
 
         //draw a triangle
@@ -172,8 +134,6 @@ const vaporwaveTemplate = ( sketch ) => {
 
             let line_angle = prc * Math.PI * 2 + time * 2;
             let w = i;
-            // let line_bump = Math.sin(line_angle) * w * 0.05;
-            // w += line_bump;
             let x = -w/2;
 
             let c1 = {
@@ -189,10 +149,8 @@ const vaporwaveTemplate = ( sketch ) => {
             }
 
             let color_angle = prc * Math.PI * 2 + time * 2;
-            let color_prc = 0.5 + Math.sin(color_angle) * 0.5
-            //console.log(color_prc)
-
-            //let hue = 70+ Math.sin(h_angle)*20;
+            let color_prc = 0.5 + Math.sin(color_angle) * 0.5;
+            
             let hue = (1.0-color_prc)*c1.h + color_prc*c2.h;
             let sat = (1.0-color_prc)*c1.s + color_prc*c2.s;
             let bri = (1.0-color_prc)*c1.b + color_prc*c2.b;
