@@ -54,13 +54,10 @@ const emojiGrid = ( sketch ) => {
                 let noise_y =  y + spacing * num_periods;
                 let noise_val = sketch.noise(noise_x*noise_zoom, noise_y*noise_zoom, noise_speed*time);
 
-                //noise_val = 0;
-
                 let emoji = "😨";
                 if (noise_val > 0.25)   emoji = "😀";
                 if (noise_val > 0.5)    emoji = "😍";
                 if (noise_val > 0.7)    emoji = "🥵";
-
 
                 sketch.text(emoji, x, y);
             }

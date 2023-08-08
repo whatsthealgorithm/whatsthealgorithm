@@ -19,24 +19,35 @@ const crimsonRoom = ( sketch ) => {
         sketch.background(bgColor);
         sketch.fill(color);
 
+        
 
         t+=.003
         let shapes_per_row = 50;
-        //t = sketch.millis / 1000.0;
         let w = device.offsetWidth;
         let h = device.offsetHeight;
-        for(d=15;d<530/2;d*=1.1){
+        for(d=15;d<500/2;d*=1.1){
             for(i=0;i<shapes_per_row;i++){
-                a=t+sketch.TAU/shapes_per_row*i+d/(900+sketch.sin(t*4)*300) 
-                x=sketch.quick_map(a)*d
-                y=sketch.quick_map(a+sketch.PI/2)*d
-                s=2+d/20+(sketch.abs(x)-sketch.abs(y))/20
-                //sketch.fill(0)
-                sketch.rect(w/2+x,h/2+y,s,s)
+                a=t+sketch.TAU/shapes_per_row*i+d/(900+sketch.sin(t*4)*300);
+                x=sketch.quick_map(a)*d;
+                y=sketch.quick_map(a+sketch.PI/2)*d;
+                s=4+d/20+(sketch.abs(x)-sketch.abs(y))/20;
+                
+                if (sketch.userShape == "square"){
+                    sketch.rect(w/2+x,h/2+y,s,s);
+                }
+                else if (sketch.userShape == "circle"){
+                    sketch.circle(w/2+x,h/2+y,s);
+                }
+                else{
+                    sketch.push();
+                    sketch.translate(w/2+x,h/2+y);
+                    sketch.triangle(-s/2,s/2, s/2,s/2, 0,-s/2 );
+                    sketch.pop();
+                }
             }
         }
 
-        sketch.fill(0)
+        sketch.fill(0);
         sketch.text("fps "+sketch.frameRate(), w-150, device.offsetHeight-40);
     };
 
