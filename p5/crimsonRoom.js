@@ -19,9 +19,7 @@ const crimsonRoom = ( sketch ) => {
         sketch.background(bgColor);
         sketch.fill(color);
 
-        
-
-        t+=.003
+        t+=.003;
         let shapes_per_row = 50;
         let w = device.offsetWidth;
         let h = device.offsetHeight;

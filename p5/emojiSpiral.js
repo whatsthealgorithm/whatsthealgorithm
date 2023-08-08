@@ -1,11 +1,8 @@
-const emoji = ( sketch ) => {
+const emojiSpiral = ( sketch ) => {
     var bgColor;
     var color;
 
-    
-
     let characters = [];
-
 
     let grow_time = 4.0;
     let spacing = 0.5;
@@ -18,16 +15,12 @@ const emoji = ( sketch ) => {
     
         sketch.smooth();
         sketch.noStroke();   
-
         
         timer = spacing;
-        
-        
       };
 
     sketch.draw = () => {
 
-        
         //generic emoji choices
         emoji_choices = ["😀","💩","😈","😻","🤡","🤮","😇","🤬",,"😱"];
 
@@ -42,14 +35,11 @@ const emoji = ( sketch ) => {
             emoji_choices = ["🌻","🍋","⭐","🍯","🌕","🍌","🔔","🐥","😀","😸"]
         }
 
-
-
         let delta_t = sketch.deltaTime / 1000.0;
         timer += delta_t;
 
         if (timer >= spacing){
             //create a new character
-            //let emoji = emoji_choices.charAt( Math.floor(Math.random * emoji_choices.length) );
             let emoji = sketch.random(emoji_choices);
             characters.push({
                 emoji : emoji,
@@ -92,9 +82,7 @@ const emoji = ( sketch ) => {
             characters.shift();
         }
 
-
-
-
+        //fps test
         sketch.fill(0)
         sketch.text("fps "+sketch.frameRate(), device.offsetWidth-150, device.offsetHeight-40);
     };
@@ -108,20 +96,7 @@ const emoji = ( sketch ) => {
             sketch.noLoop();
         }
     }
-    // sketch.setColor = () => {
-        // if (sketch.userColor == "red"){
-        //     color = "red";
-        //     bgColor = '#9e1b11';
-        // }
-        // else if (sketch.userColor == "blue"){
-        //     color = "blue";
-        //     bgColor = '#8bb7d6';
-        // }
-        // else if (sketch.userColor == "yellow"){
-        //     color = "yellow";
-        //     bgColor = '#ccc72f';
-        // }
-    // }
+    
   };
   
   

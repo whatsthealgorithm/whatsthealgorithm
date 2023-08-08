@@ -22,12 +22,16 @@ const textSwipe = ( sketch ) => {
             for (let i=0; i<2; i++){
                 let g = sketch.createGraphics(device.offsetWidth, device.offsetHeight);
                 let y_spacing = 140;
+                
+                g.smooth();
                 g.textSize(60);
                 g.textStyle(sketch.BOLD);
                 g.textAlign(sketch.CENTER, sketch.CENTER);
                 g.noStroke();
                 if (i == 0) g.fill(0);
                 else        g.fill(255);
+
+                //could be any text here. could be randomzied too
                 g.text("JUNGLE", device.offsetWidth/2, device.offsetHeight/2 - y_spacing);
                 g.text("IS", device.offsetWidth/2, device.offsetHeight/2);
                 g.text("MASSIVE", device.offsetWidth/2, device.offsetHeight/2 + y_spacing);
@@ -43,7 +47,6 @@ const textSwipe = ( sketch ) => {
                         let y = shape_y_dist;
                         if (k==1)   y = device.offsetHeight-shape_y_dist;
                         
-
                         if (sketch.userShape == "square"){
                             g.square(x-shape_size/2, y, shape_size);
                         }
@@ -75,7 +78,6 @@ const textSwipe = ( sketch ) => {
         let y_divide = device.offsetHeight/2 + Math.sin( time * 3 ) * (device.offsetHeight*0.6);
         //clamp it
         y_divide = Math.min(y_divide, device.offsetHeight);
-        //y_divide = Math.min(Math.max(y_divide, 0), device.offsetHeight);
         
         sketch.noStroke();
         sketch.rect(0,0, device.offsetWidth, y_divide);
