@@ -13,62 +13,57 @@ const textSwipe = ( sketch ) => {
       sketch.smooth();
       sketch.noStroke(); 
       
-      //make the image
-      for (let i=0; i<2; i++){
-        let g = sketch.createGraphics(device.offsetWidth, device.offsetHeight);
-        let y_spacing = 140;
-        g.textSize(60);
-        g.textStyle(sketch.BOLD);
-        g.textAlign(sketch.CENTER, sketch.CENTER);
-        g.noStroke();
-        if (i == 0) g.fill(0);
-        else        g.fill(255);
-        g.text("JUNGLE", device.offsetWidth/2, device.offsetHeight/2 - y_spacing);
-        g.text("IS", device.offsetWidth/2, device.offsetHeight/2);
-        g.text("MASSIVE", device.offsetWidth/2, device.offsetHeight/2 + y_spacing);
-        
-
-
-        //put some shapes along the top and bottom
-        let shape_size = 40;
-        let shape_padding = 10;
-        let shape_y_dist = y_spacing/2;
-
-        for (let x=0; x<=device.offsetWidth; x+=shape_size + shape_padding){
-            for (let k=0; k<2; k++){
-
-                let y = shape_y_dist;
-                if (k==1)   y = device.offsetHeight-shape_y_dist;
-                
-                //g.circle(x, y, shape_size);
-
-                g.push();
-                g.translate(x,y);
-                if (k==0)   g.scale(1,-1);
-                g.triangle(-shape_size/2,shape_size/2, shape_size/2,shape_size/2, 0,-shape_size/2 );
-                g.pop();
-
-                // if (sketch.userShape == "square"){
-                //     g.square(x-shape_size/2, y, shape_size);
-                // }
-                // else if (sketch.userShape == "circle"){
-                //     g.circle(x, y, shape_size);
-                // }
-                // else{
-                //     sketch.triangle(device.offsetWidth / 2, device.offsetHeight / 2, device.offsetWidth / 2 - size / 2, device.offsetHeight / 2 + size, device.offsetWidth / 2 + size / 2, device.offsetHeight / 2 + size);
-                // }
-            }
-        }
-
-        //add it
-        imgs.push(g);
-
-
-      }
-      
     };
 
     sketch.draw = () => {
+
+        //if this is the first frame, make the images
+        if (imgs.length == 0){
+            for (let i=0; i<2; i++){
+                let g = sketch.createGraphics(device.offsetWidth, device.offsetHeight);
+                let y_spacing = 140;
+                g.textSize(60);
+                g.textStyle(sketch.BOLD);
+                g.textAlign(sketch.CENTER, sketch.CENTER);
+                g.noStroke();
+                if (i == 0) g.fill(0);
+                else        g.fill(255);
+                g.text("JUNGLE", device.offsetWidth/2, device.offsetHeight/2 - y_spacing);
+                g.text("IS", device.offsetWidth/2, device.offsetHeight/2);
+                g.text("MASSIVE", device.offsetWidth/2, device.offsetHeight/2 + y_spacing);
+
+                //put some shapes along the top and bottom
+                let shape_size = 40;
+                let shape_padding = 10;
+                let shape_y_dist = y_spacing/2;
+
+                for (let x=0; x<=device.offsetWidth; x+=shape_size + shape_padding){
+                    for (let k=0; k<2; k++){
+
+                        let y = shape_y_dist;
+                        if (k==1)   y = device.offsetHeight-shape_y_dist;
+                        
+
+                        if (sketch.userShape == "square"){
+                            g.square(x-shape_size/2, y, shape_size);
+                        }
+                        else if (sketch.userShape == "circle"){
+                            g.circle(x, y, shape_size);
+                        }
+                        else{
+                            g.push();
+                            g.translate(x,y);
+                            if (k==0)   g.scale(1,-1);
+                            g.triangle(-shape_size/2,shape_size/2, shape_size/2,shape_size/2, 0,-shape_size/2 );
+                            g.pop();
+                        }
+                    }
+                }
+
+                //add it
+                imgs.push(g);
+            }
+        }
 
         sketch.setColor();
         sketch.background(bgColor);

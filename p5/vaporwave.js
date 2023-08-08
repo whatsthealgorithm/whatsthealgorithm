@@ -118,25 +118,27 @@ const vaporwave = ( sketch ) => {
         }
        
 
-        //draw a triangle
+        //draw a shape
 
         sketch.push();
         sketch.translate(device.offsetWidth/2, device.offsetHeight/2);
         let step = 1;
         sketch.strokeWeight(step);
+
+
         let height = 250;
+       
+
+        if (sketch.userShape == "square"){
+            height = 200;
+        }
+
+
         let start_y = -height/2;
 
 
+
         for (let i=0; i<height; i+=step){
-            let prc = i / height;
-
-            let y = start_y + i;
-
-            let line_angle = prc * Math.PI * 2 + time * 2;
-            let w = i;
-            let x = -w/2;
-
             let c1 = {
                 h: 275,
                 s: 96,
@@ -149,14 +151,42 @@ const vaporwave = ( sketch ) => {
                 b: 98
             }
 
+            let prc = i / height;
             let color_angle = prc * Math.PI * 2 + time * 2;
             let color_prc = 0.5 + Math.sin(color_angle) * 0.5;
-            
+
             let hue = (1.0-color_prc)*c1.h + color_prc*c2.h;
             let sat = (1.0-color_prc)*c1.s + color_prc*c2.s;
             let bri = (1.0-color_prc)*c1.b + color_prc*c2.b;
 
             sketch.stroke(hue, sat, bri);
+
+            let y = start_y + i;
+            let  w;
+
+            //circle
+            if (sketch.userShape == "circle"){
+                
+                //thanks https://stackoverflow.com/questions/34185725/how-do-you-find-the-width-of-a-circle-from-any-given-y-position
+                let radius = height/2;
+
+                //dist from the center Y
+                let relative_y = Math.abs(sketch.map(prc, 0, 1, -height/2, height/2));
+                let sq_width = radius*radius - relative_y*relative_y;
+                w =  Math.sqrt( radius*radius - relative_y*relative_y ) * 2;
+            }
+            //square
+            else if (sketch.userShape == "square"){
+                w = height;
+            }
+
+            //triangle
+            else{
+                //let line_angle = prc * Math.PI * 2 + time * 2;
+                w = i;
+            }
+            
+            let x = -w/2;
             sketch.line(x,y, x+w, y);
         }
 
