@@ -14,6 +14,7 @@ const tunnel = ( sketch ) => {
     };
 
     sketch.draw = () => {
+        //sketch.userShape = "triangle"
 
         sketch.setColor();
         sketch.background(bgColor);
@@ -31,23 +32,43 @@ const tunnel = ( sketch ) => {
             base_hue = 0.7
         }
 
-
-        s=18
-        p=t%1
-        u=t*1.57
+        //terrible tweetcart code
+        s=18;
+        p=t%1;
+        u=t*1.57;
         w=device.offsetWidth;
         h=device.offsetHeight;
-        sketch.colorMode(sketch.HSB,3)
-        sketch.noFill()
+        sketch.colorMode(sketch.HSB,3);
+        sketch.noFill();
         for(i=0;i<s;i++){
-            o=i/s+p/s
-            sketch.strokeWeight(45)
+            o=i/s+p/s;
+            sketch.strokeWeight(50);
             let hue = base_hue+sketch.sin(o*-4+u)/2;
             let bri = 2+sketch.sin(o*-8+u);
-            sketch.stroke(hue, bri, 3)
-            d=70-o*30
-            sketch.circle(w/2+sketch.sin(a=o*4+u)*d, h/2+sketch.cos(a)*d/2, device.offsetHeight*1.2*o)
-        }t+=.04
+            sketch.stroke(hue, bri, 3);
+            d=70-o*30;
+
+            let x = w/2+sketch.sin(a=o*4+u)*d;
+            let y = h/2+sketch.cos(a)*d/2;
+            let size =  device.offsetHeight*1.2*o;
+
+            if (sketch.userShape == "triangle"){
+                size *= 1.75;
+                y -= 20;
+                sketch.push();
+                sketch.translate(x,y);
+                sketch.triangle(-size/2,size/2, size/2,size/2, 0,-size/2 );
+                sketch.pop();
+            }
+            else if (sketch.userShape == "square"){
+                sketch.square(x-size/2, y-size/2, size);
+            }
+            else if (sketch.userShape == "circle"){
+                sketch.circle(x,y, size);
+            }
+        }
+        
+        t+=.04
 
         
     };
