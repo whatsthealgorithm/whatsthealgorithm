@@ -4,6 +4,7 @@ var menu;
 var menuButton;
 var debugMenu;
 var introPages;
+var deviceButtons;
 
 var posts = [];
 var buttonCounts = {follows: 0, likes: 0, shares: 0};
@@ -12,6 +13,7 @@ var interestDict = {};
 var scriptByIndex = {};
 var scriptByTrigger = {};
 var sketchDict = {};
+var selectInterestDict = {};
 
 var animating = false;
 var disableMessages = false;
@@ -19,6 +21,7 @@ var isMobile = false;
 var debug = false;
 var inIntro = false;
 var menuShowing = false;
+var deviceButtonsShowing = true;
 
 const initialPostLoad = 10;
 const pageSwipeTime = 400;
@@ -62,11 +65,14 @@ async function initialize(){
     menu = document.getElementById("info");
     menuButton = document.getElementById("info-icon");
     debugMenu = document.getElementById("debug");
+    deviceButtons = document.getElementById("device-buttons")
 
+    // mouse touch controls
     document.addEventListener("dragstart", dragStart);
     document.addEventListener("dragend", dragEnd);
     document.addEventListener("dragover", drag);
 
+    // mobile touch controls
     document.addEventListener("touchmove", touchMove);
     document.addEventListener("touchend", touchEnd);
 
@@ -99,31 +105,24 @@ async function initialize(){
     var exit = info.getElementsByClassName("info-exit-button")[0];
 
     isMobile = $(window).width() < 767;
-    if (isMobile){
-        // move info menu into device div
-        document.getElementById("device").insertBefore(info, device);
-
-        menuButton.addEventListener("click", () => { toggleInfoMenu(true)} );
-        exit.addEventListener("click", () => { toggleInfoMenu(false) });
-        menu.style.top = info.offsetHeight + "px";
-        exit.style.display = "block";
-        toggleInfoMenu(false);
-    };
+    menuButton.addEventListener("click", () => { toggleInfoMenu(true)} );
+    exit.addEventListener("click", () => { toggleInfoMenu(false) });
+    menu.style.top = info.offsetHeight + "px";
+    exit.style.display = "block";
+    toggleInfoMenu(false);
 
     await recSys.setup();
 
     if(feed_testing === 1) {
-           recSys.createNewUser(interestDict);
+        recSys.createNewUser(interestDict);
         setPreferences(menu);
-        if (isMobile){
-            toggleInfoMenu(false);
-        }
+        toggleInfoMenu(false);
         var contentIdList = recSys.initializeFeed();
         document.getElementById("total-matching").innerHTML = recSys.getInitialMatchingAmount();
         loadContent(initialPostLoad, contentIdList);
         setContentDraw();
         document.getElementById("debug-content").innerHTML = "ID: " + posts[0].id;
-        document.getElementById("debug-post-count").innerHTML = "Post #: " + currentPost;
+        document.getElementById("debug-post-count").innerHTML = "Post" + currentPost;
     }
     else {
         startIntro();
@@ -137,17 +136,14 @@ async function initialize(){
 function setContentDraw(){
     // Turn previous post off (if exists)
     if (posts[currentPost-1] != null && sketchDict[posts[currentPost-1].id] != null){
-        console.log("Turning post " + (currentPost-1) + " off")
         sketchDict[posts[currentPost-1].id].setDraw(false);
     }
     // Turn current post on 
     if (posts[currentPost] != null && sketchDict[posts[currentPost].id] != null){
-        console.log("Turning post " + currentPost + " on")
         sketchDict[posts[currentPost].id].setDraw(true);
     }
     // Turn next post on
     if (posts[currentPost + 1] != null && sketchDict[posts[currentPost + 1].id] != null){
-        console.log("Turning post " + (currentPost+1) + " on")
         sketchDict[posts[currentPost + 1].id].setDraw(true);
     }
 }
@@ -187,7 +183,7 @@ function startIntro(){
             var interestButton = document.createElement("button");
             interestButton.className = "interest-selection";
             interestButton.innerHTML = trait;
-            interestButton.onclick = onInterestButtonClicked;
+            interestButton.onclick = onIntroInterestButtonClicked;
             buttonContainer.appendChild(interestButton);
             interestDict[trait] = false;
         }
@@ -205,9 +201,7 @@ function onIntroButtonClicked(){
     if (introIndex == 2){
         recSys.createNewUser(interestDict);
         setPreferences(menu);
-        if (isMobile){
-            toggleInfoMenu(false);
-        }
+        toggleInfoMenu(false);
         var contentIdList = recSys.initializeFeed();
         document.getElementById("total-matching").innerHTML = recSys.getInitialMatchingAmount();
         loadContent(initialPostLoad, contentIdList);
@@ -219,14 +213,17 @@ function onIntroButtonClicked(){
     if (introIndex >= introPages.length){
         setTimeout(() => {
             document.getElementById("debug-content").innerHTML = "ID: " + posts[0].id;
-            document.getElementById("debug-post-count").innerHTML = "Post #: " + currentPost;
+            document.getElementById("debug-post-count").innerHTML = "Post " + currentPost;
             document.getElementById("intro").style.display = "none";
             inIntro = false;
         }, 100);
     };
 }
 
-function onInterestButtonClicked(e){
+/**
+ * Click handler for interest buttons in the intro sequece 
+ **/ 
+function onIntroInterestButtonClicked(e){
     if (!interestDict[e.target.innerHTML]){
         e.target.style.backgroundColor = "#1ad631";
         interestDict[e.target.innerHTML] = true;
@@ -243,6 +240,20 @@ function onInterestButtonClicked(e){
     }
     else{
         $("#interest-finished")[0].disabled = true;
+    }
+}
+
+/**
+ * Click handler for interest buttons in the create-your-own algorithm section
+ **/ 
+function onSelectInterestButtonClicked(e){
+    if (!selectInterestDict[e.target.innerHTML]){
+        e.target.style.backgroundColor = "#1ad631";
+        selectInterestDict[e.target.innerHTML] = true;
+    }
+    else{
+        e.target.style.backgroundColor = "antiquewhite";
+        selectInterestDict[e.target.innerHTML] = false;
     }
 }
 
@@ -275,7 +286,7 @@ function createContentPost(index, contentId){
     contentTemplate.id = "content-" + index;
 
     post.className = "post";
-    post.addEventListener("click", click);
+    //post.addEventListener("click", click);
     contentTemplate.setDraw(false);
     sketchDict[contentId] = contentTemplate;
 
@@ -317,8 +328,11 @@ function createMessagePost(message, index){
         else if (message.dataId == "preferences-template"){
             setPreferences(messageData);
         }
-        else if (message.dataId == "algorithm-template"){
-            setAlgorithms(messageData);
+        else if (message.dataId == "algorithm-select-template"){
+            setAlgorithmsForSelection(messageData);
+        }
+        else if (message.dataId = "algorithm-create-template"){
+            setAlgorithmCreate(messageData);
         }
         messageBox.appendChild(messageData);
     }
@@ -336,7 +350,6 @@ function createMessagePost(message, index){
         messageBody.innerHTML += message.body;
         messageBox.appendChild(messageBody);    
     }
-   
 
     if (message.buttons != null){
         for (var i = 0; i < message.buttons.length; i++){
@@ -350,7 +363,7 @@ function createMessagePost(message, index){
     }
 
     messagePost.appendChild(messageBox);
-    messagePost.addEventListener("click", click);
+    //messagePost.addEventListener("click", click);
     return messagePost;
 }
 
@@ -442,7 +455,7 @@ function click(e){
         return;
     }
     // Top forty percent of screen = scroll up
-    if (e.offsetY < postHeight * 0.4){
+    if (e.clientY < postHeight * 0.4){
         tryLastPost();
     }
     // Bottom sixty percent of screen = scroll down
@@ -492,19 +505,36 @@ function snapToCurrentPost(){
         marginTop: '+=' + diff + 'px'
     }, pageSwipeTime, "swing", () => { animating = false});
 
-    if (waitingForMessage()){
+    if (posts[currentPost].type == "message"){
         setTimeout(() => {
-            $('#device-buttons')[0].style.opacity = 0;
+            toggleDeviceButtons(false);
         }, 200);
     }
-    else if ($('#device-buttons')[0].style.opacity == 0){
+    else if (!deviceButtonsShowing){
         setTimeout(() => {
-            $('#device-buttons')[0].style.opacity = 1;
+            toggleDeviceButtons(true);
         }, 500);
     }
     setContentDraw();
     document.getElementById("debug-content").innerHTML = "ID: " + posts[currentPost].id;
-    document.getElementById("debug-post-count").innerHTML = "Post #: " + currentPost;
+    document.getElementById("debug-post-count").innerHTML = "Post " + currentPost;
+}
+
+function toggleDeviceButtons(show){
+    if (show && !deviceButtonsShowing){
+        deviceButtonsShowing = true;
+        deviceButtons.style.opacity = 1;
+        setTimeout(() => {
+            deviceButtons.style.display = "flex";
+        }, 100);
+    }
+    else if (!show && deviceButtonsShowing){
+        deviceButtonsShowing = false;
+        deviceButtons.style.opacity = 0;
+        setTimeout(() => {
+            deviceButtons.style.display = "none";
+        }, 100);
+    }
 }
 
 function setWeightings(div, algorithmIndex){
@@ -533,7 +563,7 @@ function setPreferences(div){
     }
 }
 
-function setAlgorithms(div){
+function setAlgorithmsForSelection(div){
     // populate the algorithms div with the rest of the algorithms 
     var algCard = div.querySelector(".alg-card");
     for (var i = 1; i < recSys.ALGORITHMS.length; i++){
@@ -542,8 +572,13 @@ function setAlgorithms(div){
     // now go in and set all data for the algorithms 
     var algCards = div.getElementsByClassName("alg-card");
     for (var i = 0; i < algCards.length; i++){
+        algCards[i].id = "alg-" + i;
+        algCards[i].addEventListener("click", onAlgorithmCardClicked);
         algCards[i].getElementsByClassName("alg-title")[0].innerHTML = "Algorithm " + i;
         var buttonContainer = algCards[i].getElementsByClassName("alg-interest-list")[0];
+        if (recSys.ALGORITHMS[i][1].length == 0){
+            algCards[i].getElementsByClassName("alg-subtitle")[0].style.innerHTML = "No Key Preferences";
+        }
         for (var j = 0; j < recSys.ALGORITHMS[i][1].length; j++){
             var interestButton = document.createElement("button");
             interestButton.className = "interest-selection";
@@ -553,8 +588,45 @@ function setAlgorithms(div){
         var weightingsMenu = document.getElementById("weightings-template").content.cloneNode(true);
         var weightingsContainer = algCards[i].getElementsByClassName("alg-weightings")[0];
         weightingsContainer.appendChild(weightingsMenu);
+        weightingsContainer.getElementsByClassName("top-info-row")[0].style.display = "none";
         setWeightings(weightingsContainer, i);
     }
+}
+
+function setAlgorithmCreate(div){
+    var weightingsDiv = div.getElementsByClassName("create-weightings")[0];
+    var weightingsMenu = document.getElementById("weightings-template").content.cloneNode(true);
+    weightingsDiv.append(weightingsMenu);
+    div.getElementsByClassName("weightings")[0].style.display = "none";
+    var bars = div.getElementsByClassName("bar");
+    for (var i = 0; i < bars.length; i++){
+        bars[i].id = "bar-" + i;
+        bars[i].addEventListener("click", onWeightingsBarClicked);
+    }
+
+    var buttonContainer = div.getElementsByClassName("select-priorities")[0];
+
+    var traits = recSys.getTraits();
+    for (var traitName in traits){
+        for (var i = 0; i < traits[traitName].length; i++){
+            var trait = traits[traitName][i];
+            var interestButton = document.createElement("button");
+            interestButton.className = "interest-selection";
+            interestButton.innerHTML = trait;
+            interestButton.onclick = onSelectInterestButtonClicked;
+            buttonContainer.appendChild(interestButton);
+            selectInterestDict[trait] = false;
+        }
+    }
+}
+
+function onWeightingsBarClicked(e){
+    var bar = e.target.closest(".bar");
+    var barFill = bar.getElementsByClassName("bar-fill")[0];
+    console.log(bar, barFill)
+    var index = parseInt(bar.id.split("-").slice(-1));
+    console.log(e.offsetX, bar.offsetWidth);
+    barFill.style.width = (100 * e.offsetX / bar.offsetWidth) + "%";
 }
 
 function onMessageButtonClicked(e){
@@ -577,7 +649,7 @@ function onMessageButtonClicked(e){
     for (var i = 0; i < message.buttons.length; i++){
         if (message.buttons[i] == e.target.innerHTML){
             button = message.buttons[i];
-            trigger = message.triggers[i];
+            trigger = message.buttonTriggers[i];
             break;
         }
     }
@@ -613,9 +685,7 @@ function processTrigger(trigger){
         return;
     }
     else if (trigger == "unlock-menu"){
-        if (isMobile){
-            menuButton.style.display = "block";
-        }
+        menuButton.style.display = "block";
     }
 }
 
@@ -639,13 +709,22 @@ function onDeviceButtonClicked(e){
         recSys.onContentEngagement(posts[currentPost].id, "share");
     }
 
-    if (!isMobile || menuShowing){
+    if (menuShowing){
         setPreferences(menu);
     }
 
     e.target.classList.remove('button-clicked')
     void e.target.offsetWidth; // trigger reflow
     e.target.classList.add('button-clicked');
+}
+
+function onAlgorithmCardClicked(e){
+    //Extract index from id
+    var id = e.target.closest(".alg-card").id;
+    var index = parseInt(e.target.id.split("-").slice(-1));
+    posts[currentPost].confirmed = true;
+    tryNextPost();
+    snapToCurrentPost();
 }
 
 function toggleDebug(){
@@ -660,14 +739,9 @@ function resize(){
     }
 
     if (!isMobile && $(window).width() < 767){
-        var info = document.getElementById("info-column");
-        document.getElementById("device").insertBefore(info, device);
         isMobile = true;
     }
     else if (isMobile && $(window).width() >= 767){
-        var info = document.getElementById("info-column");
-        var deviceCol = document.getElementById("device-column");
-        document.getElementById("content").insertBefore(info, deviceCol);
         isMobile = false;
     }
 }

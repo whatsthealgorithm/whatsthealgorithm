@@ -40,10 +40,6 @@
                     <div id="debug-post-count"></div>
     </div>
     <div id="content">
-        <div class="column" id="info-column">
-            <div id="info"></div>
-        </div>
-
         <div class="column" id="device-column">
             <div id="device">
                 <div id="intro">
@@ -79,6 +75,7 @@
 
                 </div>
                 <img id="info-icon" src="images/bar-graph.png"\>
+                <div id="info-column"><div id="info"></div></div> 
                 <div id="device-screen"> 
                     <div id="device-buttons">
                         <img id="follow" class="device-button" src="images/follow.png"\>
@@ -148,12 +145,22 @@
      </div>
 </template>
 
-<template id="algorithm-template">
+<template id="algorithm-select-template">
     <div class="alg-card">
         <div class="alg-title">Algorithm X</div>
         <div class="alg-subtitle">Key Preferences</div>
         <div class="alg-interest-list"></div>
         <div class="alg-weightings"><!-- Weightings chart goes in here --></div>
     </div>
+</template>
+
+<template id="algorithm-create-template">
+    <div class="message-title">
+        Create Your Own Algorithm
+    </div>
+    <div class="create-weightings">
+    </div>
+    <div class="message-subtitle">Select Priorities</div>
+    <div class="select-priorities"></div>
 </template>
 </html>
