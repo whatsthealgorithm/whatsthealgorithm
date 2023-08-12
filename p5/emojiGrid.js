@@ -67,8 +67,8 @@ const emojiGrid = ( sketch ) => {
 
 
 
-        sketch.fill(0)
-        sketch.text("fps "+sketch.frameRate(), device.offsetWidth-150, device.offsetHeight-40);
+        //sketch.fill(0)
+        //sketch.text("fps "+sketch.frameRate(), device.offsetWidth-150, device.offsetHeight-40);
     };
 
 

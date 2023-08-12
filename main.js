@@ -272,9 +272,10 @@ function createContentPost(index, contentId){
     //var contentTemplate = new p5(crimsonRoom, post);
     //var contentTemplate = new p5(emojiSpiral, post);
     //var contentTemplate = new p5(emojiGrid, post);
+    var contentTemplate = new p5(emojiBounce, post);
     //var contentTemplate = new p5(vaporwave, post);
     //var contentTemplate = new p5(reactorChamber, post);
-    var contentTemplate = new p5(tunnel, post);
+    //var contentTemplate = new p5(tunnel, post);
     //var contentTemplate = new p5(textSwipe, post);
 
     setupContentAttributes(contentTemplate, contentId);
