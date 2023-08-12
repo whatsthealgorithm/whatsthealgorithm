@@ -135,16 +135,16 @@ async function initialize(){
  */
 function setContentDraw(){
     // Turn previous post off (if exists)
-    if (posts[currentPost-1] != null && sketchDict[posts[currentPost-1].id] != null){
-        sketchDict[posts[currentPost-1].id].setDraw(false);
+    if (posts[currentPost-1] != null && sketchDict[posts[currentPost-1].div.id] != null){
+        sketchDict[posts[currentPost-1].div.id].setDraw(false);
     }
     // Turn current post on 
-    if (posts[currentPost] != null && sketchDict[posts[currentPost].id] != null){
-        sketchDict[posts[currentPost].id].setDraw(true);
+    if (posts[currentPost] != null && sketchDict[posts[currentPost].div.id] != null){
+        sketchDict[posts[currentPost].div.id].setDraw(true);
     }
     // Turn next post on
-    if (posts[currentPost + 1] != null && sketchDict[posts[currentPost + 1].id] != null){
-        sketchDict[posts[currentPost + 1].id].setDraw(true);
+    if (posts[currentPost + 1] != null && sketchDict[posts[currentPost+1].div.id] != null){
+        sketchDict[posts[currentPost+1].div.id].setDraw(true);
     }
 }
 
@@ -280,7 +280,13 @@ function createContentPost(index, contentId){
     var post = document.createElement("div");
     post.id = "post-" + index; 
     var contentTemplate = new p5(testTemplate, post);
-
+    //var contentTemplate = new p5(crimsonRoom, post);
+    //var contentTemplate = new p5(emojiSpiral, post);
+    //var contentTemplate = new p5(emojiGrid, post);
+    //var contentTemplate = new p5(vaporwave, post);
+    //var contentTemplate = new p5(reactorChamber, post);
+    //var contentTemplate = new p5(tunnel, post);
+    //var contentTemplate = new p5(textSwipe, post);
     setupContentAttributes(contentTemplate, contentId);
 
     contentTemplate.id = "content-" + index;
@@ -288,7 +294,7 @@ function createContentPost(index, contentId){
     post.className = "post";
     //post.addEventListener("click", click);
     contentTemplate.setDraw(false);
-    sketchDict[contentId] = contentTemplate;
+    sketchDict[post.id] = contentTemplate;
 
     return post;
 }
