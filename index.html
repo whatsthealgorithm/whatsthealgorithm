@@ -23,12 +23,12 @@
         }
      </script>
 
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
-    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 
-    <!-- Andy is gettnig on a plane and so made local versions of p5 and jquery-->
-    <script src="offline/p5_v1-4-0.js"></script>
-    <script src="offline/jquery_v1-11-1.js" type="text/javascript"></script>
+    <!-- Andy is getting on a plane and so made local versions of p5 and jquery-->
+    <!-- <script src="offline/p5_v1-4-0.js"></script>
+    <script src="offline/jquery_v1-11-1.js" type="text/javascript"></script> -->
 
 
     <script type="module" src="main.js"></script>
@@ -58,10 +58,6 @@
                     <div id="debug-post-count"></div>
     </div>
     <div id="content">
-        <div class="column" id="info-column">
-            <div id="info"></div>
-        </div>
-
         <div class="column" id="device-column">
             <div id="device">
                 <div id="intro">
@@ -97,6 +93,7 @@
 
                 </div>
                 <img id="info-icon" src="images/bar-graph.png"\>
+                <div id="info-column"><div id="info"></div></div> 
                 <div id="device-screen"> 
                     <div id="device-buttons">
                         <img id="follow" class="device-button" src="images/follow.png"\>
@@ -166,12 +163,22 @@
      </div>
 </template>
 
-<template id="algorithm-template">
+<template id="algorithm-select-template">
     <div class="alg-card">
         <div class="alg-title">Algorithm X</div>
         <div class="alg-subtitle">Key Preferences</div>
         <div class="alg-interest-list"></div>
         <div class="alg-weightings"><!-- Weightings chart goes in here --></div>
     </div>
+</template>
+
+<template id="algorithm-create-template">
+    <div class="message-title">
+        Create Your Own Algorithm
+    </div>
+    <div class="create-weightings">
+    </div>
+    <div class="message-subtitle">Select Priorities</div>
+    <div class="select-priorities"></div>
 </template>
 </html>

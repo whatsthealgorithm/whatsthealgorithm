@@ -102,13 +102,13 @@ function onContentEngagement(contentId, interaction){
     for (var trait in contentTraits){
         if (contentTraits[trait] != 0){
             if (interaction == "like"){
-                user.staticPreferences[trait] += ALG_1_WEIGHTINGS[0];
+                user.staticPreferences[trait] += ALG_1[0][0];
             }
             else if (interaction == "follow"){
-                user.staticPreferences[trait] += ALG_1_WEIGHTINGS[1];
+                user.staticPreferences[trait] += ALG_1[0][1];
             }
             else if (interaction == "share"){
-                user.staticPreferences[trait] += ALG_1_WEIGHTINGS[2];
+                user.staticPreferences[trait] += ALG_1[0][2];
             }
         }
     }

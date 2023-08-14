@@ -57,7 +57,6 @@ const textPop = ( sketch ) => {
         let bg_off_x = bg_spacing * ( (time * bg_period) % 1);
         let bg_off_y = Math.sin(time) * bg_spacing * 2;
 
-        sketch.userShape = "trangle"
         sketch.fill(color);
 
         let cols = 0;
@@ -66,10 +65,16 @@ const textPop = ( sketch ) => {
             for(let y=-bg_spacing*2-bg_off_y; y<device.offsetHeight+bg_spacing*2; y+=bg_spacing){
 
                 if (sketch.userShape == "square"){
-                    sketch.square(x,y, bg_spacing/2);
+                    sketch.push();
+                    sketch.translate(x,y);
+                    sketch.rotate(x/30 + y/30)
+                    let size = bg_spacing/2
+                    sketch.square(-size/2,-size/2, size);
+                    sketch.pop();
                 }
                 else if (sketch.userShape == "circle"){
-                    sketch.circle(x,y, bg_spacing/2);
+                    let size =  bg_spacing/2 + Math.sin(x/30 + y/30) * 2;
+                    sketch.circle(x,y, size);
                 }
                 else{
                     let ts = bg_spacing*0.5;
