@@ -270,13 +270,17 @@ function createContentPost(index, contentId){
     post.id = "post-" + index; 
     //var contentTemplate = new p5(testTemplate, post);
     //var contentTemplate = new p5(crimsonRoom, post);
+    //var contentTemplate = new p5(lePark, post);
     //var contentTemplate = new p5(emojiSpiral, post);
     //var contentTemplate = new p5(emojiGrid, post);
-    var contentTemplate = new p5(emojiBounce, post);
+    //var contentTemplate = new p5(emojiBounce, post);
+    //var contentTemplate = new p5(emojiMandala, post);
     //var contentTemplate = new p5(vaporwave, post);
     //var contentTemplate = new p5(reactorChamber, post);
+    //var contentTemplate = new p5(cubeStructure, post);
     //var contentTemplate = new p5(tunnel, post);
     //var contentTemplate = new p5(textSwipe, post);
+    var contentTemplate = new p5(textPop, post);
 
     setupContentAttributes(contentTemplate, contentId);
 

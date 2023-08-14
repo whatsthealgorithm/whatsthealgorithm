@@ -53,7 +53,6 @@ const reactorChamber = ( sketch ) => {
                 else{
                     sketch.scale(1,-1);
                     sketch.cone(70, h*1.3);
-
                 }
                 
                 sketch.pop()
