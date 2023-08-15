@@ -12,33 +12,35 @@ var user;
 var initialTraitsDict;
 var contentDict = {};
 var traits;
+var styles;
 var totalInitialMatching;
 
 // Start exports section
 
 /**
- * Derives necessary data objects from the content json file.
+ * Derives necessary data objects from the sketch json file.
  */
 function setup(){
-    return $.getJSON('json/content.json', function(jsonData, status, xhr)
+    return $.getJSON('json/sketches.json', function(jsonData, status, xhr)
     {
         traits = jsonData.traits;
+        styles = jsonData.styles;
         initialTraitsDict = getInitialTraitsDict();
 
-        for (var i = 0; i < jsonData.content.length; i++){
-            var content = jsonData.content[i];
-            var traitsDict = {...initialTraitsDict}; // performs a deep copy
+        var combinations = getAllPossibleTraitCombinations();
 
-            for (var j = 0; j < content.traits.length; j++){
-                traitsDict[content.traits[j]] = 1;
+        for (var i = 0; i < jsonData.sketches.length; i++){
+            var sketch = jsonData.sketches[i];
+            for (var j = 0; j < combinations.length; j++){
+                contentDict[sketch.id + j] = {
+                    id: sketch.id + j,
+                    style: sketch.style,
+                    sketchName: sketch.id,
+                    traits: combinations[j],
+                    seen: false,
+                    matchScore: -1,
+                };
             }
-
-            contentDict[content.id] = {
-                id: content.id,
-                traits: traitsDict,
-                seen: false,
-                matchScore: -1,
-            };
         }
     });
 }
@@ -99,19 +101,18 @@ function onContentSeen(contentId){
  */
 function onContentEngagement(contentId, interaction){
     var contentTraits = contentDict[contentId].traits;
-    for (var trait in contentTraits){
-        if (contentTraits[trait] != 0){
-            if (interaction == "like"){
-                user.staticPreferences[trait] += ALG_1[0][0];
-            }
-            else if (interaction == "follow"){
-                user.staticPreferences[trait] += ALG_1[0][1];
-            }
-            else if (interaction == "share"){
-                user.staticPreferences[trait] += ALG_1[0][2];
-            }
+    for (var i = 0; i < contentTraits.length; i++){
+        if (interaction == "like"){
+            user.staticPreferences[contentTraits[i]] += ALG_1[0][0];
+        }
+        else if (interaction == "follow"){
+            user.staticPreferences[contentTraits[i]] += ALG_1[0][1];
+        }
+        else if (interaction == "share"){
+            user.staticPreferences[contentTraits[i]] += ALG_1[0][2];
         }
     }
+    user.staticPreferences[contentDict[contentId].style] += 1;
 }
 
 /**
@@ -119,7 +120,6 @@ function onContentEngagement(contentId, interaction){
  */
 function recommend(amount){
     var ideal = getIdealContentVector(user.staticPreferences);
-
     var unseenContent = [];
 
     for (var id in contentDict){
@@ -128,11 +128,16 @@ function recommend(amount){
         }
     }
 
-    unseenContent.sort(function(id1, id2) { return calculateSimilarity(ideal, contentDict[id2].traits) - calculateSimilarity(ideal, contentDict[id1].traits); });
+    unseenContent.sort(function(id1, id2) 
+    { 
+        var contentVector1 = createContentVector(contentDict[id1]);
+        var contentVector2 = createContentVector(contentDict[id2]);
+        return calculateSimilarity(ideal, contentVector2) - calculateSimilarity(ideal, contentVector1);
+     });
 
     var topContent = unseenContent.slice(0, amount);
     for (var i = 0; i < topContent.length; i++){
-        console.log("Recommending " + topContent[i] + ", similarity to ideal is " + calculateSimilarity(ideal, contentDict[topContent[i]].traits));
+        console.log("Recommending " + topContent[i] + ", similarity to ideal is " + calculateSimilarity(ideal, createContentVector(contentDict[topContent[i]])));
     }
     return topContent;
 }
@@ -141,30 +146,23 @@ function recommend(amount){
 /**
  * Returns the traits dictionary (derived from json) with all possible traits sorted by category
  */
-function getTraits(){
+function getAllTraits(){
     return traits;
 }
 
 /**
- * Returns the top trait within a category for a specified piece of content content. 
- * (e.g. returns 'yellow' for category 'color' for id 'content5')
+ * Returns an array of traits for a specific piece of content (e.g. ["red", "square", "fast"])
  */
-function getTopTrait(categoryName, id){
-    var content = contentDict[id];
-    var traitList = traits[categoryName];
-    for (var i = 0; i < traitList.length; i++){
-        if (content.traits[traitList[i]] > 0){
-            return traitList[i];
-        }
+function getContentTraits(id){
+    if (contentDict.hasOwnProperty(id)){
+        return contentDict[id].traits;
     }
-    // TODO: make random? 
-    return traitList[0];
+    return null;
 }
 
-function getInitialMatchingAmount(){
-    return totalInitialMatching;
-}
-
+/**
+ * Returns an array of the top interests and their scores, sorted from highest to lowest 
+ */
 function getTopInterests(){
     var arr = [];
     for (var pref in user.staticPreferences){
@@ -175,7 +173,53 @@ function getTopInterests(){
     return arr;
 }
 
+/**
+ * Gets the name of the sketch associated with the given content id
+ */
+function getContentSketchName(id){
+    return contentDict[id].sketchName;
+}
+
 // End exports
+
+/**
+ * Creates a dict with only traits marked that belong to the passed in piece of content. 
+ */
+function createContentVector(content){
+    var vector = {...initialTraitsDict};
+    for (var trait in content.traits){
+        vector[content.traits[trait]] = 1;
+    }
+    vector[content.style] = 1;
+    return vector;
+}
+
+/**
+ * Gets all possible trait combinations for an arbitrary list of traits.
+ */
+function getAllPossibleTraitCombinations(){
+    var traitsList = Object.values(traits);
+    var combos = traitsList[0];
+    for (var i = 1; i < traitsList.length; i++){
+        combos = combine(combos, traitsList[i]);
+    }
+    return combos;
+}
+
+/**
+ * Helper function that rewrites the passed in array to encompass all new combinations of the given list.
+ */
+function combine(array, list){
+    var ar = [];
+    for (var i = 0; i < array.length; i++){
+        for (var j = 0; j < list.length; j++){
+            var c = [array[i], list[j]];
+            ar.push(c.flat());
+        }
+    }
+    array = ar;
+    return array;
+}
 
 /**
  * Returns a zero-initialized dictionary mapping traits to their value.
@@ -187,6 +231,9 @@ function getInitialTraitsDict(){
             dict[traits[categorytName][i]] = 0;
         }
     }
+    for (var style in styles){
+        dict[styles[style]] = 0;
+    }
     return dict;
 }
 
@@ -195,7 +242,6 @@ function getInitialTraitsDict(){
  * The top trait of each category will be marked, or no mark in that category if there is no top trait 
  */
 function getIdealContentVector(preferences){
-    console.log(preferences);
     var traitsDict = {...initialTraitsDict};
     for (var traitName in traits){
         var maxVal = 0;
@@ -205,13 +251,24 @@ function getIdealContentVector(preferences){
 
             if (preferences[trait] > maxVal){
                 topTrait = trait;
-                maxVal =  preferences[trait];
+                maxVal = preferences[trait];
             }
         }
         if (topTrait != null){
             traitsDict[topTrait] = 1;
         }
     }
+
+    // Get top style
+    var topStyle = styles[0];
+    var maxVal = 0;
+    for (var i = 0; i < styles.length; i++){
+        if (preferences[styles[i]] > maxVal){
+            topStyle = styles[i];
+            maxVal = preferences[styles[i]];
+        }
+    }
+    traitsDict[topStyle] = 1;
     return traitsDict; 
 }
 
@@ -220,9 +277,9 @@ function getIdealContentVector(preferences){
  */
 function calculateSimilarity(idealVector, contentVector){
     var similarityScore = 0;
-    var traits = Object.keys(idealVector);
-    for (var i = 0; i < traits.length; i++){
-        similarityScore += idealVector[traits[i]] * contentVector[traits[i]];
+    var traitList = Object.keys(idealVector);
+    for (var i = 0; i < traitList.length; i++){
+        similarityScore += idealVector[traitList[i]] * contentVector[traitList[i]];
     }
     return similarityScore;
 }
@@ -250,7 +307,7 @@ function getMatchingAndNonMatchingContent(){
 function matchesPreferences(content, threshold){
     var overlap = 0;
     for (var trait in content.traits){
-        if (content.traits[trait] > 0 && user.staticPreferences[trait] > 0){
+        if (user.staticPreferences[content.traits[trait]] != 0){
             overlap++;
         }
     }
@@ -271,4 +328,4 @@ function selectAtRandom(array, num){
     return selection;
 }
 
-export { ALGORITHMS, setup, createNewUser, initializeFeed, onContentSeen, onContentEngagement, recommend, getTraits, getTopTrait, getInitialMatchingAmount, getTopInterests };
+export { ALGORITHMS, setup, createNewUser, initializeFeed, onContentSeen, onContentEngagement, recommend, getAllTraits, getContentTraits, getTopInterests, getContentSketchName };
