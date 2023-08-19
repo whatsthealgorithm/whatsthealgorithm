@@ -16,11 +16,14 @@ const textPop = ( sketch ) => {
     };
 
     sketch.reset = () =>{
+        //do whatever you want with this raw text!
+
         //let raw_text = ["give", "me", "some", "pizza"];
         let raw_text = ["can","I", "pet", "your", "dog?"];
+
         words = [];
 
-        let x_wander = 80;
+        let x_wander = device.offsetWidth * 0.22;
 
         for (let i=0; i<raw_text.length; i++){
             words.push({
@@ -35,14 +38,21 @@ const textPop = ( sketch ) => {
 
     sketch.draw = () => {
 
+        // console.log("color: "+sketch.userColor);
+        // console.log("shape: "+sketch.userShape);
+        // console.log("speed: "+sketch.userSpeed);
+
         //do initial setup
         if(words.length == 0){
             sketch.reset();
+            console.log(device.offsetWidth +" , "+device.offsetHeight);
         }
         
         sketch.setColor();
         // sketch.background(bgColor);
         // sketch.fill(color);
+
+        
 
         let time = sketch.millis() / 1000.0;
         let delta_time = sketch.deltaTime / 1000.0;
@@ -51,7 +61,7 @@ const textPop = ( sketch ) => {
         sketch.background(255);
 
         //shape grid
-        let bg_spacing = 20;
+        let bg_spacing = device.offsetWidth * 0.1;
         let bg_period = 2;
 
         let bg_off_x = bg_spacing * ( (time * bg_period) % 1);
@@ -94,7 +104,7 @@ const textPop = ( sketch ) => {
 
         sketch.textAlign(sketch.CENTER, sketch.CENTER);
         sketch.textStyle(sketch.BOLDITALIC);
-        sketch.textSize(70);
+        sketch.textSize( device.offsetWidth * 0.23 );
 
         let grow_time = 0.7;
         let pause_time = grow_time+2.5;
@@ -131,25 +141,25 @@ const textPop = ( sketch ) => {
         }
 
 
-        sketch.fill(0)
-        sketch.textSize(20)
-        sketch.text("fps "+sketch.frameRate(), device.offsetWidth-150, device.offsetHeight-40);
+        // sketch.fill(0)
+        // sketch.textSize(20)
+        // sketch.text("fps "+sketch.frameRate(), device.offsetWidth-150, device.offsetHeight-40);
 
         
     };
 
     sketch.setColor = () => {
+        color = sketch.userColor;
         if (sketch.userColor == "red"){
-            color = "red";
             bgColor = '#9e1b11';
         }
         else if (sketch.userColor == "blue"){
             bgColor = "blue";
             color = '#8bb7d6';
         }
-        else if (sketch.userColor == "yellow"){
-            color = "yellow";
-            bgColor = '#ccc72f';
+        else if (sketch.userColor == "green"){
+            color = "#84f28c";
+            bgColor = '#228429';
         }
     };
 

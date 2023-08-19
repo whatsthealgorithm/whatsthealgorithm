@@ -118,11 +118,11 @@ async function initialize(){
         setPreferences(menu);
         toggleInfoMenu(false);
         var contentIdList = recSys.initializeFeed();
-        document.getElementById("total-matching").innerHTML = recSys.getInitialMatchingAmount();
         loadContent(initialPostLoad, contentIdList);
         setContentDraw();
         document.getElementById("debug-content").innerHTML = "ID: " + posts[0].id;
         document.getElementById("debug-post-count").innerHTML = "Post" + currentPost;
+        document.getElementById("debug-traits").innerHTML = recSys.getContentTraits(posts[currentPost].id);
     }
     else {
         startIntro();
@@ -176,7 +176,7 @@ function startIntro(){
 
     var buttonContainer = document.getElementById("intro-button-container");
 
-    var traits = recSys.getTraits();
+    var traits = recSys.getAllTraits();
     for (var traitName in traits){
         for (var i = 0; i < traits[traitName].length; i++){
             var trait = traits[traitName][i];
@@ -203,7 +203,6 @@ function onIntroButtonClicked(){
         setPreferences(menu);
         toggleInfoMenu(false);
         var contentIdList = recSys.initializeFeed();
-        document.getElementById("total-matching").innerHTML = recSys.getInitialMatchingAmount();
         loadContent(initialPostLoad, contentIdList);
 
         setTimeout(onIntroButtonClicked, 4000);
@@ -279,20 +278,8 @@ function loadContent(amount, idList){
 function createContentPost(index, contentId){
     var post = document.createElement("div");
     post.id = "post-" + index; 
-    //var contentTemplate = new p5(testTemplate, post);
-    //var contentTemplate = new p5(crimsonRoom, post);
-    //var contentTemplate = new p5(lePark, post);
-    //var contentTemplate = new p5(emojiSpiral, post);
-    //var contentTemplate = new p5(emojiGrid, post);
-    //var contentTemplate = new p5(emojiBounce, post);
-    //var contentTemplate = new p5(emojiMandala, post);
-    //var contentTemplate = new p5(vaporwave, post);
-    //var contentTemplate = new p5(reactorChamber, post);
-    //var contentTemplate = new p5(cubeStructure, post);
-    //var contentTemplate = new p5(tunnel, post);
-    //var contentTemplate = new p5(textSwipe, post);
-    var contentTemplate = new p5(textPop, post);
-
+    var name = recSys.getContentSketchName(contentId);
+    var contentTemplate = new p5(eval(name), post);
     setupContentAttributes(contentTemplate, contentId);
 
     contentTemplate.id = "content-" + index;
@@ -308,17 +295,16 @@ function createContentPost(index, contentId){
 
 function setupContentAttributes(template, id){
     if (typeof test_attributes == 'undefined') {
-        template.userSize = recSys.getTopTrait("sizes", id);
-        template.userColor = recSys.getTopTrait("colors", id);
-        template.userShape = recSys.getTopTrait("shapes", id);
+        var traits = recSys.getContentTraits(id);
+        template.userColor = traits[0];
+        template.userShape = traits[1];
+        template.userSpeed = traits[2];
     }
     else {
-        template.userSize = test_attributes.userSize;
+        template.userSpeed = test_attributes.userSpeed;
         template.userColor = test_attributes.userColor;
         template.userShape = test_attributes.userShape;
     }
-
-    console.log(template.userSize, template.userColor, template.userShape);
 }
 
 function createMessagePost(message, index){
@@ -530,6 +516,7 @@ function snapToCurrentPost(){
     setContentDraw();
     document.getElementById("debug-content").innerHTML = "ID: " + posts[currentPost].id;
     document.getElementById("debug-post-count").innerHTML = "Post " + currentPost;
+    document.getElementById("debug-traits").innerHTML = recSys.getContentTraits(posts[currentPost].id);
 }
 
 function toggleDeviceButtons(show){
@@ -618,7 +605,7 @@ function setAlgorithmCreate(div){
 
     var buttonContainer = div.getElementsByClassName("select-priorities")[0];
 
-    var traits = recSys.getTraits();
+    var traits = recSys.getAllTraits();
     for (var traitName in traits){
         for (var i = 0; i < traits[traitName].length; i++){
             var trait = traits[traitName][i];

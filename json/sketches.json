@@ -1,0 +1,14 @@
+{
+    "sketches": [
+        {
+            "id": "textPop",
+            "style": "emoji"
+        }
+    ],
+    "traits": {
+        "colors": ["red", "blue", "green"],
+        "shapes": ["circle", "square", "triangle"],
+        "speeds": ["slow", "normal", "fast"]
+    },
+    "styles": ["emoji", "vaporwave", "hypnotic", "3D", "text"]
+}
