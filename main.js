@@ -307,8 +307,8 @@ function setupContentAttributes(template, id){
     }
 
     template.userSpeedF = 1.0;
-    if (template.userSpeed == "slow")    template.userSpeedF = 0.25;
-    if (template.userSpeed == "fast")    template.userSpeedF = 3;
+    if (template.userSpeed == "slow")    template.userSpeedF = 0.5;
+    if (template.userSpeed == "fast")    template.userSpeedF = 2;
 }
 
 function createMessagePost(message, index){

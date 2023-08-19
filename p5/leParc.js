@@ -1,4 +1,4 @@
-const lePark = ( sketch ) => {
+const leParc = ( sketch ) => {
 
     var index = 0;
     var bgColor;
@@ -16,16 +16,13 @@ const lePark = ( sketch ) => {
 
     sketch.draw = () => {
 
-        // sketch.setColor();
-        // sketch.background(bgColor);
-        // sketch.fill(color);
-
         let t = sketch.millis() / 1000;
+        t *= sketch.userSpeedF;
 
 
         w = device.offsetWidth;
         h = device.offsetHeight;
-        s = 50
+        s = device.offsetWidth / 7;
         c = sketch.color(213,209,200)
 
         
@@ -37,6 +34,9 @@ const lePark = ( sketch ) => {
         }
         else if (sketch.userColor == "yellow"){
             c = sketch.color(214, 214, 161);
+        }
+        else if (sketch.userColor == "green"){
+            c = sketch.color("#add6a1");
         }
         
 
@@ -69,20 +69,6 @@ const lePark = ( sketch ) => {
         
     };
 
-    sketch.setColor = () => {
-        if (sketch.userColor == "red"){
-            color = "red";
-            bgColor = '#9e1b11';
-        }
-        else if (sketch.userColor == "blue"){
-            color = "blue";
-            bgColor = '#8bb7d6';
-        }
-        else if (sketch.userColor == "yellow"){
-            color = "yellow";
-            bgColor = '#ccc72f';
-        }
-    };
 
     sketch.setDraw = (shouldDraw) =>{
         if (shouldDraw && !sketch.isLooping()){

@@ -14,13 +14,9 @@ const tunnel = ( sketch ) => {
     };
 
     sketch.draw = () => {
-        //sketch.userShape = "triangle"
-
-        sketch.setColor();
-        sketch.background(bgColor);
-        sketch.fill(color);
-
+        
         let t = sketch.millis() / 1000.0;
+        t *= sketch.userSpeedF;
 
         let base_hue = 2.8;   //red
         if (sketch.userColor == "red"){
@@ -28,8 +24,8 @@ const tunnel = ( sketch ) => {
         else if (sketch.userColor == "blue"){
             base_hue = 2;
         }
-        else if (sketch.userColor == "yellow"){
-            base_hue = 0.7
+        else if (sketch.userColor == "green"){
+            base_hue = 0.9
         }
 
         //terrible tweetcart code
@@ -71,21 +67,6 @@ const tunnel = ( sketch ) => {
         t+=.04
 
         
-    };
-
-    sketch.setColor = () => {
-        if (sketch.userColor == "red"){
-            color = "red";
-            bgColor = '#9e1b11';
-        }
-        else if (sketch.userColor == "blue"){
-            color = "blue";
-            bgColor = '#8bb7d6';
-        }
-        else if (sketch.userColor == "yellow"){
-            color = "yellow";
-            bgColor = '#ccc72f';
-        }
     };
 
     sketch.setDraw = (shouldDraw) =>{

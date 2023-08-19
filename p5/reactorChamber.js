@@ -22,9 +22,13 @@ const reactorChamber = ( sketch ) => {
         sketch.background(bgColor);
         sketch.fill(color);
 
-        s=300 * scale
+        let device_adjust = device.offsetWidth / 300;
 
-        t-=.004
+        s=300 * scale * device_adjust;
+
+        let delta_t = sketch.deltaTime / 4000;
+        delta_t *= sketch.userSpeedF;
+        t -= delta_t
         w = device.offsetHeight
         let y_spacing = device.offsetHeight / 2.5;
 
@@ -64,19 +68,18 @@ const reactorChamber = ( sketch ) => {
     };
 
     sketch.setColor = () => {
+        color = sketch.userColor;
+
         if (sketch.userColor == "red"){
-            color = "red";
             bgColor = '#9e1b11';
         }
         else if (sketch.userColor == "blue"){
-            color = "blue";
             bgColor = '#8bb7d6';
         }
-        else if (sketch.userColor == "yellow"){
-            color = "yellow";
-            bgColor = '#ccc72f';
+        else if (sketch.userColor == "green"){
+            bgColor = '#2fcc54';
         }
-    };
+    }
 
     sketch.setDraw = (shouldDraw) =>{
         if (shouldDraw && !sketch.isLooping()){
