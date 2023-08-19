@@ -305,6 +305,10 @@ function setupContentAttributes(template, id){
         template.userColor = test_attributes.userColor;
         template.userShape = test_attributes.userShape;
     }
+
+    template.userSpeedF = 1.0;
+    if (template.userSpeed == "slow")    template.userSpeedF = 0.25;
+    if (template.userSpeed == "fast")    template.userSpeedF = 3;
 }
 
 function createMessagePost(message, index){

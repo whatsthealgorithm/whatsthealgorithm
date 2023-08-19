@@ -15,18 +15,16 @@ const cubeStructure = ( sketch ) => {
 
 
     sketch.draw = () => {
-
-
-        let time = (sketch.millis() / 1000) * 0.5;
+        let time = (sketch.millis() / 1000) * 0.5 * sketch.userSpeedF;
 
         sketch.setColor();
         sketch.background(210+Math.sin(time * 3) * 20);
         sketch.fill(color);
 
+        let device_adjust = device.offsetWidth / 300;
         
-
-        let w = 500;
-        let c = 50;
+        let w = 500 * device_adjust;
+        let c = 50 * device_adjust;
 
         //sketch.colorMode(sketch.HSB,1);
         sketch.push();
@@ -65,19 +63,18 @@ const cubeStructure = ( sketch ) => {
     };
 
     sketch.setColor = () => {
+        color = sketch.userColor;
+
         if (sketch.userColor == "red"){
-            color = "red";
             bgColor = '#9e1b11';
         }
         else if (sketch.userColor == "blue"){
-            color = "blue";
             bgColor = '#8bb7d6';
         }
-        else if (sketch.userColor == "yellow"){
-            color = "yellow";
-            bgColor = '#ccc72f';
+        else if (sketch.userColor == "green"){
+            bgColor = '#2fcc54';
         }
-    };
+    }
 
     sketch.setDraw = (shouldDraw) =>{
         if (shouldDraw && !sketch.isLooping()){

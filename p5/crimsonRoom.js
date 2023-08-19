@@ -19,16 +19,24 @@ const crimsonRoom = ( sketch ) => {
         sketch.background(bgColor);
         sketch.fill(color);
 
-        t+=.003;
+        let device_adjust = device.offsetWidth / 300;
+
+        //console.log("speed: "+sketch.userSpeedF)
+
+        let delta_time = sketch.deltaTime / 1000;
+        //console.log(delta_time)
+        t += delta_time * 0.3 * sketch.userSpeedF;
         let shapes_per_row = 50;
         let w = device.offsetWidth;
         let h = device.offsetHeight;
-        for(d=15;d<500/2;d*=1.1){
+        let max_d = 200 * device_adjust;
+        for(d=15;d<max_d;d*=1.2){
             for(i=0;i<shapes_per_row;i++){
                 a=t+sketch.TAU/shapes_per_row*i+d/(900+sketch.sin(t*4)*300);
                 x=sketch.quick_map(a)*d;
                 y=sketch.quick_map(a+sketch.PI/2)*d;
                 s=4+d/20+(sketch.abs(x)-sketch.abs(y))/20;
+                s *= device_adjust
                 
                 if (sketch.userShape == "square"){
                     sketch.rect(w/2+x,h/2+y,s,s);
@@ -55,17 +63,16 @@ const crimsonRoom = ( sketch ) => {
     }
 
     sketch.setColor = () => {
+        color = sketch.userColor;
+
         if (sketch.userColor == "red"){
-            color = "red";
             bgColor = '#9e1b11';
         }
         else if (sketch.userColor == "blue"){
-            color = "blue";
             bgColor = '#8bb7d6';
         }
-        else if (sketch.userColor == "yellow"){
-            color = "yellow";
-            bgColor = '#ccc72f';
+        else if (sketch.userColor == "green"){
+            bgColor = '#2fcc54';
         }
     }
 

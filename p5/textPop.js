@@ -55,7 +55,9 @@ const textPop = ( sketch ) => {
         
 
         let time = sketch.millis() / 1000.0;
+        time *= sketch.userSpeedF;
         let delta_time = sketch.deltaTime / 1000.0;
+        delta_time *= sketch.userSpeedF;
 
         //background
         sketch.background(255);

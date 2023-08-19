@@ -11,14 +11,16 @@ const emojiBounce = ( sketch ) => {
     };
 
     var objs = [];
-    var emoji_size = 100;
-
-    var speed = 200;
+    
 
 
     sketch.draw = () => {
 
         let padding = 0;
+
+        let emoji_size = device.offsetWidth * 0.25;
+
+        let speed = device.offsetWidth * 0.66 ;
 
         let delta_time = sketch.deltaTime / 1000.0;
 
@@ -70,8 +72,8 @@ const emojiBounce = ( sketch ) => {
             o.hit_time ++;
 
             //update
-            o.x += o.vx * speed * delta_time;
-            o.y += o.vy * speed * delta_time;
+            o.x += o.vx * speed * delta_time * sketch.userSpeedF;
+            o.y += o.vy * speed * delta_time * sketch.userSpeedF;
 
             //bounce on walls
             if (o.x < -padding)                     o.vx = 1;
@@ -82,7 +84,7 @@ const emojiBounce = ( sketch ) => {
             //bounce on others
             for (let k=0; k<i; k++){
                 let other = objs[k];
-                if (sketch.is_touching(o, other)){
+                if (sketch.is_touching(o, other, emoji_size)){
 
                     let x_dist = o.x - other.x;
                     let y_dist = o.y - other.y;
@@ -111,9 +113,9 @@ const emojiBounce = ( sketch ) => {
         }
     };
 
-    sketch.is_touching = (a, b) => {
+    sketch.is_touching = (a, b, size) => {
         let dist = sketch.dist(a.x, a.y, b.x, b.y);
-        return dist < emoji_size ;
+        return dist < size ;
     }
 
 
@@ -127,17 +129,16 @@ const emojiBounce = ( sketch ) => {
     }
 
     sketch.setColor = () => {
+        color = sketch.userColor;
+
         if (sketch.userColor == "red"){
-            color = "red";
             bgColor = '#9e1b11';
         }
         else if (sketch.userColor == "blue"){
-            color = "blue";
             bgColor = '#8bb7d6';
         }
-        else if (sketch.userColor == "yellow"){
-            color = "yellow";
-            bgColor = '#ccc72f';
+        else if (sketch.userColor == "green"){
+            bgColor = '#2fcc54';
         }
     }
   };
