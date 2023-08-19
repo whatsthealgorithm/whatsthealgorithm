@@ -16,19 +16,16 @@ const emojiMandala = ( sketch ) => {
 
     sketch.draw = () => {
 
-        // sketch.setColor();
-        // sketch.background(bgColor);
-        // sketch.fill(color);
-
         sketch.background(255);
 
-        let emoji_size = 100;
+        let emoji_size = device.offsetHeight * 0.15;
         sketch.textAlign(sketch.CENTER,sketch.CENTER);
         sketch.textSize(emoji_size);
 
 
 
         let time = sketch.millis() / 1000;
+        time *= sketch.userSpeedF;
 
         //moving the whole thing to the center of the screen
         sketch.push();
@@ -36,7 +33,7 @@ const emojiMandala = ( sketch ) => {
 
         let num_depth = 5;
 
-        let end_dist = 350;
+        let end_dist = device.offsetHeight * 0.5;
 
         let start_num = 4;
         let end_num = 20;
@@ -72,8 +69,8 @@ const emojiMandala = ( sketch ) => {
                 else if (sketch.userColor == "blue"){
                     emojis = ["😨", "🥶"];
                 }
-                else if (sketch.userColor == "yellow"){
-                    emojis = ["😀", "😎"];
+                else if (sketch.userColor == "green"){
+                    emojis = ["🤮", "🤢"];
                 }
 
                 let emoji = emojis[i%2];
@@ -114,21 +111,6 @@ const emojiMandala = ( sketch ) => {
         }
         else if (!shouldDraw && sketch.isLooping()){
             sketch.noLoop();
-        }
-    }
-
-    sketch.setColor = () => {
-        if (sketch.userColor == "red"){
-            color = "red";
-            bgColor = '#9e1b11';
-        }
-        else if (sketch.userColor == "blue"){
-            color = "blue";
-            bgColor = '#8bb7d6';
-        }
-        else if (sketch.userColor == "yellow"){
-            color = "yellow";
-            bgColor = '#ccc72f';
         }
     }
   };
