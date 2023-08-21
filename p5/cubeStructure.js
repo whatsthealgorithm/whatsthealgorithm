@@ -8,6 +8,7 @@ const cubeStructure = ( sketch ) => {
         var deviceScreen = document.getElementById("device-screen");
         var canvas = sketch.createCanvas(deviceScreen.offsetWidth, deviceScreen.offsetHeight, sketch.WEBGL);
         canvas.addClass("p5-content");
+        canvas.addClass("cubeStructure");
     };
 
     t=0;

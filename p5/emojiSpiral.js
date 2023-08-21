@@ -11,8 +11,9 @@ const emojiSpiral = ( sketch ) => {
 
     sketch.setup = () => {
         var deviceScreen = document.getElementById("device-screen");
-        var canvas = sketch.createCanvas(deviceScreen.offsetWidth, deviceScreen.offsetHeight, sketch.WEBGL);
+        var canvas = sketch.createCanvas(deviceScreen.offsetWidth, deviceScreen.offsetHeight);
         canvas.addClass("p5-content");
+        canvas.addClass("emojiSpiral");
     
         sketch.smooth();
         sketch.noStroke();   
