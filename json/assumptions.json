@@ -1,0 +1,14 @@
+{
+    "assumptions": 
+        {
+            "red": "hot-headed, fiery, and the life of the party",
+            "blue": "moody, introverted, and easily scared",
+            "yellow": "sunny, level-headed, and always happy",
+            "circle": "easy-going, sometimes to a fault",
+            "triangle": "witty but prone to bouts of prickliness",
+            "square": "good with following instructions and fitting in with the crowd",
+            "fast": "live on wild side, never slowing down for anything",
+            "normal": "live life in the moment, and think planning is an annoyance",
+            "slow": "take things at their own pace, and save tasks til the last minute"
+        }
+}

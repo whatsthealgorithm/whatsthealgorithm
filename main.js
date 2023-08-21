@@ -26,6 +26,7 @@ var deviceButtonsShowing = true;
 const initialPostLoad = 10;
 const pageSwipeTime = 400;
 const numPreferencesToShow = 4;
+const maxPosts = 28;
 
 var introIndex = 0;
 var lastYPos = -1;
@@ -37,6 +38,7 @@ var totalPosts = 0;
 var interestsPicked = 0;
 
 import * as recSys from "recSys";
+import * as canvas from "html2canvas";
 
 // FOR TESTING
 
@@ -318,6 +320,7 @@ function createMessagePost(message, index){
     if (message.dataId != null){
         var messageData = document.createElement("div");
         messageData.className = "message-data";
+        messageData.id = message.dataId + "-div";
         var content = document.getElementById(message.dataId).content.cloneNode(true);
         messageData.append(content);
         if (message.dataId == "weightings-template"){
@@ -329,8 +332,11 @@ function createMessagePost(message, index){
         else if (message.dataId == "algorithm-select-template"){
             setAlgorithmsForSelection(messageData);
         }
-        else if (message.dataId = "algorithm-create-template"){
+        else if (message.dataId == "algorithm-create-template"){
             setAlgorithmCreate(messageData);
+        }
+        else if (message.dataId == "assumptions-template"){
+            setAssumptions(messageData);
         }
         messageBox.appendChild(messageData);
     }
@@ -464,15 +470,15 @@ function click(e){
 }
 
 function tryNextPost(){
-
     if (currentPost + 1 < totalPosts && !waitingForMessage()) {
         //update render here
         currentPost++;
 
         // See if we need to load more posts
-        if (currentPost + 1 >= totalPosts){
-            var nextContentIds = recSys.recommend(5);
-            loadContent(5, nextContentIds);
+        if (currentPost + 1 >= totalPosts && totalPosts < maxPosts){
+            var numPosts = Math.min(5, maxPosts - totalPosts);
+            var nextContentIds = recSys.recommend(numPosts);
+            loadContent(numPosts, nextContentIds);
         }
 
         //UNCOMMENT when we have enough content to not run out
@@ -628,6 +634,47 @@ function onWeightingsBarClicked(e){
     barFill.style.width = (100 * e.offsetX / bar.offsetWidth) + "%";
 }
 
+function setMyAlgorithm(div){
+    var createCard = $("#algorithm-create-card")[0];
+    var myAlgCard = createCard.cloneNode(true);
+    myAlgCard.id = "my-alg-card";
+    var createCardBars = createCard.getElementsByClassName("bar");
+    var myAlgBars = myAlgCard.getElementsByClassName("bar");
+
+    for (var i = 0; i < createCardBars.length; i++){
+        myAlgBars[i].getElementsByClassName("bar-fill")[0].style.width = createCardBars[i].getElementsByClassName("bar-fill")[0].style.width; 
+    }
+
+    myAlgCard.getElementsByClassName("message-subtitle")[0].style.display = "none";
+
+    var buttons = myAlgCard.getElementsByClassName("interest-selection");
+    console.log(buttons);
+    console.log(selectInterestDict)
+    for (var i = 0; i < buttons.length; i++){
+        if (selectInterestDict[buttons[i].innerHTML]){
+            buttons[i].style.backgroundColor = "#1ad631";
+        }
+        else{
+            buttons[i].style.display = "none";
+        }
+    }
+
+    myAlgCard.getElementsByClassName("message-title")[0].innerHTML = "My Algorithm";
+    div.getElementsByClassName("my-alg")[0].appendChild(myAlgCard);    
+}
+
+function setAssumptions(div){
+    var topColor = recSys.getTopTrait("colors");
+    var topShape = recSys.getTopTrait("shapes");
+    var topSpeed = recSys.getTopTrait("speeds");
+    div.getElementsByClassName("assumption-color")[0].innerHTML = topColor;
+    div.getElementsByClassName("assumption-shape")[0].innerHTML = topShape;
+    div.getElementsByClassName("assumption-speed")[0].innerHTML = topSpeed;
+    div.getElementsByClassName("assumption-color-analysis")[0].innerHTML = recSys.getAssumption(topColor);
+    div.getElementsByClassName("assumption-shape-analysis")[0].innerHTML = recSys.getAssumption(topShape);
+    div.getElementsByClassName("assumption-speed-analysis")[0].innerHTML = recSys.getAssumption(topSpeed);
+}
+
 function onMessageButtonClicked(e){
     if (disableMessages){
         return;
@@ -685,6 +732,20 @@ function processTrigger(trigger){
     }
     else if (trigger == "unlock-menu"){
         menuButton.style.display = "block";
+    }
+    else if (trigger == "create-my-algorithm"){
+        setMyAlgorithm($("#algorithm-image-template-div")[0]);
+    }
+    else if (trigger == "save-algorithm"){
+        html2canvas($("#my-alg-card")[0]).then(function(canvas) {
+            canvas.classList = "alg-image";
+            var canvasUrl = canvas.toDataURL();
+            var createEl = document.createElement('a');
+            createEl.href = canvasUrl;
+            createEl.download = "my_algorithm";
+            createEl.click();
+            createEl.remove();
+        });
     }
 }
 
