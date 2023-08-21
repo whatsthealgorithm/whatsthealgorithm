@@ -31,11 +31,15 @@ const emojiSpiral = ( sketch ) => {
         else if (sketch.userColor == "blue"){
             emoji_choices = ["🧊","💧","🐬","🥶","🐟","💎","💙","😨","😱","🤖"]
         }
+        else if (sketch.userColor == "green"){
+            emoji_choices = ["🤢","🥎","🎾"," 🥝","🍏","🌳","🦜","🐸","💚","🐲"]
+        }
         else if (sketch.userColor == "yellow"){
             emoji_choices = ["🌻","🍋","⭐","🍯","🌕","🍌","🔔","🐥","😀","😸"]
         }
 
-        let delta_t = sketch.deltaTime / 10000.0;
+        let delta_t = sketch.deltaTime / 1000.0;
+        delta_t *= sketch.userSpeedF
         timer += delta_t;
 
         if (timer >= spacing){
@@ -59,7 +63,7 @@ const emojiSpiral = ( sketch ) => {
             let prc = characters[i].timer / grow_time;
 
             let curve_prc = Math.pow(prc, 1);
-            let scale = prc * 200;
+            let scale = prc * device.offsetWidth * 0.45;
 
             let angle = prc * -Math.PI;// - sketch_time / 5;
 

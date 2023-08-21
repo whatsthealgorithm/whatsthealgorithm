@@ -44,7 +44,7 @@ import * as canvas from "html2canvas";
 
 // default 0. set to 1 to skip intro screens
 
-const feed_testing = 0;
+const feed_testing = 1;
 
 // To test for content with specific attributes, set these. Otherwise, comment it out.
 
@@ -299,14 +299,18 @@ function setupContentAttributes(template, id){
     if (typeof test_attributes == 'undefined') {
         var traits = recSys.getContentTraits(id);
         template.userColor = traits[0];
-        template.userSpeed = traits[1];
-        template.userShape = traits[2];
+        template.userShape = traits[1];
+        template.userSpeed = traits[2];
     }
     else {
         template.userSpeed = test_attributes.userSpeed;
         template.userColor = test_attributes.userColor;
         template.userShape = test_attributes.userShape;
     }
+
+    template.userSpeedF = 1.0;
+    if (template.userSpeed == "slow")    template.userSpeedF = 0.5;
+    if (template.userSpeed == "fast")    template.userSpeedF = 2;
 }
 
 function createMessagePost(message, index){

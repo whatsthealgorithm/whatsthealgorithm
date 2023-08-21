@@ -20,13 +20,14 @@ const emojiGrid = ( sketch ) => {
         sketch.background(bgColor);
         sketch.fill(color);
 
-        let spacing = 40;
+        let spacing = device.offsetWidth * 0.15;
 
 
         sketch.textAlign(sketch.CENTER,sketch.CENTER);
-        sketch.textSize(40);
+        sketch.textSize(spacing);
 
         let time = sketch.millis() / 1000;
+        time *= sketch.userSpeedF;
 
         let period_length = 2.0;
         let period = time % period_length;
@@ -65,10 +66,8 @@ const emojiGrid = ( sketch ) => {
 
         sketch.pop();
 
-
-
-        sketch.fill(0)
-        sketch.text("fps "+sketch.frameRate(), device.offsetWidth-150, device.offsetHeight-40);
+        //sketch.fill(0)
+        //sketch.text("fps "+sketch.frameRate(), device.offsetWidth-150, device.offsetHeight-40);
     };
 
 
@@ -82,17 +81,16 @@ const emojiGrid = ( sketch ) => {
     }
 
     sketch.setColor = () => {
+        color = sketch.userColor;
+
         if (sketch.userColor == "red"){
-            color = "red";
             bgColor = '#9e1b11';
         }
         else if (sketch.userColor == "blue"){
-            color = "blue";
             bgColor = '#8bb7d6';
         }
-        else if (sketch.userColor == "yellow"){
-            color = "yellow";
-            bgColor = '#ccc72f';
+        else if (sketch.userColor == "green"){
+            bgColor = '#2fcc54';
         }
     }
   };

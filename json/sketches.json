@@ -1,7 +1,15 @@
 {
     "sketches": [
         {
+            "id": "emojiBounce",
+            "style": "emoji"
+        },
+        {
             "id": "emojiGrid",
+            "style": "emoji"
+        },
+        {
+            "id": "emojiMandala",
             "style": "emoji"
         },
         {
@@ -17,11 +25,23 @@
             "style": "hypnotic"
         },
         {
+            "id": "leParc",
+            "style": "hypnotic"
+        },
+        {
             "id": "reactorChamber",
             "style": "3D"
         },
         {
+            "id": "cubeStructure",
+            "style": "3D"
+        },
+        {
             "id": "textSwipe",
+            "style": "text"
+        },
+        {
+            "id": "textPop",
             "style": "text"
         },
         {
@@ -30,7 +50,7 @@
         }
     ],
     "traits": {
-        "colors": ["red", "blue", "yellow"],
+        "colors": ["red", "blue", "green"],
         "shapes": ["circle", "square", "triangle"],
         "speeds": ["slow", "normal", "fast"]
     },

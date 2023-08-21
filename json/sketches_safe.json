@@ -1,0 +1,58 @@
+{
+    "sketches": [
+        {
+            "id": "emojiBounce",
+            "style": "emoji"
+        },
+        {
+            "id": "emojiGrid",
+            "style": "emoji"
+        },
+        {
+            "id": "emojiMandala",
+            "style": "emoji"
+        },
+        {
+            "id": "emojiSpiral",
+            "style": "emoji"
+        },
+        {
+            "id": "vaporwave",
+            "style": "vaporwave"
+        },
+        {
+            "id": "tunnel",
+            "style": "hypnotic"
+        },
+        {
+            "id": "leParc",
+            "style": "hypnotic"
+        },
+        {
+            "id": "reactorChamber",
+            "style": "3D"
+        },
+        {
+            "id": "cubeStructure",
+            "style": "3D"
+        },
+        {
+            "id": "textSwipe",
+            "style": "text"
+        },
+        {
+            "id": "textPop",
+            "style": "text"
+        },
+        {
+            "id": "crimsonRoom",
+            "style": "hypnotic"
+        }
+    ],
+    "traits": {
+        "colors": ["red", "blue", "yellow"],
+        "shapes": ["circle", "square", "triangle"],
+        "speeds": ["slow", "normal", "fast"]
+    },
+    "styles": ["emoji", "vaporwave", "hypnotic", "3D", "text"]
+}

@@ -17,14 +17,16 @@ const textSwipe = ( sketch ) => {
 
     sketch.draw = () => {
 
+        //console.log(device.offsetHeight);
+
         //if this is the first frame, make the images
         if (imgs.length == 0){
             for (let i=0; i<2; i++){
                 let g = sketch.createGraphics(device.offsetWidth, device.offsetHeight);
-                let y_spacing = 140;
+                let y_spacing = device.offsetHeight * 0.2;
                 
                 g.smooth();
-                g.textSize(60);
+                g.textSize(device.offsetHeight * 0.08);
                 g.textStyle(sketch.BOLD);
                 g.textAlign(sketch.CENTER, sketch.CENTER);
                 g.noStroke();
@@ -37,8 +39,8 @@ const textSwipe = ( sketch ) => {
                 g.text("MASSIVE", device.offsetWidth/2, device.offsetHeight/2 + y_spacing);
 
                 //put some shapes along the top and bottom
-                let shape_size = 40;
-                let shape_padding = 10;
+                let shape_size = device.offsetHeight * 0.05;
+                let shape_padding = device.offsetHeight * 0.014;
                 let shape_y_dist = y_spacing/2;
 
                 for (let x=0; x<=device.offsetWidth; x+=shape_size + shape_padding){
@@ -74,6 +76,7 @@ const textSwipe = ( sketch ) => {
 
 
         let time = sketch.millis() / 1000;
+        time *= sketch.userSpeedF;
         //move y divide up and down, going a little out of frame
         let y_divide = device.offsetHeight/2 + Math.sin( time * 3 ) * (device.offsetHeight*0.6);
         //clamp it
@@ -89,19 +92,20 @@ const textSwipe = ( sketch ) => {
     };
 
     sketch.setColor = () => {
+        
         if (sketch.userColor == "red"){
-            color = "red";
-            bgColor = '#9e1b11';
+            color = '#ff9494';
+            bgColor = "red";
         }
         else if (sketch.userColor == "blue"){
-            bgColor = "blue";
-            color = '#8bb7d6';
+            bgColor = "#0024ff";
+            color = '#94a3ff';
         }
-        else if (sketch.userColor == "yellow"){
-            color = "yellow";
-            bgColor = '#ccc72f';
+        else if (sketch.userColor == "green"){
+            color = "#2aff00";
+            bgColor = '#2fcc54';
         }
-    };
+    }
 
     sketch.setDraw = (shouldDraw) =>{
         if (shouldDraw && !sketch.isLooping()){
