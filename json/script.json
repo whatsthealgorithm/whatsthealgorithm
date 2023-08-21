@@ -38,6 +38,18 @@
         {
             "trigger": "show-preferences",
             "dataId": "preferences-template",
+            "body": "We've also made some assumptions about you based on this.",
+            "buttons": ["See Assumptions"],
+            "buttonTriggers": ["show-assumptions"]
+        },
+        {
+            "trigger": "show-assumptions",
+            "dataId": "assumptions-template",
+            "buttons": ["Done"],
+            "buttonTriggers": ["feedback-needed"]
+        },
+        {
+            "trigger": "feedback-needed",
             "title": "Feedback Needed",
             "body": "Are these inferences accurate?",
             "buttons": ["Yes", "No", "Some of them"],
@@ -68,7 +80,7 @@
             "index": "25",
             "title": "Thanks for helping us test our app!",
             "body": "Some academics, policymakers, etc. think that having one algorithm is bad and that being able to choose from multiple options will give a better and safer experience.<br> We're still thinking about this proposal and the best way to implement it. There are a few algorithms in our system that users of our app have helped us make.<br> You can explore them and let us know which ones speak to you!",
-            "buttons": ["Explore Algoirthmic Choice"],
+            "buttons": ["Explore Algorithmic Choice"],
             "buttonTriggers": ["continue"]
         },
         {
@@ -79,7 +91,14 @@
             "index": "27",
             "dataId": "algorithm-create-template",
             "buttons": ["Done"],
-            "buttonTriggers": ["continue"]
+            "buttonTriggers": ["create-my-algorithm"]
+        },
+        {
+            "index": "28",
+            "dataId": "algorithm-image-template",
+            "body": "Here's your algorithm! Save and share it with others.",
+            "buttons": ["Share"],
+            "buttonTriggers": ["save-algorithm"]
         }
     ]
 }

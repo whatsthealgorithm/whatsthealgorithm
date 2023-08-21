@@ -13,6 +13,7 @@ var initialTraitsDict;
 var contentDict = {};
 var traits;
 var styles;
+var assumptions;
 var totalInitialMatching;
 
 // Start exports section
@@ -21,6 +22,10 @@ var totalInitialMatching;
  * Derives necessary data objects from the sketch json file.
  */
 function setup(){
+    $.getJSON('json/assumptions.json', function(jsonData, status, xhr)
+    {
+        assumptions = jsonData.assumptions;
+    });
     return $.getJSON('json/sketches.json', function(jsonData, status, xhr)
     {
         traits = jsonData.traits;
@@ -174,6 +179,28 @@ function getTopInterests(){
 }
 
 /**
+ * Returns the top trait of the given category name
+ */
+function getTopTrait(categoryName){
+    var topTrait = traits[categoryName][0];
+    var topVal = 0;
+    for (var trait in traits[categoryName]){
+        if (user.staticPreferences[trait] > topVal){
+            topVal = user.staticPreferences[pref];
+            topTrait = traits[categoryName][trait];
+        }
+    }
+    return topTrait;
+}
+
+/**
+ * Returns the assumption associated with the given trait
+ */
+function getAssumption(topTrait){
+    return assumptions[topTrait];
+}
+
+/**
  * Gets the name of the sketch associated with the given content id
  */
 function getContentSketchName(id){
@@ -226,9 +253,9 @@ function combine(array, list){
  */
 function getInitialTraitsDict(){
     var dict = {};
-    for (var categorytName in traits){
-        for (var i = 0; i < traits[categorytName].length; i++){
-            dict[traits[categorytName][i]] = 0;
+    for (var categoryName in traits){
+        for (var i = 0; i < traits[categoryName].length; i++){
+            dict[traits[categoryName][i]] = 0;
         }
     }
     for (var style in styles){
@@ -328,4 +355,4 @@ function selectAtRandom(array, num){
     return selection;
 }
 
-export { ALGORITHMS, setup, createNewUser, initializeFeed, onContentSeen, onContentEngagement, recommend, getAllTraits, getContentTraits, getTopInterests, getContentSketchName };
+export { ALGORITHMS, setup, createNewUser, initializeFeed, onContentSeen, onContentEngagement, recommend, getAllTraits, getContentTraits, getTopInterests, getTopTrait, getAssumption, getContentSketchName };

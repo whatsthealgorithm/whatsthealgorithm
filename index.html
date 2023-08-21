@@ -18,7 +18,8 @@
     <script type="importmap">
         {
           "imports": {
-            "recSys": "./modules/recSys.js"
+            "recSys": "./modules/recSys.js",
+            "html2canvas": "./modules/html2canvas.js"
           }
         }
      </script>
@@ -164,6 +165,13 @@
      </div>
 </template>
 
+<template id="assumptions-template">
+    <div class="message-title">Our Assumptions About You</div>
+    <div class="assumption-subtitle">Your favorite color is <span class="assumption-color"></span>; we think this makes you <span class="assumption-color-analysis"></span>.</div>
+    <div class="assumption-subtitle">Your favorite shape is <span class="assumption-shape"></span>; we can tell you're probably <span class="assumption-shape-analysis"></span>.</div>
+    <div class="assumption-subtitle">Your favorite speed is <span class="assumption-speed"></span>; we think that you like to <span class="assumption-speed-analysis"></span>.</div>
+</template>
+
 <template id="algorithm-select-template">
     <div class="alg-card">
         <div class="alg-title">Algorithm X</div>
@@ -174,12 +182,24 @@
 </template>
 
 <template id="algorithm-create-template">
-    <div class="message-title">
-        Create Your Own Algorithm
+    <div id="algorithm-create-card">
+        <div class="message-title">
+            Create Your Own Algorithm
+        </div>
+        <div class="create-weightings">
+        </div>
+        <div class="message-subtitle">Select Priorities</div>
+        <div class="select-priorities"></div>
     </div>
-    <div class="create-weightings">
+</template>
+
+<template id="algorithm-image-template">
+    <div class="my-alg"></div>
+    <div class="share-icons">
+        <img class="share-icon" src="images/fb.png"\>
+        <img class="share-icon" src="images/insta.png"\>
+        <img class="share-icon" src="images/tik_tok.png"\>
+        <img class="share-icon" src="images/twitter.png"\>
     </div>
-    <div class="message-subtitle">Select Priorities</div>
-    <div class="select-priorities"></div>
 </template>
 </html>

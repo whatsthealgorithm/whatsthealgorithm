@@ -326,6 +326,31 @@ body {
     margin: 0 3% 10% 3%;
 }
 
+.alg-image{
+    border: 2px solid black;
+}
+
+#my-alg-card{
+    padding: 5% 0;
+}
+
+.share-icons{
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+    margin: auto;
+    padding-bottom: 5%;
+}
+
+.share-icon{
+    width: 15%;
+}
+
+.assumption-subtitle{
+    font-size: 180%;
+    padding: 2%;
+}
+
 /* desktop */
 @media only screen and (min-width: 768px) {
     #content{
