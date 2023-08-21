@@ -5,12 +5,12 @@ const vaporwave = ( sketch ) => {
     var color;
 
     sketch.setup = () => {
-      var canvas = sketch.createCanvas(device.offsetWidth, device.offsetHeight);
-      canvas.addClass("p5-content");
-  
-      sketch.smooth();
-      sketch.noStroke();      
-      
+        var deviceScreen = document.getElementById("device-screen");
+        var canvas = sketch.createCanvas(deviceScreen.offsetWidth, deviceScreen.offsetHeight, sketch.WEBGL);
+        canvas.addClass("p5-content");
+    
+        sketch.smooth();
+        sketch.noStroke();
     };
 
     let time = 0;
