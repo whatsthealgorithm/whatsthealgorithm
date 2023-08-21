@@ -5,11 +5,9 @@ const reactorChamber = ( sketch ) => {
     var color;
 
     sketch.setup = () => {
-    var deviceScreen = document.getElementById("device-screen");
-    var canvas = sketch.createCanvas(deviceScreen.offsetWidth, deviceScreen.offsetHeight, sketch.WEBGL);
-
-      canvas.addClass("p5-content");
-      
+        var deviceScreen = document.getElementById("device-screen");
+        var canvas = sketch.createCanvas(deviceScreen.offsetWidth, deviceScreen.offsetHeight, sketch.WEBGL);
+        canvas.addClass("p5-content"); //Add this or you won't see the sketch
     };
 
     t=0;
@@ -17,7 +15,6 @@ const reactorChamber = ( sketch ) => {
     let scale = 0.5;
 
     sketch.draw = () => {
-
         sketch.setColor();
         sketch.background(bgColor);
         sketch.fill(color);
@@ -64,7 +61,7 @@ const reactorChamber = ( sketch ) => {
             }
             sketch.pop()
         }
-        
+    
     };
 
     sketch.setColor = () => {

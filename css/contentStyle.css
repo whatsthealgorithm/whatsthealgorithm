@@ -1,3 +1,7 @@
+.p5Canvas{
+    display: none;
+}
+
 .p5-content{
     position: absolute;
     display: block;
