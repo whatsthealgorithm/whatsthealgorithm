@@ -22,6 +22,7 @@ var debug = false;
 var inIntro = false;
 var menuShowing = false;
 var deviceButtonsShowing = true;
+var barDragging = false;
 
 const initialPostLoad = 10;
 const pageSwipeTime = 400;
@@ -399,7 +400,7 @@ function touchMove(e){
 }
 
 function move(currentY){
-    if (inIntro){
+    if (inIntro || barDragging){
         return;
     }
 
@@ -610,7 +611,13 @@ function setAlgorithmCreate(div){
     var bars = div.getElementsByClassName("bar");
     for (var i = 0; i < bars.length; i++){
         bars[i].id = "bar-" + i;
+        bars[i].setAttribute('draggable', true);
         bars[i].addEventListener("click", onWeightingsBarClicked);
+        bars[i].addEventListener("dragover", onWeightingsBarDrag);
+        bars[i].addEventListener("dragend", onWeightingsBarDragEnd);
+        // mobile touch controls
+        bars[i].addEventListener("touchmove", onWeightingsBarTouchMove);
+        bars[i].addEventListener("touchend", onWeightingsBarTouchEnd);
     }
 
     var buttonContainer = div.getElementsByClassName("select-priorities")[0];
@@ -632,10 +639,34 @@ function setAlgorithmCreate(div){
 function onWeightingsBarClicked(e){
     var bar = e.target.closest(".bar");
     var barFill = bar.getElementsByClassName("bar-fill")[0];
-    console.log(bar, barFill)
-    var index = parseInt(bar.id.split("-").slice(-1));
-    console.log(e.offsetX, bar.offsetWidth);
     barFill.style.width = (100 * e.offsetX / bar.offsetWidth) + "%";
+}
+
+function onWeightingsBarDrag(e){
+    moveWeightingsBar(e.offsetX, e.target.closest(".bar"));
+}
+
+function onWeightingsBarDragEnd(e){
+    e.preventDefault();
+    barDragging = false;
+}
+
+function onWeightingsBarTouchMove(e){
+    var rect = e.target.getBoundingClientRect();
+    var x = e.touches[0].pageX - rect.left;
+    moveWeightingsBar(x, e.target.closest(".bar"));
+}
+
+function onWeightingsBarTouchEnd(e){
+    barDragging = false;
+}
+
+function moveWeightingsBar(x, bar){
+    if (!barDragging){
+        barDragging = true;
+    }
+    var barFill = bar.getElementsByClassName("bar-fill")[0];
+    barFill.style.width = (100 * x / bar.offsetWidth) + "%";
 }
 
 function setMyAlgorithm(div){

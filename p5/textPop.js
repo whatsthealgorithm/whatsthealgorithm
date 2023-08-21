@@ -46,7 +46,6 @@ const textPop = ( sketch ) => {
         //do initial setup
         if(words.length == 0){
             sketch.reset();
-            console.log(device.offsetWidth +" , "+device.offsetHeight);
         }
         
         sketch.setColor();
