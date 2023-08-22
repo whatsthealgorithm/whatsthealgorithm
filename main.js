@@ -147,7 +147,7 @@ function setContentDraw(){
     }
     // Turn next post on
     if (posts[currentPost + 1] != null && sketchDict[posts[currentPost+1].div.id] != null){
-        sketchDict[posts[currentPost+1].div.id].setDraw(true);
+        sketchDict[posts[currentPost+1].div.id].setDraw(false);
     }
 }
 
@@ -273,6 +273,7 @@ function loadContent(amount, idList){
         // If we just made a message post, still make sure we create the specified amount of content posts
         amount += isMessagePost ? 1 : 0;
     }
+    console.log("Adding " + amount + " to total posts")
     totalPosts += amount;
     postHeight = $("#post-0")[0].clientHeight;
 }
@@ -414,6 +415,9 @@ function move(currentY){
     else if (currentY == 0){
         return;
     }
+    else if (currentY - lastYPos < 0 && currentPost >= maxPosts){
+        return;
+    }
 
     var marginTop = parseInt($('#device-screen')[0].style.marginTop.slice(0, -2));
 
@@ -475,7 +479,8 @@ function click(e){
 }
 
 function tryNextPost(){
-    if (currentPost + 1 < totalPosts && !waitingForMessage()) {
+    console.log("Current post is " + currentPost + " and total posts are " + totalPosts);
+    if (currentPost + 1 < totalPosts && !waitingForMessage() && currentPost < maxPosts) {
         //update render here
         currentPost++;
 
