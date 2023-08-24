@@ -47,12 +47,8 @@ body {
     pointer-events: auto; 
 }
 
-.info-subtitle{
-    font-size: 2vw;
-}
-
 .info-row{
-    margin-bottom: 2vw;
+    margin-bottom:3%;
     margin-left: 5%;
     margin-right: 5%;
     width: 90%;

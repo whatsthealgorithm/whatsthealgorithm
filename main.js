@@ -837,6 +837,14 @@ function resize(){
         postHeight = $("#post-0")[0].clientHeight;
         $('#device-screen')[0].style.marginTop = -postHeight * currentPost + "px";
     }
+    for (var id in sketchDict){
+        sketchDict[id].resizeCanvas($('#device-screen')[0].offsetWidth, $('#device-screen')[0].offsetHeight);
+    }
+
+    if (!menuShowing){
+        menu.style.top = info.offsetHeight + "px";
+    }
+
 
     if (!isMobile && $(window).width() < 767){
         isMobile = true;
@@ -846,19 +854,16 @@ function resize(){
     }
 }
 
-// MOBILE SPECIFIC
-
 function toggleInfoMenu(show){
     if (!show){
         menu.style.top = info.offsetHeight + "px";
         menuButton.style.opacity = 1;
-        menuShowing = true;
+        menuShowing = false;
     }
     else{
         setPreferences(menu);
         menu.style.top = 0;
         menuButton.style.opacity = 0;
+        menuShowing = true;
     }
 }
-
-//
