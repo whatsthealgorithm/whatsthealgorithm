@@ -44,8 +44,10 @@ import * as canvas from "html2canvas";
 // FOR TESTING
 
 // default 0. set to 1 to skip intro screens
-
 const feed_testing = 1;
+
+// default 0. set to 1 to disable scrolling up
+const disable_scroll_up = 1;
 
 // To test for content with specific attributes, set these. Otherwise, comment it out.
 
@@ -54,6 +56,7 @@ const feed_testing = 1;
 //     'userColor': 'red',
 //     'userShape': 'triangle'
 // }
+
 
 
 // On Page Load
@@ -273,7 +276,6 @@ function loadContent(amount, idList){
         // If we just made a message post, still make sure we create the specified amount of content posts
         amount += isMessagePost ? 1 : 0;
     }
-    console.log("Adding " + amount + " to total posts")
     totalPosts += amount;
     postHeight = $("#post-0")[0].clientHeight;
 }
@@ -416,6 +418,9 @@ function move(currentY){
         return;
     }
     else if (currentY - lastYPos < 0 && currentPost >= maxPosts){
+        return;
+    }
+    else if (disable_scroll_up == 1 && currentY - lastYPos > 0){
         return;
     }
 
