@@ -5,7 +5,9 @@ const emojiSpiral = ( sketch ) => {
     let characters = [];
 
     let grow_time = 4.0;
-    let spacing = 0.5;
+
+    //changed from 0.5 to 1.3
+    let spacing = 1.3;
 
     let timer = 0;
 
