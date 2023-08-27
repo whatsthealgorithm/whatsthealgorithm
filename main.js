@@ -5,6 +5,7 @@ var menuButton;
 var debugMenu;
 var introPages;
 var deviceButtons;
+var scrollTimeout;
 
 var posts = [];
 var buttonCounts = {follows: 0, likes: 0, shares: 0};
@@ -35,6 +36,7 @@ var startingYPos = -1;
 var percentToSwipe = 15;
 var currentPost = 0;
 var totalPosts = 0;
+var simulatedWheelPos = 0;
 
 var interestsPicked = 0;
 
@@ -49,7 +51,7 @@ const feed_testing = 0;
 
 
 // default 0. set to 1 to disable scrolling up
-const disable_scroll_up = 1;
+const disable_scroll_up = 0;
 
 // To test for content with specific attributes, set these. Otherwise, comment it out.
 
@@ -58,8 +60,6 @@ const disable_scroll_up = 1;
 //     'userColor': 'red',
 //     'userShape': 'triangle'
 // }
-
-
 
 // On Page Load
 $(document).ready(function() { 
@@ -79,6 +79,9 @@ async function initialize(){
     document.addEventListener("dragstart", dragStart);
     document.addEventListener("dragend", dragEnd);
     document.addEventListener("dragover", drag);
+
+    // scroll touch controls
+    document.addEventListener("wheel", wheelMove);
 
     // mobile touch controls
     document.addEventListener("touchmove", touchMove);
@@ -272,7 +275,7 @@ function loadContent(amount, idList){
         var post = isMessagePost ? createMessagePost(scriptByIndex[totalPosts + i], totalPosts + i) : createContentPost(totalPosts + i, id);
         post.setAttribute('draggable', true);
         device.appendChild(post);
-        var entry = {id: id, div: post, type: isMessagePost ? "message" : "content", confirmed: false};
+        var entry = {id: id, div: post, type: isMessagePost ? "message" : "content", confirmed: false, isFollowed: false, isLiked: false, isShared: false};
         posts.push(entry);
         contentIndex += isMessagePost ? 0 : 1;
         // If we just made a message post, still make sure we create the specified amount of content posts
@@ -285,7 +288,10 @@ function loadContent(amount, idList){
 
 function createContentPost(index, contentId){
     var post = document.createElement("div");
-    post.id = "post-" + index; 
+    post.id = "post-" + index;
+    var gradient = document.createElement("div");
+    gradient.classList = "black-gradient";
+    post.appendChild(gradient);
     var name = recSys.getContentSketchName(contentId);
     var contentTemplate = new p5(eval(name), post);
     setupContentAttributes(contentTemplate, contentId);
@@ -323,6 +329,9 @@ function createMessagePost(message, index){
     var messagePost = document.createElement("div");
     messagePost.className = "post message-div";
     messagePost.id = "post-" + index; 
+    var gradient = document.createElement("div");
+    gradient.classList = "black-gradient";
+    messagePost.appendChild(gradient);
 
     var messageBox = document.createElement("div");
     messageBox.className = "message-box";
@@ -404,6 +413,25 @@ function touchMove(e){
     move(e.touches[0].screenY);
 }
 
+function wheelMove(e){
+    //console.log(e)
+    if (scrollTimeout == null){
+        simulatedWheelPos = window.innerHeight / 2;
+    }
+    else{
+        clearTimeout(scrollTimeout);
+    }
+    simulatedWheelPos -= e.deltaY * 0.5;
+    console.log(simulatedWheelPos)
+    move(simulatedWheelPos);
+    
+    scrollTimeout = setTimeout(() => {
+        moveEnd();
+        scrollTimeout = null;
+        console.log("end")
+    }, 100);
+}
+
 function move(currentY){
     if (inIntro || barDragging){
         return;
@@ -413,6 +441,9 @@ function move(currentY){
     if (lastYPos == -1){
         lastYPos = currentY;
         startingYPos = currentY;
+        $('.black-gradient').css({
+            'opacity': '1',
+        });
         return;
     }
     // Detect if we've reached top of page
@@ -486,7 +517,6 @@ function click(e){
 }
 
 function tryNextPost(){
-    console.log("Current post is " + currentPost + " and total posts are " + totalPosts);
     if (currentPost + 1 < totalPosts && !waitingForMessage() && currentPost < maxPosts) {
         //update render here
         currentPost++;
@@ -498,8 +528,7 @@ function tryNextPost(){
             loadContent(numPosts, nextContentIds);
         }
 
-        //UNCOMMENT when we have enough content to not run out
-        //recSys.onContentSeen(posts[currentPost].id);
+        recSys.onContentSeen(posts[currentPost].id);
     }
 }
 
@@ -524,7 +553,12 @@ function snapToCurrentPost(){
     animating = true;
     $('#device-screen').animate({
         marginTop: '+=' + diff + 'px'
-    }, pageSwipeTime, "swing", () => { animating = false});
+    }, pageSwipeTime, "swing", () => { 
+        animating = false;
+        $('.black-gradient').css({
+            'opacity': '0',
+        });
+    });
 
     if (posts[currentPost].type == "message"){
         setTimeout(() => {
@@ -537,6 +571,7 @@ function snapToCurrentPost(){
         }, 500);
     }
     setContentDraw();
+    setButtonInteractions();
     document.getElementById("debug-content").innerHTML = "ID: " + posts[currentPost].id;
     document.getElementById("debug-post-count").innerHTML = "Post " + currentPost;
     document.getElementById("debug-traits").innerHTML = recSys.getContentTraits(posts[currentPost].id);
@@ -801,19 +836,64 @@ function onDeviceButtonClicked(e){
         return;
     }
     if (e.target.id == "follow"){
-        buttonCounts.follows++;
+        if (!posts[currentPost].isFollowed){
+            buttonCounts.follows++;
+            $('#follow').css({
+                '-webkit-filter': 'invert(100%)',
+                'filter': 'invert(100%)'
+            });
+            recSys.onContentEngagement(posts[currentPost].id, "follow");
+        }
+        else{
+            buttonCounts.follows--;
+            $('#follow').css({
+                '-webkit-filter': 'none',
+                'filter': 'none'
+            });
+            recSys.onContentDisengagement(posts[currentPost].id, "follow");
+        }
         document.getElementById("debug-follows").innerHTML =  buttonCounts.follows;
-        recSys.onContentEngagement(posts[currentPost].id, "follow");
+        posts[currentPost].isFollowed = !posts[currentPost].isFollowed;
     }
     else if (e.target.id == "like"){
-        buttonCounts.likes++;
-        document.getElementById("debug-likes").innerHTML = buttonCounts.likes;
-        recSys.onContentEngagement(posts[currentPost].id, "like");
+        if (!posts[currentPost].isLiked){
+            buttonCounts.likes++;
+            $('#like').css({
+                '-webkit-filter': 'invert(100%)',
+                'filter': 'invert(100%)'
+            });
+            recSys.onContentEngagement(posts[currentPost].id, "like");
+        }
+        else{
+            buttonCounts.likes--;
+            $('#like').css({
+                '-webkit-filter': 'none',
+                'filter': 'none'
+            });
+            recSys.onContentDisengagement(posts[currentPost].id, "like");
+        }
+        document.getElementById("debug-likes").innerHTML =  buttonCounts.likes;
+        posts[currentPost].isLiked = !posts[currentPost].isLiked;
     }
     else if (e.target.id == "share"){
-        buttonCounts.shares++;
-        document.getElementById("debug-shares").innerHTML = buttonCounts.shares;
-        recSys.onContentEngagement(posts[currentPost].id, "share");
+        if (!posts[currentPost].isShared){
+            buttonCounts.shares++;
+            $('#share').css({
+                '-webkit-filter': 'invert(100%)',
+                'filter': 'invert(100%)'
+            });
+            recSys.onContentEngagement(posts[currentPost].id, "share");
+        }
+        else{
+            buttonCounts.shares--;
+            $('#share').css({
+                '-webkit-filter': 'none',
+                'filter': 'none'
+            });
+            recSys.onContentDisengagement(posts[currentPost].id, "share");
+        }
+        document.getElementById("debug-shares").innerHTML =  buttonCounts.shares;
+        posts[currentPost].isShared = !posts[currentPost].isShared
     }
 
     if (menuShowing){
@@ -823,6 +903,47 @@ function onDeviceButtonClicked(e){
     e.target.classList.remove('button-clicked')
     void e.target.offsetWidth; // trigger reflow
     e.target.classList.add('button-clicked');
+}
+
+function setButtonInteractions(){
+    if (!posts[currentPost].isFollowed){
+        $('#follow').css({
+            '-webkit-filter': 'none',
+            'filter': 'none'
+        });
+    }
+    else{
+        $('#follow').css({
+            '-webkit-filter': 'invert(100%)',
+            'filter': 'invert(100%)'
+        });
+    }
+    
+    if (!posts[currentPost].isLiked){
+        $('#like').css({
+            '-webkit-filter': 'none',
+            'filter': 'none'
+        });
+    }
+    else{
+        $('#like').css({
+            '-webkit-filter': 'invert(100%)',
+            'filter': 'invert(100%)'
+        });
+    }
+
+    if (!posts[currentPost].isShared){
+        $('#share').css({
+            '-webkit-filter': 'none',
+            'filter': 'none'
+        });
+    }
+    else{
+        $('#share').css({
+            '-webkit-filter': 'invert(100%)',
+            'filter': 'invert(100%)'
+        });
+    }
 }
 
 function onAlgorithmCardClicked(e){

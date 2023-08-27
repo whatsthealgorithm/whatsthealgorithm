@@ -98,7 +98,9 @@ function initializeFeed(){
  * Handler function for marking content as seen.
  */
 function onContentSeen(contentId){
-    contentDict[contentId].seen = true;
+    if (contentDict.hasOwnProperty(contentId)){
+        contentDict[contentId].seen = true;
+    }
 }
 
 /**
@@ -118,6 +120,25 @@ function onContentEngagement(contentId, interaction){
         }
     }
     user.staticPreferences[contentDict[contentId].style] += 1;
+}
+
+/**
+ * Handler function for proccessing a disengagment on a piece of content. 
+ */
+function onContentDisengagement(contentId, interaction){
+    var contentTraits = contentDict[contentId].traits;
+    for (var i = 0; i < contentTraits.length; i++){
+        if (interaction == "like"){
+            user.staticPreferences[contentTraits[i]] -= ALG_1[0][0];
+        }
+        else if (interaction == "follow"){
+            user.staticPreferences[contentTraits[i]] -= ALG_1[0][1];
+        }
+        else if (interaction == "share"){
+            user.staticPreferences[contentTraits[i]] -= ALG_1[0][2];
+        }
+    }
+    user.staticPreferences[contentDict[contentId].style] -= 1;
 }
 
 /**
@@ -355,4 +376,4 @@ function selectAtRandom(array, num){
     return selection;
 }
 
-export { ALGORITHMS, setup, createNewUser, initializeFeed, onContentSeen, onContentEngagement, recommend, getAllTraits, getContentTraits, getTopInterests, getTopTrait, getAssumption, getContentSketchName };
+export { ALGORITHMS, setup, createNewUser, initializeFeed, onContentSeen, onContentEngagement, onContentDisengagement, recommend, getAllTraits, getContentTraits, getTopInterests, getTopTrait, getAssumption, getContentSketchName };
