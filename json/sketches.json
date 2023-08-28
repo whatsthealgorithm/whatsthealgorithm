@@ -1,10 +1,6 @@
 {
     "sketches": [
         {
-            "id": "emojiBounce",
-            "style": "emoji"
-        },
-        {
             "id": "emojiGrid",
             "style": "emoji"
         },
