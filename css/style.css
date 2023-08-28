@@ -80,6 +80,8 @@ body {
     border: 7px solid black;
     border-radius: 45px;
     overflow: hidden;
+    max-width: 414px;
+    max-height: 881px;
 }
 
 #device-screen{

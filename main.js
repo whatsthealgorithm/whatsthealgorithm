@@ -33,7 +33,7 @@ const maxPosts = 28;
 var introIndex = 0;
 var lastYPos = -1;
 var startingYPos = -1;
-var percentToSwipe = 15;
+var percentToSwipe = 14;
 var currentPost = 0;
 var totalPosts = 0;
 var simulatedWheelPos = 0;
@@ -487,7 +487,7 @@ function moveEnd(){
     }
 
     var difference = startingYPos - lastYPos;
-    var percentDragged = 100 * (difference / screen.height);
+    var percentDragged = 100 * (difference / device.offsetHeight);
 
     lastYPos = -1;
     startingYPos = -1;
@@ -972,7 +972,6 @@ function resize(){
     if (!menuShowing){
         menu.style.top = info.offsetHeight + "px";
     }
-
 
     if (!isMobile && $(window).width() < 767){
         isMobile = true;
