@@ -414,21 +414,18 @@ function touchMove(e){
 }
 
 function wheelMove(e){
-    //console.log(e)
     if (scrollTimeout == null){
         simulatedWheelPos = window.innerHeight / 2;
     }
     else{
         clearTimeout(scrollTimeout);
     }
-    simulatedWheelPos -= e.deltaY * 0.5;
-    console.log(simulatedWheelPos)
+    simulatedWheelPos -= e.deltaY * 0.2;
     move(simulatedWheelPos);
     
     scrollTimeout = setTimeout(() => {
         moveEnd();
         scrollTimeout = null;
-        console.log("end")
     }, 100);
 }
 
@@ -730,8 +727,6 @@ function setMyAlgorithm(div){
     myAlgCard.getElementsByClassName("message-subtitle")[0].style.display = "none";
 
     var buttons = myAlgCard.getElementsByClassName("interest-selection");
-    console.log(buttons);
-    console.log(selectInterestDict)
     for (var i = 0; i < buttons.length; i++){
         if (selectInterestDict[buttons[i].innerHTML]){
             buttons[i].style.backgroundColor = "#1ad631";
@@ -798,7 +793,6 @@ function onMessageButtonClicked(e){
 
 function processTrigger(trigger){
     if (scriptByTrigger.hasOwnProperty(trigger)){
-        console.log(scriptByTrigger[trigger]);
         var post = createMessagePost(scriptByTrigger[trigger], totalPosts);
         // Insert generated message post right after other message post
         posts[currentPost].div.insertAdjacentElement("afterend", post);
