@@ -134,6 +134,10 @@ body {
     margin-top: 3%;
 }
 
+.smaller-title{
+    font-size: 225%;
+}
+
 .smaller-text{
     font-size: 100%;
 }
