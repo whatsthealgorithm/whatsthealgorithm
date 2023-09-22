@@ -1,14 +1,14 @@
 {
     "script": [
         {
-            "index": "10",
+            "index": "6",
             "title": "Great Work",
             "body": "We're adjusting our recs based on your interactions. if you enjoy what you're seeing something, make sure you use the buttons to give the algorithm a signal.",
             "buttons": ["Okay"],
             "buttonTriggers":  ["continue"]
         },
         {
-            "index": "15",
+            "index": "12",
             "title": "We Want Your Feedback",
             "body": "Is this content matching your interests?",
             "buttons": ["Yes", "No", "Sometimes"],

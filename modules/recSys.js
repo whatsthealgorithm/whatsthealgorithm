@@ -15,6 +15,7 @@ var traits;
 var styles;
 var assumptions;
 var totalInitialMatching;
+var lastRecommendedSketch = null;
 
 // Start exports section
 
@@ -72,10 +73,10 @@ function createNewUser(statedPreferences){
 function initializeFeed(){
     var [matchingContent, nonMatchingContent] = getMatchingAndNonMatchingContent();
     totalInitialMatching = matchingContent.length;
-    var selectedMatchingContent = selectAtRandom(matchingContent, 7);
-    var selectedNonMatchingContent = selectAtRandom(nonMatchingContent, 10 - selectedMatchingContent.length);
+    var selectedMatchingContent = selectAtRandom(matchingContent, 5);
+    var selectedNonMatchingContent = selectAtRandom(nonMatchingContent, 6 - selectedMatchingContent.length);
 
-    if (selectedMatchingContent.lenth + selectedNonMatchingContent.length < 10){
+    if (selectedMatchingContent.length + selectedNonMatchingContent.length < 6){
         console.log("Error: Not enough content found");
     }
 
@@ -84,7 +85,7 @@ function initializeFeed(){
     var initialMatching = selectedMatchingContent.slice(0, INITIAL_MATCHING_AMOUNT);
     var leftoverMatching = selectedMatchingContent.slice(INITIAL_MATCHING_AMOUNT);
     if (leftoverMatching.length != 0){
-        selectedNonMatchingContent = selectAtRandom(leftoverMatching.concat(selectedNonMatchingContent), 10 - initialMatching.length);
+        selectedNonMatchingContent = selectAtRandom(leftoverMatching.concat(selectedNonMatchingContent), 6 - initialMatching.length);
     }
 
     var feedList = initialMatching.concat(selectedNonMatchingContent);
@@ -144,29 +145,67 @@ function onContentDisengagement(contentId, interaction){
 /**
  * Recommends a specified number of content posts based on the users' recorded preferences thus far. 
  */
-function recommend(amount){
+ function recommend(amount) {
+    console.log("Recommend function called");
     var ideal = getIdealContentVector(user.staticPreferences);
     var unseenContent = [];
 
-    for (var id in contentDict){
-        if (!contentDict[id].seen){
+    for (var id in contentDict) {
+        if (!contentDict[id].seen) {
             unseenContent.push(id);
         }
     }
 
-    unseenContent.sort(function(id1, id2) 
-    { 
+    // Sort the content based on similarity to ideal vector
+    unseenContent.sort(function(id1, id2) {
         var contentVector1 = createContentVector(contentDict[id1]);
         var contentVector2 = createContentVector(contentDict[id2]);
         return calculateSimilarity(ideal, contentVector2) - calculateSimilarity(ideal, contentVector1);
-     });
+    });
 
-    var topContent = unseenContent.slice(0, amount);
-    for (var i = 0; i < topContent.length; i++){
-        console.log("Recommending " + topContent[i] + ", similarity to ideal is " + calculateSimilarity(ideal, createContentVector(contentDict[topContent[i]])));
+    var recommendations = [];
+
+    while (recommendations.length < amount && unseenContent.length > 0) {
+        const topContent = unseenContent.shift();  // Get the top recommendation
+        console.log("Processing content:", topContent);
+        if (recommendations.length === 0) {
+            // If this is the first video, add it without filtering
+            recommendations.push(topContent);
+        } else {
+            // Check against the last added video
+            const lastAdded = recommendations[recommendations.length - 1];
+            const currentSketchTraits = contentDict[topContent].traits;
+            const lastSketchTraits = contentDict[lastAdded].traits;
+
+            const sameStyle = contentDict[topContent].style === contentDict[lastAdded].style;
+            console.log("same style?", sameStyle);
+            const sameColor = currentSketchTraits.includes(lastSketchTraits.find(trait => traits.colors.includes(trait)));
+            console.log("same color?", sameColor);
+            const sameShape = currentSketchTraits.includes(lastSketchTraits.find(trait => traits.shapes.includes(trait)));
+            console.log("same shape?", sameShape);
+            const differentSpeed = !currentSketchTraits.includes(lastSketchTraits.find(trait => traits.speeds.includes(trait)));
+            console.log("different speed?", differentSpeed);
+            
+            if (!(sameStyle && sameColor && sameShape && differentSpeed)) {
+                console.log("Added Content:", topContent);
+                recommendations.push(topContent);
+            }
+            else { 
+                console.log("Filtered Content:", topContent);
+                // Additional information if you want more context
+                console.log("Reason: Matches style, color, shape with previous content but has different speed.");
+            }
+           
+        }
     }
-    return topContent;
+
+    for (var i = 0; i < recommendations.length; i++) {
+        console.log("Recommending " + recommendations[i] + ", similarity to ideal is " + calculateSimilarity(ideal, createContentVector(contentDict[recommendations[i]])));
+    }
+
+    return recommendations;
 }
+
 
 
 /**

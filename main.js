@@ -25,7 +25,7 @@ var menuShowing = false;
 var deviceButtonsShowing = true;
 var barDragging = false;
 
-const initialPostLoad = 10;
+const initialPostLoad = 6;
 const pageSwipeTime = 400;
 const numPreferencesToShow = 4;
 const maxPosts = 28;
@@ -129,6 +129,7 @@ async function initialize(){
         setPreferences(menu);
         toggleInfoMenu(false);
         var contentIdList = recSys.initializeFeed();
+        console.log("this is the id list", contentIdList)
         loadContent(initialPostLoad, contentIdList);
         setContentDraw();
         document.getElementById("debug-content").innerHTML = "ID: " + posts[0].id;
@@ -269,6 +270,11 @@ function onSelectInterestButtonClicked(e){
 
 function loadContent(amount, idList){
     var contentIndex = 0;
+    if (idList && idList.length < amount) {
+        console.warn("idList does not have enough elements for the required amount.");
+        return;
+    }
+    console.log("this is the id list 2", idList)
     for (var i = 0; i < amount; i++){
         var isMessagePost = messageAtIndex(totalPosts + i);
         var id = isMessagePost ? "message-" + (totalPosts + i) : idList[contentIndex];
@@ -522,6 +528,7 @@ function tryNextPost(){
         if (currentPost + 1 >= totalPosts && totalPosts < maxPosts){
             var numPosts = Math.min(5, maxPosts - totalPosts);
             var nextContentIds = recSys.recommend(numPosts);
+            console.log('Recommended IDs:', nextContentIds);
             loadContent(numPosts, nextContentIds);
         }
 

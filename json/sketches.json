@@ -13,8 +13,12 @@
             "style": "emoji"
         },
         {
+            "id": "emojiBounce",
+            "style": "emoji"
+        },
+        {
             "id": "vaporwave",
-            "style": "vaporwave"
+            "style": "hypnotic"
         },
         {
             "id": "tunnel",
