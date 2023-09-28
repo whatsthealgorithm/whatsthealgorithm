@@ -1,19 +1,11 @@
 {
     "sketches": [
         {
-            "id": "emojiBounce",
-            "style": "emoji"
-        },
-        {
             "id": "emojiGrid",
             "style": "emoji"
         },
         {
             "id": "emojiMandala",
-            "style": "emoji"
-        },
-        {
-            "id": "emojiSpiral",
             "style": "emoji"
         },
         {

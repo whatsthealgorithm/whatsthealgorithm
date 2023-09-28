@@ -30,7 +30,7 @@
         },
         {
             "trigger": "content-sometimes-matches",
-            "title": "Good to know.",
+            "title": "Got it.",
             "body": "We're showing you some new content, but we might not be getting the balance right. We'll show you what we know about you: ",
             "buttons": ["See Data"],
             "buttonTriggers": ["show-preferences"]

@@ -467,11 +467,11 @@ margin-bottom: 1%;
 }
 
 .alg-title{
-    font-size: 160%;
+    font-size: 130%;
 }
 
 .alg-subtitle{
-    font-size: 120%;
+    font-size: 100%;
 }
 
 .create-weightings{
@@ -484,6 +484,11 @@ margin-bottom: 1%;
 
 .alg-image{
     border: 2px solid black;
+}
+
+.alg-interest-list {
+    margin-left: 1%;
+    margin-right: 1%;
 }
 
 #my-alg-card{
