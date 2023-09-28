@@ -51,6 +51,7 @@
 
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/contentStyle.css">
+    <link href='https://fonts.googleapis.com/css?family=JetBrains Mono' rel='stylesheet'>
 </head>
 
 <body>
@@ -63,18 +64,20 @@
     </div>
     <div id="content">
         <div class="column" id="device-column">
+
             <div id="device">
                 <div id="intro">
                     <div id="intro-0" class="intro-page" style="display:none">
                         <div class="intro-title">Welcome!</div>
                         <div class="intro-paragraph">You are helping test our new social media app and inform its development.</div>
                         <div class="intro-paragraph">Click below to start.</div>
-                        <button class="intro-button">Try App</button>
+                        <button class="intro-button">Start</button>
                     </div>
 
                     <div id="intro-1" class="intro-page" style="display:none">
-                        <div class="intro-title">Getting started</div>
-                        <div class="intro-paragraph">Select 3 or more interests so we can get you started with some recommended content.</div>
+                        <div class="welcome-title">Getting <br>started</div>
+                        <div style="width: 100%; margin-bottom: 5%; border: 1px; border: 1px solid #000000;"></div>
+                        <div class="intro-paragraph">Select a preferred color, shape, and speed so we can get you started with some recommended content.</div>
                         <div id="intro-button-container"></div>
                         <button class="intro-button" id="interest-finished">Done</button>
                     </div>
@@ -86,13 +89,13 @@
                             <div class="ring" id="ring3"></div>
                             <div class="ring" id="ring4"></div>
                          </div>
-                        <div class="intro-paragraph">Gathering more information about you...</div>
+                        <div class="loading">Gathering more information about you...</div>
                     </div>
 
                     <div id="intro-3" class="intro-page" style="display:none">
-                        <div class="intro-paragraph">We found 12347823 posts that match your interests and demographic.</div>
+                        <div class="intro-paragraph" style="margin-top: 40%;">We found 12347823 posts that match your interests and demographic.</div>
                         <div class="intro-paragraph">We will start by showing you a random selection, and improving our recommendations over time based on what we continue learning about you.</div>
-                        <button class="intro-button">Done</button>
+                        <button class="intro-button">See content</button>
                     </div>
 
                 </div>
@@ -144,25 +147,25 @@
 
     <div class="info-row bar-container pref-0"> <span class="param-0">???:</span> 
         <div class="bar">
-           <div class="bar-fill" style="background-color: yellow;"></div> 
+           <div class="bar-fill" style="background-color: #EE4813;"></div> 
         </div> 
     </div>
 
     <div class="info-row bar-container pref-1"> <span class="param-1">???:</span> 
        <div class="bar">
-          <div class="bar-fill" style="background-color: yellow;"></div> 
+          <div class="bar-fill" style="background-color: #EE4813;"></div> 
        </div> 
    </div>
 
     <div class="info-row bar-container pref-2"> <span class="param-2">???:</span> 
        <div class="bar">
-           <div class="bar-fill" style="background-color: yellow;"></div> 
+           <div class="bar-fill" style="background-color: #EE4813;"></div> 
        </div> 
     </div>
 
     <div class="info-row bar-container pref-3"> <span class="param-3">???:</span> 
         <div class="bar">
-            <div class="bar-fill" style="background-color: yellow;"></div> 
+            <div class="bar-fill" style="background-color: #EE4813;"></div> 
         </div> 
      </div>
 </template>

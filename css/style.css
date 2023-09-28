@@ -1,9 +1,18 @@
 
+
+:root {
+  --bg-color: #E6E6DE;
+  --main-green: #20E864;
+  --main-blue: #2251F8;
+  --main-red: #EE4813;
+}
+
 body {
     margin: 0px;
     width: 100vw;
     height: 100dvh;
-    font-family: Helvetica Neue, Arial, sans-serif;
+/*    font-family: Helvetica Neue, Arial, sans-serif;*/
+    font-family: 'JetBrains Mono', monospace;
     overflow: hidden;
     touch-action: manipulation;
     background: url('../images/background.png') no-repeat center center fixed; 
@@ -72,11 +81,17 @@ body {
     display: flex;
     justify-content: left;
     width: 65%;
+
+    border-radius: 30px;
+
+
+
 }
 
 .bar-fill{
-    background-color: blue;
+    background-color: var(--main-red);
     width: 3%;
+    border-radius: 30px;
 }
 
 #device{
@@ -89,6 +104,7 @@ body {
     max-width: 414px;
     max-height: 881px;
     z-index: 1;
+    background-image: url('../images/background.png');
 }
 
 #device-screen{
@@ -106,13 +122,14 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    background: var(--bg-color);
 }
 
 .message-box{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    background-color: white;
+    background-color: var(--bg-color)
     text-align: center;
     width: 100%;
     align-items: center;
@@ -121,19 +138,26 @@ body {
 .message-title{
     font-size: 300%;
     padding-bottom: 10%;
+    marign-left: 5%;
 }
 
+@media only screen and (max-width: 770px) {
+    .message-title {
+        margin-left: 5%;
+    }
+}
 .message-subtitle{
     font-size: 225%;
 }
 
 .message-body{
-    font-size: 150%;
+    font-size: 100%;
     height: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0% 4% 10%;
+    margin-left: 2%;
 }
 
 .message-body br{
@@ -149,7 +173,7 @@ body {
 }
 
 .message-button{
-    font-size: 150%;
+  /*  font-size: 150%;
     margin-bottom: 5%;
     display: flex;
     align-items: center;
@@ -157,6 +181,29 @@ body {
     height: 8%;
     padding: 3% 6%;
     width: fit-content;
+*/
+    height: 4rem;
+    font-size: 150%;
+    padding: 0 8%;
+    margin-left: 0%;
+    margin-top: 5%;
+/*    width: fit-content;*/
+    
+    width: 90%;
+    background-color: var(--main-green);
+    border-radius: 36px;
+
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+
+    border: 1px solid #000000;
+
+    box-shadow: 0px 10px 0px 0px #000000;
+
+}
+
+.message-button:hover {
+    background: white;
 }
 
 .message-data{
@@ -184,6 +231,10 @@ body {
     height: 20%;
     width: auto;
     padding-bottom: 70%;
+}
+
+.device-button:hover {
+
 }
 
 .button-clicked{
@@ -217,34 +268,124 @@ body {
     height: 80vh;
     width: 90%;
     transition: opacity 0.1s ease-in-out;
-    background-color: white;
+    background-color: var(--bg-color);
     flex-direction: column;
     justify-content: center;
+
 }
 
-.intro-title{
-    font-size: 300%;
-    margin-bottom: 15%;
+#intro-2 {
+background-color: var(--main-blue);
 }
+.intro-title{
+    font-size: 380%;
+    margin-top: 70%;
+    margin-bottom: 5%;
+    margin-left: 0%;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;  
+}
+
+.welcome-title{
+    font-size: 200%;
+    margin-top: 20%;
+    font-weight: 100;
+    margin-bottom: 5%;
+    margin-left: 0%;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;  
+}
+
 
 .intro-paragraph{
-    font-size: 150%;
-    margin-bottom: 15%;
+    font-size: 100%;
+    margin-bottom: 7%;
+    font-family: 'JetBrains Mono', monospace;
+    margin-left: 0%;
+    letter-spacing: 0em;
+    width: 100%;
+/*font-size: 20px;*/
+font-weight: 100 !important;
+line-height: 25px;
+letter-spacing: 0em;
+text-align: left;
+
+}
+
+.loading {
+     font-size: 180%;
+    margin-bottom: -10%;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0em;
+    width: 100%;
+/*font-size: 20px;*/
+font-weight: 100 !important;
+line-height: 30px;
+letter-spacing: 0em;
+text-align: center;
+color: white;
 }
 
 .intro-button{
-    height: 8%;
+    height: 12%;
     font-size: 150%;
     padding: 0 8%;
-    width: fit-content;
+    margin-left: 5%;
+    margin-top: 10%;
+    margin-bottom: -10%;
+/*    width: fit-content;*/
+    
+    width: 90%;
+    background-color: var(--main-green);
+    border-radius: 36px;
+
+
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+
+    border: 1px solid #000000;
+
+    box-shadow: 0px 10px 0px 0px #000000;
+
+
+/*
+border: 1px
+gap: 32px*/
+
+
+}
+
+.intro-button:hover {
+    background-color: white;
 }
 
 .interest-selection{
-    background-color: antiquewhite;
+    background-color: var(--bg-color);
     padding: 3% 3%;
     margin: 4% 4% 0 0;
-    border-radius: 5%;
+    border-radius: 5,%;
     font-size: 100%;
+
+padding: 12px, 42px, 12px, 42px;
+border-radius: 1000px;
+
+border-color: black;
+gap: 10px;
+
+border: 1px solid #000000;
+
+width: 29%;
+
+box-shadow: 0px 8px 0px 0px #000000;
+margin-bottom: 1%;
+
+
+/*width: 40%;*/
+
+}
+
+.interest-selection:hover{
+    background-color: var(--main-green);
 }
 
 #intro-button-container{
@@ -268,10 +409,12 @@ body {
     width: 80%;
     height: 80%;
     margin: 8px;
-    border: 8px solid rgb(0, 0, 0);
+    border: 50px solid var(--bg-color);
     border-radius: 50%;
+    margin-left: 10%;
     animation: loadingRing 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-    border-color: rgb(0, 0, 0) transparent transparent transparent;
+    border-color: var(--bg-color) transparent transparent transparent;
+
 }
 
 #ring1{

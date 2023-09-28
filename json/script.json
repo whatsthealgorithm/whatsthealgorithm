@@ -9,7 +9,7 @@
         },
         {
             "index": "12",
-            "title": "We Want Your Feedback",
+            "title": "Feedback",
             "body": "Is this content matching your interests?",
             "buttons": ["Yes", "No", "Sometimes"],
             "buttonTriggers": ["content-matches", "content-doesnt-match", "content-sometimes-matches"]
@@ -23,7 +23,7 @@
         },
         {
             "trigger": "content-doesnt-match",
-            "title": "Good to know.",
+            "title": "Got it.",
             "body": "We'll show you what we know about you and you can tell us if it's right: ",
             "buttons": ["See Data"],
             "buttonTriggers": ["show-preferences"]
@@ -39,7 +39,7 @@
             "trigger": "show-preferences",
             "dataId": "preferences-template",
             "body": "We've also made some assumptions about you based on this.",
-            "buttons": ["See Assumptions"],
+            "buttons": ["View"],
             "buttonTriggers": ["show-assumptions"]
         },
         {
@@ -50,7 +50,7 @@
         },
         {
             "trigger": "feedback-needed",
-            "title": "Feedback Needed",
+            "title": "Feedback",
             "body": "Are these inferences accurate?",
             "buttons": ["Yes", "No", "Some of them"],
             "buttonTriggers": ["preferences-match", "preferences-dont-match", "preferences-dont-match"]
