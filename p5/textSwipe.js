@@ -7,8 +7,6 @@ const textSwipe = ( sketch ) => {
     var imgs = [];
 
     sketch.setup = () => {
-        color = 0;
-        bcColor = 0;
         var deviceScreen = document.getElementById("device-screen");
         var canvas = sketch.createCanvas(deviceScreen.offsetWidth, deviceScreen.offsetHeight);
         canvas.addClass("p5-content");
