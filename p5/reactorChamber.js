@@ -9,6 +9,8 @@ const reactorChamber = ( sketch ) => {
         var canvas = sketch.createCanvas(deviceScreen.offsetWidth, deviceScreen.offsetHeight, sketch.WEBGL);
         canvas.addClass("p5-content");
         canvas.addClass("reactorChamber");
+
+        bgColor = green;
     };
 
     t=0;
@@ -26,8 +28,8 @@ const reactorChamber = ( sketch ) => {
 
         let delta_t = sketch.deltaTime / 4000;
         delta_t *= sketch.userSpeedF;
-        t -= delta_t
-        w = device.offsetHeight
+        t -= delta_t;
+        w = device.offsetHeight;
         let y_spacing = device.offsetHeight / 2.5;
 
         for(k=-1;k<=1;k+=2){
@@ -69,13 +71,16 @@ const reactorChamber = ( sketch ) => {
         color = sketch.userColor;
 
         if (sketch.userColor == "red"){
-            bgColor = '#9e1b11';
+           // bgColor = '#9e1b11';
+            bcColor = "red";
         }
         else if (sketch.userColor == "blue"){
-            bgColor = '#8bb7d6';
+            //bgColor = '#8bb7d6';
+            bcColor = "blue";
         }
         else if (sketch.userColor == "green"){
-            bgColor = '#2fcc54';
+            //bgColor = '#2fcc54';
+            bgColor = "green";
         }
     }
 

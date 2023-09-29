@@ -7,6 +7,8 @@ const textSwipe = ( sketch ) => {
     var imgs = [];
 
     sketch.setup = () => {
+        color = 0;
+        bcColor = 0;
         var deviceScreen = document.getElementById("device-screen");
         var canvas = sketch.createCanvas(deviceScreen.offsetWidth, deviceScreen.offsetHeight);
         canvas.addClass("p5-content");
@@ -95,7 +97,7 @@ const textSwipe = ( sketch ) => {
     sketch.setColor = () => {
         
         if (sketch.userColor == "red"){
-            color = '#ff9494';
+            color = "#ff9494";
             bgColor = "red";
         }
         else if (sketch.userColor == "blue"){
