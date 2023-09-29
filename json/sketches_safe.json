@@ -1,12 +1,16 @@
 {
     "sketches": [
         {
+            "id": "emojiMandala",
+            "style": "emoji"
+        },
+        {
             "id": "emojiGrid",
             "style": "emoji"
         },
         {
-            "id": "emojiMandala",
-            "style": "emoji"
+            "id": "leParc",
+            "style": "hypnotic"
         },
         {
             "id": "vaporwave",
@@ -14,10 +18,6 @@
         },
         {
             "id": "tunnel",
-            "style": "hypnotic"
-        },
-        {
-            "id": "leParc",
             "style": "hypnotic"
         },
         {

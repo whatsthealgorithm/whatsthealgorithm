@@ -385,6 +385,35 @@ margin-bottom: 1%;
 
 }
 
+.interest-selection2{
+    background-color: var(--bg-color);
+    padding: 3% 3%;
+    margin: 4% 4% 0 0;
+    border-radius: 5,%;
+    font-size: 100%;
+
+padding: 12px, 42px, 12px, 42px;
+border-radius: 1000px;
+
+border-color: black;
+gap: 10px;
+
+border: 1px solid #000000;
+
+width: 29%;
+
+margin-bottom: 1%;
+
+
+/*width: 40%;*/
+
+}
+
+.interest-selection2:hover {
+    background-color: var(--main-green);
+}
+
+
 .interest-selection:hover{
     background-color: var(--main-green);
 }
@@ -469,10 +498,12 @@ margin-bottom: 1%;
 
 .alg-title{
     font-size: 130%;
+    margin-left: 5%;
 }
 
 .alg-subtitle{
     font-size: 100%;
+    margin-left: 5%;
 }
 
 .create-weightings{

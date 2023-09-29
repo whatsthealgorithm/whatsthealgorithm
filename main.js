@@ -642,7 +642,7 @@ function setAlgorithmsForSelection(div){
         }
         for (var j = 0; j < recSys.ALGORITHMS[i][1].length; j++){
             var interestButton = document.createElement("button");
-            interestButton.className = "interest-selection";
+            interestButton.className = "interest-selection2";
             interestButton.innerHTML = recSys.ALGORITHMS[i][1][j];
             buttonContainer.appendChild(interestButton);
         }

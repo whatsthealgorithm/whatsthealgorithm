@@ -80,6 +80,8 @@ function initializeFeed(){
         console.log("Error: Not enough content found");
     }
 
+    console.log(matchingContent);
+
     console.log("Found " + selectedMatchingContent.length + " pieces of matching content and " + selectedNonMatchingContent.length + " pieces of non matching content.");
 
     var initialMatching = selectedMatchingContent.slice(0, INITIAL_MATCHING_AMOUNT);
