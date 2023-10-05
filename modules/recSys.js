@@ -70,32 +70,71 @@ function createNewUser(statedPreferences){
 /**
  * Initializes the user's initial feed with a mixture of targeted and random content. 
  */
+// function initializeFeed(){
+//     var [matchingContent, nonMatchingContent] = getMatchingAndNonMatchingContent();
+//     totalInitialMatching = matchingContent.length;
+//     var selectedMatchingContent = selectAtRandom(matchingContent, 5);
+//     var selectedNonMatchingContent = selectAtRandom(nonMatchingContent, 6 - selectedMatchingContent.length);
+
+//     if (selectedMatchingContent.length + selectedNonMatchingContent.length < 6){
+//         console.log("Error: Not enough content found");
+//         return [];
+//     }
+
+//     var initialMatching = selectedMatchingContent.slice(0, INITIAL_MATCHING_AMOUNT);
+//     var leftoverMatching = selectedMatchingContent.slice(INITIAL_MATCHING_AMOUNT);
+//     if (leftoverMatching.length != 0){
+//         selectedNonMatchingContent = selectAtRandom(leftoverMatching.concat(selectedNonMatchingContent), 6 - initialMatching.length);
+//     }
+
+//     var combinedContent = initialMatching.concat(selectedNonMatchingContent);
+//     var feedList = [];
+//     var lastAdded = null;
+
+//     for (var id of combinedContent){
+//         if (lastAdded && contentDict[id].style === contentDict[lastAdded].style) {
+//             console.log("Filtered Content:", id);
+//             console.log("Reason: Matches style with previous content.");
+//             continue;
+//         }
+//         feedList.push(id);
+//         console.log("Added " + id + " to initial feed with match score of " + contentDict[id].matchScore + ", is it matching? " + (contentDict[id].matchScore >= MATCH_THRESHOLD));
+//         lastAdded = id;
+//     }
+
+//     return feedList;
+// }
+
 function initializeFeed(){
     var [matchingContent, nonMatchingContent] = getMatchingAndNonMatchingContent();
     totalInitialMatching = matchingContent.length;
-    var selectedMatchingContent = selectAtRandom(matchingContent, 5);
-    var selectedNonMatchingContent = selectAtRandom(nonMatchingContent, 6 - selectedMatchingContent.length);
 
-    if (selectedMatchingContent.length + selectedNonMatchingContent.length < 6){
-        console.log("Error: Not enough content found");
+    var feedList = [];
+    var combinedContent = matchingContent.concat(nonMatchingContent);
+
+    while (feedList.length < 6 && combinedContent.length > 0) {
+        var selectedId = selectOneAtRandom(combinedContent);
+        if (feedList.length === 0 || contentDict[selectedId].style !== contentDict[feedList[feedList.length - 1]].style) {
+            feedList.push(selectedId);
+            console.log("Added " + selectedId + " to initial feed with match score of " + contentDict[selectedId].matchScore + ", is it matching? " + (contentDict[selectedId].matchScore >= MATCH_THRESHOLD));
+        }
+        // Remove the selectedId from combinedContent
+        combinedContent = combinedContent.filter(id => id !== selectedId);
     }
 
-    console.log(matchingContent);
-
-    console.log("Found " + selectedMatchingContent.length + " pieces of matching content and " + selectedNonMatchingContent.length + " pieces of non matching content.");
-
-    var initialMatching = selectedMatchingContent.slice(0, INITIAL_MATCHING_AMOUNT);
-    var leftoverMatching = selectedMatchingContent.slice(INITIAL_MATCHING_AMOUNT);
-    if (leftoverMatching.length != 0){
-        selectedNonMatchingContent = selectAtRandom(leftoverMatching.concat(selectedNonMatchingContent), 6 - initialMatching.length);
+    if (feedList.length < 6) {
+        console.log("Error: Not enough content found.");
+        return [];
     }
 
-    var feedList = initialMatching.concat(selectedNonMatchingContent);
-    for (var id in feedList){
-        console.log("Added " + feedList[id] + " to initial feed with match score of " + contentDict[feedList[id]].matchScore + ", is it matching? " + (contentDict[feedList[id]].matchScore >= MATCH_THRESHOLD));
-    }
     return feedList;
 }
+
+function selectOneAtRandom(contentList) {
+    var randomIndex = Math.floor(Math.random() * contentList.length);
+    return contentList[randomIndex];
+}
+
 
 /**
  * Handler function for marking content as seen.
@@ -181,6 +220,11 @@ function onContentDisengagement(contentId, interaction){
 
             const sameStyle = contentDict[topContent].style === contentDict[lastAdded].style;
             console.log("same style?", sameStyle);
+            if (sameStyle) {
+                console.log("Filtered Content:", topContent);
+                console.log("Reason: Matches style with previous content.");
+                continue;
+            }
             const sameColor = currentSketchTraits.includes(lastSketchTraits.find(trait => traits.colors.includes(trait)));
             console.log("same color?", sameColor);
             const sameShape = currentSketchTraits.includes(lastSketchTraits.find(trait => traits.shapes.includes(trait)));
