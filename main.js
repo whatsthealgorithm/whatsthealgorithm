@@ -57,7 +57,7 @@ const disable_scroll_up = 0;
 
 // let test_attributes = {
 //     'userSize': 'large',
-//     'userColor': 'red',
+//     'userColor': 'blue',
 //     'userShape': 'triangle'
 // }
 

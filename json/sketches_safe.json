@@ -39,6 +39,10 @@
         {
             "id": "crimsonRoom",
             "style": "hypnotic"
+        },
+        {
+            "id": "textSpotlight",
+            "style": "text"
         }
     ],
     "traits": {
