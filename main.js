@@ -270,13 +270,18 @@ function onSelectInterestButtonClicked(e){
 
 function loadContent(amount, idList){
     var contentIndex = 0;
-    if (idList && idList.length < amount) {
+    if (idList && idList.length < amount && feed_testing == 0) {
         console.warn("idList does not have enough elements for the required amount.");
         return;
     }
     console.log("this is the id list 2", idList)
     for (var i = 0; i < amount; i++){
         var isMessagePost = messageAtIndex(totalPosts + i);
+
+        if(feed_testing == 1){
+            contentIndex = 0;  
+        }
+
         var id = isMessagePost ? "message-" + (totalPosts + i) : idList[contentIndex];
         var post = isMessagePost ? createMessagePost(scriptByIndex[totalPosts + i], totalPosts + i) : createContentPost(totalPosts + i, id);
         post.setAttribute('draggable', true);

@@ -43,6 +43,10 @@
         {
             "id": "textSpotlight",
             "style": "text"
+        },
+        {
+            "id": "textBounce",
+            "style": "text"
         }
     ],
     "traits": {

@@ -17,6 +17,7 @@ var assumptions;
 var totalInitialMatching;
 var lastRecommendedSketch = null;
 
+const feed_testing = 0;
 // Start exports section
 
 /**
@@ -49,6 +50,7 @@ function setup(){
             }
         }
     });
+
 }
 
 /**
@@ -122,7 +124,7 @@ function initializeFeed(){
         combinedContent = combinedContent.filter(id => id !== selectedId);
     }
 
-    if (feedList.length < 6) {
+    if (feedList.length < 6 && feed_testing == 0) {
         console.log("Error: Not enough content found.");
         return [];
     }
@@ -310,6 +312,9 @@ function getAssumption(topTrait){
  * Gets the name of the sketch associated with the given content id
  */
 function getContentSketchName(id){
+
+// sketchName: sketch.id
+
     return contentDict[id].sketchName;
 }
 
