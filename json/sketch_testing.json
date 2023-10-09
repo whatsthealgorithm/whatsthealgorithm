@@ -1,8 +1,8 @@
 {
     "sketches": [
         {
-            "id": "textBounce",
-            "style": "text"
+            "id": "threeChambers",
+            "style": "3D"
         }
     ],
     "traits": {
