@@ -17,7 +17,7 @@ var assumptions;
 var totalInitialMatching;
 var lastRecommendedSketch = null;
 
-const feed_testing = 0;
+const feed_testing = 1;
 // Start exports section
 
 /**
@@ -28,7 +28,7 @@ function setup(){
     {
         assumptions = jsonData.assumptions;
     });
-    return $.getJSON('json/sketches_safe.json', function(jsonData, status, xhr)
+    return $.getJSON('json/sketch_testing.json', function(jsonData, status, xhr)
     {
         traits = jsonData.traits;
         styles = jsonData.styles;

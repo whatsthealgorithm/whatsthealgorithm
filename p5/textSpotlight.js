@@ -11,6 +11,7 @@ const spots = [];
 var bgColor;
 var color;
 
+var angle = 0;
 
 sketch.setup = () => {
 
@@ -23,7 +24,7 @@ sketch.setup = () => {
   sketch.noStroke();
 
 
-  for(let i = 0; i<40;i++) {
+  for(let i = 0; i<20;i++) {
     let s = new Spotlight();
     spots.push(s);
   }
@@ -44,7 +45,7 @@ for (let i =0;i<spots.length;i++) {
   spots[i].update();
   spots[i].show();
 }
-
+  sketch.noStroke();
   // console.log(circle.x); 
 
   // sketch.circle(init_x,init_y,radius);
@@ -56,12 +57,14 @@ for (let i =0;i<spots.length;i++) {
   sketch.textSize(20);
   sketch.textStyle(sketch.BOLDITALIC);
 
+  sketch.rotate(sketch.sin(angle)*.1);
+
   for(var i =0;i<essay.length; i= i+40){
     sketch.text(essay.substring(start,i),text_x,i*.6);
    start = i;
   }
 
-
+angle+=.05;
 
 // if (Math.abs(text_x) < device.offsetWidth / 2) {
 //   text_x+= 1;
