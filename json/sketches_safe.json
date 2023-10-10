@@ -51,6 +51,10 @@
         {
             "id": "threeChambers",
             "style": "3D"
+        },
+        {
+            "id": "threeGrids",
+            "style": "3D"
         }
     ],
     "traits": {

@@ -8,7 +8,7 @@ const threeChambers = ( sketch ) => {
         var deviceScreen = document.getElementById("device-screen");
         var canvas = sketch.createCanvas(deviceScreen.offsetWidth, deviceScreen.offsetHeight, sketch.WEBGL);
         canvas.addClass("p5-content");
-        canvas.addClass("reactorChamber");
+        canvas.addClass("threeChambers");
     };
 
     t=0;

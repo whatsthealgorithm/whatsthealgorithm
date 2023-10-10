@@ -14,7 +14,7 @@ sketch.setup = () => {
   var canvas = sketch.createCanvas(deviceScreen.offsetWidth, deviceScreen.offsetHeight);
  
   canvas.addClass("p5-content");
-  canvas.addClass("textSpotlight");
+  canvas.addClass("textBounce");
 
   sketch.noStroke();
 

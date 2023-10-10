@@ -41,6 +41,7 @@ sketch.draw = () => {
   sketch.fill(color);
 
 
+
 for (let i =0;i<spots.length;i++) {
   spots[i].update();
   spots[i].show();

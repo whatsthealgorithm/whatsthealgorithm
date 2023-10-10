@@ -47,7 +47,7 @@ import * as canvas from "html2canvas";
 
 // default 0. set to 1 to skip intro screens
 
-const feed_testing = 1;
+const feed_testing = 0;
 
 
 // default 0. set to 1 to disable scrolling up
