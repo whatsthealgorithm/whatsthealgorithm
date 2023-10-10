@@ -91,7 +91,7 @@ function initializeFeed(){
     var combinedContent = matchingContent.concat(nonMatchingContent);
 
     while (feedList.length < 6 && combinedContent.length > 0) {
-        for (var i = 0; i < 6; i++) {
+        for (var i = 0; i < 4; i++) {
             var selectedId = selectOneAtRandom(matchingContent);
             
             if (feedList.length === 0 || contentDict[selectedId].id_recsys !== contentDict[feedList[feedList.length - 1]].id_recsys) {
@@ -100,14 +100,14 @@ function initializeFeed(){
             }
         }
 
-        // for (var i=0; i < 3; i++){
-        //     var selectedId = selectOneAtRandom(combinedContent);
+        for (var i=0; i < 3; i++){
+            var selectedId = selectOneAtRandom(combinedContent);
             
-        //     if (feedList.length === 0 || contentDict[selectedId].id_recsys !== contentDict[feedList[feedList.length - 1]].id_recsys) {
-        //         feedList.push(selectedId);
-        //         console.log("Added " + selectedId + " to initial feed with match score of " + contentDict[selectedId].matchScore + ", is it matching? " + (contentDict[selectedId].matchScore >= MATCH_THRESHOLD));
-        //     }
-        // }
+            if (feedList.length === 0 || contentDict[selectedId].id_recsys !== contentDict[feedList[feedList.length - 1]].id_recsys) {
+                feedList.push(selectedId);
+                console.log("Added " + selectedId + " to initial feed with match score of " + contentDict[selectedId].matchScore + ", is it matching? " + (contentDict[selectedId].matchScore >= MATCH_THRESHOLD));
+            }
+        }
         
         // Remove the selectedId from combinedContent
         combinedContent = combinedContent.filter(id => id !== selectedId);
