@@ -2,43 +2,43 @@
     "script": [
         {
             "index": "6",
-            "title": "Great Work",
-            "body": "We're adjusting our recs based on your interactions. if you enjoy what you're seeing something, make sure you use the buttons to give the algorithm a signal.",
+            "title": "Good work",
+            "body": "We're adjusting our recommendations based on your interactions. Make sure you use the like, share, and bookmark buttons to give the algorithm a signal of what to prioritize.",
             "buttons": ["Okay"],
             "buttonTriggers":  ["continue"]
         },
         {
             "index": "12",
             "title": "Feedback",
-            "body": "Is this content matching your interests?",
+            "body": "Is this content matching your preferences?",
             "buttons": ["Yes", "No", "Sometimes"],
             "buttonTriggers": ["content-matches", "content-doesnt-match", "content-sometimes-matches"]
         },
         {
             "trigger": "content-matches",
             "title": "Great!",
-            "body": "But the algorithm isn't magic. Here's what we know about you: ",
+            "body": "This is because we've been learning from your interactions with content. Here's the preferences we recorded for you: ",
             "buttons": ["See Data"],
             "buttonTriggers": ["show-preferences"]
         },
         {
             "trigger": "content-doesnt-match",
             "title": "Got it.",
-            "body": "We'll show you what we know about you and you can tell us if it's right: ",
+            "body": "Your interactions may not represent what your preferences really are. Here's the data we're basing our recommendations on: ",
             "buttons": ["See Data"],
             "buttonTriggers": ["show-preferences"]
         },
         {
             "trigger": "content-sometimes-matches",
             "title": "Got it.",
-            "body": "We're showing you some new content, but we might not be getting the balance right. We'll show you what we know about you: ",
+            "body": "We're trying to both adapt to your past preferences and introduce you to new content, but we might not be getting the balance right. We'll show you what we know about you: ",
             "buttons": ["See Data"],
             "buttonTriggers": ["show-preferences"]
         },
         {
             "trigger": "show-preferences",
             "dataId": "preferences-template",
-            "body": "We've also made some assumptions about you based on this.",
+            "body": "You may only be clicking some buttons, but we made some assumptions about you based on this data.",
             "buttons": ["View"],
             "buttonTriggers": ["show-assumptions"]
         },
@@ -51,21 +51,21 @@
         {
             "trigger": "feedback-needed",
             "title": "Feedback",
-            "body": "Are these inferences accurate?",
+            "body": "Are these assumptions accurate?",
             "buttons": ["Yes", "No", "Some of them"],
             "buttonTriggers": ["preferences-match", "preferences-dont-match", "preferences-dont-match"]
         },
         {
             "trigger": "preferences-match",
             "title": "Great!",
-            "body": "But remember, these can always change. Here are the signals that we pick up on to make these inferences. Knowing how we measure can help you customize your feed: ",
+            "body": "We're glad our measurements captured the right idea. <br> Here's how we've been weighing your interactions; knowing this can help you more intentionally customize your feed: ",
             "buttons": ["See Data"],
             "buttonTriggers": ["show-weightings"]
         },
         {
             "trigger": "preferences-dont-match",
             "title": "Got it.",
-            "body": "There can be a mismatch between the signals we pick up on and what you intend. Knowing how we measure can help you customize your feed: ",
+            "body": "There can be a mismatch between the signals we pick up on and what you intend. <br> Here's how we've been weighing your interactions; knowing this can help you more intentionally customize your feed: ",
             "buttons": ["See Data"],
             "buttonTriggers": ["unlock-menu"]
         },
@@ -79,7 +79,7 @@
         {
             "index": "25",
             "title": "<span class='smaller-title'>Thank you!</span>",
-            "body": "<span class='smaller-text'>Some academics, policymakers, etc. think that having one algorithm is bad and that being able to choose from multiple options will give a better and safer experience.<br> <br> We're still thinking about this proposal and the best way to implement it. There are a few algorithms in our system that our community made.<br><br> You can explore them and let us know which ones speak to you!</span>",
+            "body": "<span class='smaller-text'>We hope that providing some transparency on how we're interpreting your interactions and what data we collected can help you engage with our app with greater control. <br><br>Some field experts think users like you should have even greater choice over how the algorithm recommends content, so we're experimenting with that as well. <br><br>Here's a prototype for some features where you can customize your experience. The first is to get to choose what type of content or interactions your feed prioritizes.</span>",
             "buttons": ["Explore"],
             "buttonTriggers": ["continue"]
         },
