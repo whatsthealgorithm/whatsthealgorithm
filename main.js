@@ -754,6 +754,7 @@ function setMyAlgorithm(div){
 
 function setAssumptions(div){
     var topColor = recSys.getTopTrait("colors");
+    console.log("this is the top color,", topColor);
     var topShape = recSys.getTopTrait("shapes");
     var topSpeed = recSys.getTopTrait("speeds");
     div.getElementsByClassName("assumption-color")[0].innerHTML = topColor;

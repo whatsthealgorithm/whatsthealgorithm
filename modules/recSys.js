@@ -34,23 +34,36 @@ function setup(){
         styles = jsonData.styles;
         initialTraitsDict = getInitialTraitsDict();
 
-        var combinations = getAllPossibleTraitCombinations();
+        var allCombinations = getAllPossibleTraitCombinations();
 
         for (var i = 0; i < jsonData.sketches.length; i++){
             var sketch = jsonData.sketches[i];
-            for (var j = 0; j < combinations.length; j++){
+
+            for (var j = 0; j < allCombinations.length; j++){
+                var combo = allCombinations[j].slice(); // Clone the combination
+
+                // If the sketch style is "emoji", set shape traits to 0
+                if (sketch.style === "emoji") {
+                    traits.shapes.forEach(shapeTrait => {
+                        const index = combo.indexOf(shapeTrait);
+                        if (index !== -1) {
+                            combo[index] = 0;
+                        }
+                    });
+                }
+
                 contentDict[sketch.id + j] = {
+                    id_recsys: sketch.id,
                     id: sketch.id + j,
                     style: sketch.style,
                     sketchName: sketch.id,
-                    traits: combinations[j],
+                    traits: combo,
                     seen: false,
                     matchScore: -1,
                 };
             }
         }
     });
-
 }
 
 /**
@@ -69,57 +82,33 @@ function createNewUser(statedPreferences){
     }
 }
 
-/**
- * Initializes the user's initial feed with a mixture of targeted and random content. 
- */
-// function initializeFeed(){
-//     var [matchingContent, nonMatchingContent] = getMatchingAndNonMatchingContent();
-//     totalInitialMatching = matchingContent.length;
-//     var selectedMatchingContent = selectAtRandom(matchingContent, 5);
-//     var selectedNonMatchingContent = selectAtRandom(nonMatchingContent, 6 - selectedMatchingContent.length);
-
-//     if (selectedMatchingContent.length + selectedNonMatchingContent.length < 6){
-//         console.log("Error: Not enough content found");
-//         return [];
-//     }
-
-//     var initialMatching = selectedMatchingContent.slice(0, INITIAL_MATCHING_AMOUNT);
-//     var leftoverMatching = selectedMatchingContent.slice(INITIAL_MATCHING_AMOUNT);
-//     if (leftoverMatching.length != 0){
-//         selectedNonMatchingContent = selectAtRandom(leftoverMatching.concat(selectedNonMatchingContent), 6 - initialMatching.length);
-//     }
-
-//     var combinedContent = initialMatching.concat(selectedNonMatchingContent);
-//     var feedList = [];
-//     var lastAdded = null;
-
-//     for (var id of combinedContent){
-//         if (lastAdded && contentDict[id].style === contentDict[lastAdded].style) {
-//             console.log("Filtered Content:", id);
-//             console.log("Reason: Matches style with previous content.");
-//             continue;
-//         }
-//         feedList.push(id);
-//         console.log("Added " + id + " to initial feed with match score of " + contentDict[id].matchScore + ", is it matching? " + (contentDict[id].matchScore >= MATCH_THRESHOLD));
-//         lastAdded = id;
-//     }
-
-//     return feedList;
-// }
-
 function initializeFeed(){
     var [matchingContent, nonMatchingContent] = getMatchingAndNonMatchingContent();
     totalInitialMatching = matchingContent.length;
+    console.log("found this much matching content",totalInitialMatching )
 
     var feedList = [];
     var combinedContent = matchingContent.concat(nonMatchingContent);
 
     while (feedList.length < 6 && combinedContent.length > 0) {
-        var selectedId = selectOneAtRandom(combinedContent);
-        if (feedList.length === 0 || contentDict[selectedId].style !== contentDict[feedList[feedList.length - 1]].style) {
-            feedList.push(selectedId);
-            console.log("Added " + selectedId + " to initial feed with match score of " + contentDict[selectedId].matchScore + ", is it matching? " + (contentDict[selectedId].matchScore >= MATCH_THRESHOLD));
+        for (var i = 0; i < 4; i++) {
+            var selectedId = selectOneAtRandom(matchingContent);
+            
+            if (feedList.length === 0 || contentDict[selectedId].id_recsys !== contentDict[feedList[feedList.length - 1]].id_recsys) {
+                feedList.push(selectedId);
+                console.log("Added " + selectedId + " to initial feed with match score of " + contentDict[selectedId].matchScore + ", is it matching? " + (contentDict[selectedId].matchScore >= MATCH_THRESHOLD));
+            }
         }
+
+        for (var i=0; i < 3; i++){
+            var selectedId = selectOneAtRandom(combinedContent);
+            
+            if (feedList.length === 0 || contentDict[selectedId].id_recsys !== contentDict[feedList[feedList.length - 1]].id_recsys) {
+                feedList.push(selectedId);
+                console.log("Added " + selectedId + " to initial feed with match score of " + contentDict[selectedId].matchScore + ", is it matching? " + (contentDict[selectedId].matchScore >= MATCH_THRESHOLD));
+            }
+        }
+        
         // Remove the selectedId from combinedContent
         combinedContent = combinedContent.filter(id => id !== selectedId);
     }
@@ -131,6 +120,32 @@ function initializeFeed(){
 
     return feedList;
 }
+
+// function initializeFeed(){
+//     var [matchingContent, nonMatchingContent] = getMatchingAndNonMatchingContent();
+//     totalInitialMatching = matchingContent.length;
+//     console.log("found this much matching content",totalInitialMatching )
+
+//     var feedList = [];
+//     var combinedContent = matchingContent.concat(nonMatchingContent);
+
+//     while (feedList.length < 6 && combinedContent.length > 0) {
+//         var selectedId = selectOneAtRandom(combinedContent);
+//         if (feedList.length === 0 || contentDict[selectedId].id_recsys !== contentDict[feedList[feedList.length - 1]].id_recsys) {
+//             feedList.push(selectedId);
+//             console.log("Added " + selectedId + " to initial feed with match score of " + contentDict[selectedId].matchScore + ", is it matching? " + (contentDict[selectedId].matchScore >= MATCH_THRESHOLD));
+//         }
+//         // Remove the selectedId from combinedContent
+//         combinedContent = combinedContent.filter(id => id !== selectedId);
+//     }
+
+//     if (feedList.length < 6 && feed_testing == 0) {
+//         console.log("Error: Not enough content found.");
+//         return [];
+//     }
+
+//     return feedList;
+// }
 
 function selectOneAtRandom(contentList) {
     var randomIndex = Math.floor(Math.random() * contentList.length);
@@ -203,7 +218,14 @@ function onContentDisengagement(contentId, interaction){
     unseenContent.sort(function(id1, id2) {
         var contentVector1 = createContentVector(contentDict[id1]);
         var contentVector2 = createContentVector(contentDict[id2]);
-        return calculateSimilarity(ideal, contentVector2) - calculateSimilarity(ideal, contentVector1);
+        var similarityDifference = calculateSimilarity(ideal, contentVector2) - calculateSimilarity(ideal, contentVector1);
+    
+        // If the similarity scores are equal, return a random number to shuffle the order
+        if (similarityDifference === 0) {
+            return Math.random() - 0.5;
+        }
+    
+        return similarityDifference;
     });
 
     var recommendations = [];
@@ -220,7 +242,8 @@ function onContentDisengagement(contentId, interaction){
             const currentSketchTraits = contentDict[topContent].traits;
             const lastSketchTraits = contentDict[lastAdded].traits;
 
-            const sameStyle = contentDict[topContent].style === contentDict[lastAdded].style;
+            const sameStyle = contentDict[topContent].id_recsys === contentDict[lastAdded].id_recsys;
+            console.log("id", contentDict[topContent].id_recsys);
             console.log("same style?", sameStyle);
             if (sameStyle) {
                 console.log("Filtered Content:", topContent);
@@ -416,6 +439,8 @@ function getIdealContentVector(preferences){
 function calculateSimilarity(idealVector, contentVector){
     var similarityScore = 0;
     var traitList = Object.keys(idealVector);
+    // console.log("this is the idea vector", idealVector);
+    // console.log("this is the content vector", contentVector);
     for (var i = 0; i < traitList.length; i++){
         similarityScore += idealVector[traitList[i]] * contentVector[traitList[i]];
     }
