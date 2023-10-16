@@ -2,8 +2,8 @@
     "script": [
         {
             "index": "6",
-            "title": "Good work",
-            "body": "We're adjusting our recommendations based on your interactions. Make sure you use the like, share, and bookmark buttons to give the algorithm a signal of what to prioritize.",
+            "title": "Good work!",
+            "body": "We're adjusting our recommendations based on your interactions. Don't forget to use the like, share, and bookmark buttons to give the algorithm a signal of what to prioritize.",
             "buttons": ["Okay"],
             "buttonTriggers":  ["continue"]
         },
@@ -17,14 +17,14 @@
         {
             "trigger": "content-matches",
             "title": "Great!",
-            "body": "This is because we've been learning from your interactions with content. Here's the preferences we recorded for you: ",
+            "body": "This is because we've been learning from your interactions with content. Here are the preferences we recorded for you: ",
             "buttons": ["See Data"],
             "buttonTriggers": ["show-preferences"]
         },
         {
             "trigger": "content-doesnt-match",
             "title": "Got it.",
-            "body": "Your interactions may not represent what your preferences really are. Here's the data we're basing our recommendations on: ",
+            "body": "Your interactions may not represent what your preferences really are. Here's what we think your preferences are, which we're basing our recommendations on: ",
             "buttons": ["See Data"],
             "buttonTriggers": ["show-preferences"]
         },
@@ -38,7 +38,7 @@
         {
             "trigger": "show-preferences",
             "dataId": "preferences-template",
-            "body": "You may only be clicking some buttons, but we made some assumptions about you based on this data.",
+            "body": "While you've been clicking those buttons, we've crafted a profile of you based on those actions.",
             "buttons": ["View"],
             "buttonTriggers": ["show-assumptions"]
         },
