@@ -175,6 +175,18 @@ function loadScript(){
     });
 }
 
+function getCategoryForTrait(trait) {
+    if (jsonData.traits.colors.includes(trait)) {
+        return "color";
+    } else if (jsonData.traits.shapes.includes(trait)) {
+        return "shape";
+    } else if (jsonData.traits.speeds.includes(trait)) {
+        return "speed";
+    } else {
+        // If the trait doesn't belong to any of the predefined categories, you can handle it as needed
+        return "unknown";
+    }
+}
 function startIntro(){
     document.getElementById("intro").style.display = "flex";
     inIntro = true;
@@ -235,6 +247,8 @@ function onIntroButtonClicked(){
  * Click handler for interest buttons in the intro sequece 
  **/ 
 function onIntroInterestButtonClicked(e){
+    
+    
     if (!interestDict[e.target.innerHTML]){
         e.target.style.backgroundColor = "#1ad631";
         interestDict[e.target.innerHTML] = true;
@@ -617,10 +631,12 @@ function setWeightings(div, algorithmIndex){
 
 function setPreferences(div){
     var interests = recSys.getTopInterests();
+    // console.log(interests)
     var total = interests[0][1] * 1.1;
 
     for (var i = 0; i < numPreferencesToShow; i++){
         var name = interests[i][0];
+        // console.log("this is the one interest," name)
         name = name.charAt(0).toUpperCase() + name.slice(1); // capitalize first letter
         var percent = 100 * interests[i][1] / total;
         var barDiv = div.getElementsByClassName("pref-" + i)[0];
@@ -789,6 +805,9 @@ function onMessageButtonClicked(e){
             break;
         }
     }
+    if (button === "Explore") {
+        document.getElementById("info-icon").style.display = "none";
+    }
 
     if (!posts[currentPost].confirmed){
         // Adds a new post if needed
@@ -802,6 +821,7 @@ function onMessageButtonClicked(e){
 
     //lighten screen
     document.getElementById("info").style.backgroundColor = "";
+
 }
 
 function processTrigger(trigger){
@@ -817,6 +837,9 @@ function processTrigger(trigger){
         totalPosts++;
     }
     else if (trigger == "continue"){
+        // if (index === "25") {
+        //     document.getElementById("info").style.display = "none";
+        // }
         return;
     }
     else if (trigger == "unlock-menu"){

@@ -302,23 +302,41 @@ function getContentTraits(id){
 function getTopInterests(){
     var arr = [];
     for (var pref in user.staticPreferences){
-        arr.push([pref, user.staticPreferences[pref]]);
+        console.log("these are the preferences BEFORE sorting,", user.staticPreferences )
+        if (user.staticPreferences.hasOwnProperty(pref) && !isNaN(user.staticPreferences[pref])) {
+            arr.push([pref, user.staticPreferences[pref]]);
+        }
     } 
 
     arr.sort(function(a, b) { return b[1] - a[1]; });
+    console.log("these are the preferences AFTER sorting,", arr )
+
     return arr;
 }
 
 /**
  * Returns the top trait of the given category name
  */
+// function getTopTrait(categoryName){
+//     var topTrait = traits[categoryName][0];
+//     var topVal = 0;
+//     for (var trait in traits[categoryName]){
+//         if (user.staticPreferences[trait] > topVal){
+//             topVal = user.staticPreferences[trait];
+//             topTrait = traits[categoryName][trait];
+//         }
+//     }anything
+//     return topTrait;
+// }
+
 function getTopTrait(categoryName){
     var topTrait = traits[categoryName][0];
     var topVal = 0;
-    for (var trait in traits[categoryName]){
+    for (var i = 0; i < traits[categoryName].length; i++){
+        var trait = traits[categoryName][i];
         if (user.staticPreferences[trait] > topVal){
-            topVal = user.staticPreferences[pref];
-            topTrait = traits[categoryName][trait];
+            topVal = user.staticPreferences[trait];
+            topTrait = trait;
         }
     }
     return topTrait;
