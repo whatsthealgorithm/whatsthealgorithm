@@ -57,6 +57,48 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/contentStyle.css">
     <link href='https://fonts.googleapis.com/css?family=JetBrains Mono' rel='stylesheet'>
+    <style>
+    .button-container {
+        position: relative;
+        display: inline-block; /* or use other display types as needed */
+    }
+
+    #click-detector {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: transparent; /* or any color with opacity as needed */
+        z-index: 1; /* to ensure it's above the button */
+    }
+
+    #interest-finished {
+        position: relative;
+        z-index: 0;
+        height: 70%;
+        font-size: 150%;
+        padding: 0 8%;
+        margin-left: 5%;
+        margin-top: 10%;
+        margin-bottom: -10%;
+/*    width: fit-content;*/
+    position: relative;
+    z-index: 0;
+    width: 90%;
+    background-color: var(--main-green);
+    border-radius: 36px;
+
+
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+
+    border: 1px solid #000000;
+
+    box-shadow: 0px 10px 0px 0px #000000;
+
+    }
+    </style>
 </head>
 
 <body>
@@ -88,10 +130,19 @@
                     <div id="intro-1" class="intro-page" style="display:none">
                         <div class="welcome-title">Getting <br>started</div>
                         <div style="width: 100%; margin-bottom: 5%; border: 1px; border: 1px solid #000000;"></div>
-                        <div class="intro-paragraph">Select your preferred color, shape, and speed of content so we can get you started with some recommendations.</div>
-                        <div id="intro-button-container"></div>
-                        <span id="error-message" style="color: red; display: none; font-size: x-small;">Please select one of each trait before continuing.</span>
-                        <button class="intro-button" id="interest-finished">Done</button>
+                        <div class="intro-paragraph">Select your preferred color, shape, and speed of content so we can get you started with some recommendations.</div>                        
+                        <div id="intro-button-container">  </div>                  
+                        <!-- <div id="lujain">  -->
+                        <div class="button-container">  
+                            <span id="error-message" style="color: red; display: none; font-size: x-small; position: absolute; margin-bottom: 10%;">Select one of each trait before continuing.</span>
+                    
+                        <div id="click-detector" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0;"></div>
+                        <button class="intro-button" id="interest-finished" disabled>Done</button>
+                    </div>
+
+                        <!-- </div> -->
+
+    
                     </div>
 
                     <div id="intro-2" class="intro-page" style="display:none">
@@ -124,6 +175,16 @@
             </div>
         </div>
     </div>
+    <script>
+    document.getElementById('click-detector').addEventListener('click', function() {
+        var button = document.getElementById('interest-finished');
+        if (button.disabled) {
+            document.getElementById('error-message').style.display = 'block';
+        }
+    });
+    </script>
+
+
 </body>
 
 <template id="weightings-template">
@@ -220,4 +281,5 @@
         <img class="share-icon" src="images/twitter.png"\>
     </div>
 </template>
+
 </html>

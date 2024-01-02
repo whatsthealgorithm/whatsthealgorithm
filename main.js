@@ -283,28 +283,41 @@ function onIntroInterestButtonClicked(e) {
     // Toggle the selected trait
     interestDict[trait] = !interestDict[trait];
     e.target.style.backgroundColor = interestDict[trait] ? "#1ad631" : "antiquewhite";
-
-    // Check if one of each type is selected
+    
     const isOneOfEachTypeSelected = checkIfOneOfEachTypeSelected();
+    // Check if one of each type is selected
+    if (isOneOfEachTypeSelected) {
+        document.getElementById('error-message').style.display = 'none';
+        document.getElementById('click-detector').style.display = 'none';
+    }
    
-    // document.getElementById('interest-finished').addEventListener('click', function(e) {
+    // document.getElementById('intro-button-container').addEventListener('click', function(e) {
     //     if (this.disabled) {
     //         document.getElementById('error-message').style.display = 'block';
     //     }
     // });
     
-    if (isOneOfEachTypeSelected) {
-        console.log("im in there")
-        document.getElementById('error-message').style.display = 'none';
-    }
-    else {
-        console.log("im in here");
-        document.getElementById('interest-finished').addEventListener('click', function(e) {
-            if (this.disabled) {
-                document.getElementById('error-message').style.display = 'block';
-            }
-        });
-    }
+    // document.addEventListener('DOMContentLoaded', function() {
+    // document.getElementById('interest-finished').addEventListener('mousedown', function(e) {
+    //     console.log("in here!!!");
+    //     // var button = document.getElementById('interest-finished');
+    //     if (button.disabled) {
+    //         document.getElementById('error-message').style.display = 'block';
+    //     }
+    // });
+    // });
+    // if (isOneOfEachTypeSelected) {
+    //     console.log("im in there")
+    //     document.getElementById('error-message').style.display = 'none';
+    // }
+    // else {
+    //     console.log("im in here");
+    //     document.getElementById('interest-finished').addEventListener('click', function(e) {
+    //         if (this.disabled) {
+    //             document.getElementById('error-message').style.display = 'block';
+    //         }
+    //     });
+    // }
 
     // Enable or disable the submit button
     document.getElementById("interest-finished").disabled = !isOneOfEachTypeSelected;
