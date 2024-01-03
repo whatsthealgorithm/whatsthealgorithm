@@ -98,6 +98,39 @@
     box-shadow: 0px 10px 0px 0px #000000;
 
     }
+    .tooltip {
+  position: relative;
+  display: inline-block;
+    }
+
+.tooltip .tooltiptext {
+  width: 570%;
+  /* height: 20%; */
+  background-color: white;
+  color: black;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  top: -5px;
+  right: 110%;
+  opacity: 0.8;
+  transition: opacity 1s ease;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  margin-top: -10px;
+  border-width: 10px;
+  border-style: solid;
+  border-color: transparent transparent transparent white;
+  opacity: 0.8;
+}
+
     </style>
 </head>
 
@@ -128,13 +161,14 @@
                     </div>
 
                     <div id="intro-1" class="intro-page" style="display:none">
+                        
                         <div class="welcome-title">Getting <br>started</div>
                         <div style="width: 100%; margin-bottom: 5%; border: 1px; border: 1px solid #000000;"></div>
                         <div class="intro-paragraph">Select your preferred color, shape, and speed of content so we can get you started with some recommendations.</div>                        
                         <div id="intro-button-container">  </div>                  
                         <!-- <div id="lujain">  -->
                         <div class="button-container">  
-                            <span id="error-message" style="color: red; display: none; font-size: x-small; position: absolute; margin-bottom: 10%;">Select one of each trait before continuing.</span>
+                            <span id="error-message" style="color: red; display: none; font-size: 10%; position: absolute; margin-bottom: 10%;">Select one of each trait before continuing.</span>
                     
                         <div id="click-detector" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0;"></div>
                         <button class="intro-button" id="interest-finished" disabled>Done</button>
@@ -168,8 +202,18 @@
                 <div id="device-screen"> 
                     <div id="device-buttons">
                         <img id="follow" class="device-button" src="images/follow.png"\>
-                        <img id="like" class="device-button" src="images/like.png"\>
+                        <div class="tooltip" style="display: none;">
+                            <span class="tooltiptext" style="font-size: 70%;">Don't forget to press like, share, or bookmark!</span>
+                          </div>                       
+                           <img id="like" class="device-button" src="images/like.png"\>
                         <img id="share" class="device-button" src="images/share.png"\>
+                        <img id="share" class="device-button" src="images/share.png"\>
+                        </div>
+                        <div class="swipe-tutorial-container">
+                            <div id="swipe-animation" class="swipe-animation">
+                                <img src="swipe-up.png" alt="Swipe Up Icon">
+                                <p style="color: grey">swipe up</p>
+                            </div>
                     </div>
                 </div>
             </div>
@@ -182,6 +226,22 @@
             document.getElementById('error-message').style.display = 'block';
         }
     });
+    document.addEventListener('DOMContentLoaded', function () {
+    var image = document.getElementById('follow');
+    var tooltip = document.getElementsByClassName('tooltip')[0];
+    var tooltiptext = document.getElementsByClassName('tooltiptext')[0];
+
+    image.addEventListener('click', function () {
+        // tooltip.style.display = 'none';
+        // tooltiptext.style.display = 'none';
+        tooltiptext.style.opacity = 0;
+    setTimeout(function() {
+            // tooltip.style.display = 'none';
+            // tooltiptext.style.display = 'none';
+            tooltiptext.style.opacity = 0;
+        }, 30000); // 30 seconds in milliseconds
+    });
+});
     </script>
 
 

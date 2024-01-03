@@ -66,6 +66,18 @@ $(document).ready(function() {
     initialize();
 });
 
+
+ // to show tutorial on page 2
+// if (contentIndex === 2) {
+//     // Perform actions specific to contentIndex being 2
+//     console.log("Content index is 2");
+//     document.getElementsByClassName("tooltip")[0].style.display = "block";
+// } else {
+//     console.log("Content index is not 2");
+//     document.getElementsByClassName("tooltip")[0].style.display = "none";
+// }
+
+
 async function initialize(){
     await loadScript();
     
@@ -79,6 +91,20 @@ async function initialize(){
     document.addEventListener("dragstart", dragStart);
     document.addEventListener("dragend", dragEnd);
     document.addEventListener("dragover", drag);
+
+    let isFirstDrag = true;
+
+    // Add an event listener for dragstart
+    document.addEventListener("dragend", function(event) {
+        if (isFirstDrag) {
+            // This is the first drag
+            isFirstDrag = false; // Set the flag to false for subsequent drags
+            // Perform actions for the first drag here
+            console.log("First drag detected!");
+            document.getElementsByClassName("swipe-tutorial-container")[0].style.display = "none";
+        }
+        
+    });
 
     // scroll touch controls
     document.addEventListener("wheel", wheelMove);
@@ -455,6 +481,7 @@ function loadContent(amount, idList){
     }
     totalPosts += amount;
     postHeight = $("#post-0")[0].clientHeight;
+
 }
 
 

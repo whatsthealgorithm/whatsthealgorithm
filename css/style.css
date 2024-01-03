@@ -228,6 +228,8 @@ body {
     z-index: 4;
 }
 
+
+
 .device-button{
     height: 20%;
     width: auto;
@@ -240,6 +242,46 @@ body {
 
 .button-clicked{
     animation: animateButtonClick 0.2s;
+}
+
+.swipe-tutorial-container {
+    display: flex;
+    flex-direction: column;
+    right: 32%;
+    top: 75%;
+    height: 30%;
+    justify-content: center;
+    position: absolute;
+    align-items: center;
+    z-index: 4;
+    /* height: 100vh; */
+    /* background-color: #f0f0f0; */
+    transition: opacity 1s ease;
+}
+
+.swipe-animation {
+    text-align: center;
+    animation: swipe-up 2s infinite;
+}
+
+.swipe-animation img {
+    width: 50px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.swipe-animation p {
+    font-size: 1.2em;
+    color: #333;
+}
+
+@keyframes swipe-up {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
 }
 
 #debug{
