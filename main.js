@@ -315,35 +315,7 @@ function onIntroInterestButtonClicked(e) {
     if (isOneOfEachTypeSelected) {
         document.getElementById('error-message').style.display = 'none';
         document.getElementById('click-detector').style.display = 'none';
-    }
-   
-    // document.getElementById('intro-button-container').addEventListener('click', function(e) {
-    //     if (this.disabled) {
-    //         document.getElementById('error-message').style.display = 'block';
-    //     }
-    // });
-    
-    // document.addEventListener('DOMContentLoaded', function() {
-    // document.getElementById('interest-finished').addEventListener('mousedown', function(e) {
-    //     console.log("in here!!!");
-    //     // var button = document.getElementById('interest-finished');
-    //     if (button.disabled) {
-    //         document.getElementById('error-message').style.display = 'block';
-    //     }
-    // });
-    // });
-    // if (isOneOfEachTypeSelected) {
-    //     console.log("im in there")
-    //     document.getElementById('error-message').style.display = 'none';
-    // }
-    // else {
-    //     console.log("im in here");
-    //     document.getElementById('interest-finished').addEventListener('click', function(e) {
-    //         if (this.disabled) {
-    //             document.getElementById('error-message').style.display = 'block';
-    //         }
-    //     });
-    // }
+    } 
 
     // Enable or disable the submit button
     document.getElementById("interest-finished").disabled = !isOneOfEachTypeSelected;
@@ -373,73 +345,6 @@ function checkIfOneOfEachTypeSelected() {
     return colorSelected && shapeSelected && speedSelected;
 }
 
-
-
-// /**
-//  * Click handler for interest buttons in the intro sequece 
-//  **/ 
-// function onIntroInterestButtonClicked(e){
-    
-//     var traitType;
-//     var colorCount =0; 
-//     var shapeCount =0; 
-//     var speedCount= 0;
-//     console.log(interestDict)
-//     if (!interestDict[e.target.innerHTML]){
-//         e.target.style.backgroundColor = "#1ad631";
-//         interestDict[e.target.innerHTML] = true;
-//         interestsPicked++;
-//         traitType = getTraitType(e.target.innerHTML); 
-//         console.log("hello world")
-//         console.log(traitType)
-//         console.log("bye world")
-//         if (traitType === "color"){
-//             // Allow button click for color trait
-//             colorCount++;
-//             console.log(colorCount)
-//             // Add your logic for handling the button click for color trait
-//         } else if (traitType === "shape"){
-//             // Allow button click for shape trait
-//             shapeCount++;
-//             console.log(shapeCount)
-//             // Add your logic for handling the button click for shape trait
-//         } else if (traitType === "speed"){
-//             // Allow button click for speed trait
-//             speedCount++;
-//             console.log(speedCount)
-//             // Add your logic for handling the button click for speed trait
-//         }
-//     }
-//     else{
-//         e.target.style.backgroundColor = "antiquewhite";
-//         interestDict[e.target.innerHTML] = false;
-//         interestsPicked--;
-//         traitType = getTraitType(e.target.innerHTML); 
-//         console.log("hello world")
-//         console.log(traitType)
-//         console.log("bye world")
-//         if (traitType === "color" && colorCount < 1){
-//             // Allow button click for color trait
-//             colorCount--;
-//             // Add your logic for handling the button click for color trait
-//         } else if (traitType === "shape" && shapeCount < 1){
-//             // Allow button click for shape trait
-//             shapeCount--;
-//             // Add your logic for handling the button click for shape trait
-//         } else if (traitType === "speed" && speedCount < 1){
-//             // Allow button click for speed trait
-//             speedCount--;
-//             // Add your logic for handling the button click for speed trait
-//         }
-//     }
-
-//     if (interestsPicked >= 3 && colorCount === 1 && shapeCount === 1 && speedCount === 1 ){
-//         $("#interest-finished")[0].disabled = false;
-//     }
-//     else{
-//         $("#interest-finished")[0].disabled = true;
-//     }
-// }
 
 /**
  * Click handler for interest buttons in the create-your-own algorithm section
@@ -478,12 +383,12 @@ function loadContent(amount, idList){
         contentIndex += isMessagePost ? 0 : 1;
         // If we just made a message post, still make sure we create the specified amount of content posts
         amount += isMessagePost ? 1 : 0;
+
     }
     totalPosts += amount;
     postHeight = $("#post-0")[0].clientHeight;
 
 }
-
 
 function createContentPost(index, contentId){
     var post = document.createElement("div");
@@ -715,7 +620,27 @@ function click(e){
 function tryNextPost(){
     if (currentPost + 1 < totalPosts && !waitingForMessage() && currentPost < maxPosts) {
         //update render here
+        var deviceButtons = document.getElementById('device-buttons');
+        
         currentPost++;
+        var tooltipElements = document.getElementsByClassName('tooltip');
+        var tooltip2Elements = document.getElementsByClassName('tooltiptext');
+        var tooltipAfterElement = document.querySelector('.tooltiptext::after');
+        if (currentPost == 1) {
+            console.log("in there")
+            tooltipElements[0].style.opacity = 1;
+            tooltip2Elements[0].style.opacity = 1;
+            deviceButtons.classList.add('not-hidden');
+        }
+        else if (currentPost ==2) {
+            deviceButtons.classList.remove('not-hidden');
+            tooltipElements[0].style.opacity = 0;    
+            tooltip2Elements[0].style.opacity = 0;
+        }
+        else{
+            tooltipElements[0].style.opacity = 0;    
+            tooltip2Elements[0].style.opacity = 0;
+        }
 
         // See if we need to load more posts
         if (currentPost + 1 >= totalPosts && totalPosts < maxPosts){

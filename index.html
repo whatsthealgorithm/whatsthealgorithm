@@ -115,11 +115,11 @@
   z-index: 1;
   top: -5px;
   right: 110%;
-  opacity: 0.8;
-  transition: opacity 1s ease;
+  opacity: 0;
+  transition: opacity 2s ease;
 }
 
-.tooltip .tooltiptext::after {
+/* .tooltip .tooltiptext::after {
   content: "";
   position: absolute;
   top: 50%;
@@ -128,8 +128,22 @@
   border-width: 10px;
   border-style: solid;
   border-color: transparent transparent transparent white;
-  opacity: 0.8;
-}
+  opacity: 1;
+  transition: opacity 2s ease;
+
+} */
+/* .custom-tooltip-style::after {
+content: "";
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  margin-top: -10px;
+  border-width: 10px;
+  border-style: solid;
+  border-color: transparent transparent transparent white;
+  opacity: 1;
+  transition: opacity 2s ease;
+} */
 
     </style>
 </head>
@@ -198,15 +212,17 @@
 
                 </div>
                 <img id="info-icon" src="images/bar-graph.png"\>
-                <div id="info-column"><div id="info"></div></div> 
+                <div id="info-column"><div id="info">
+
+
+                </div></div> 
                 <div id="device-screen"> 
                     <div id="device-buttons">
                         <img id="follow" class="device-button" src="images/follow.png"\>
-                        <div class="tooltip" style="display: none;">
+                        <div class="tooltip" >
                             <span class="tooltiptext" style="font-size: 70%;">Don't forget to press like, share, or bookmark!</span>
                           </div>                       
                            <img id="like" class="device-button" src="images/like.png"\>
-                        <img id="share" class="device-button" src="images/share.png"\>
                         <img id="share" class="device-button" src="images/share.png"\>
                         </div>
                         <div class="swipe-tutorial-container">
@@ -227,20 +243,37 @@
         }
     });
     document.addEventListener('DOMContentLoaded', function () {
-    var image = document.getElementById('follow');
+    var image1 = document.getElementById('follow');
+    var image2 = document.getElementById('like');
+    var image3 = document.getElementById('share');
     var tooltip = document.getElementsByClassName('tooltip')[0];
     var tooltiptext = document.getElementsByClassName('tooltiptext')[0];
+    var deviceButtons = document.getElementById('device-buttons');
 
-    image.addEventListener('click', function () {
-        // tooltip.style.display = 'none';
-        // tooltiptext.style.display = 'none';
+
+    image1.addEventListener('click', function () {
+        console.log("hi")
+        deviceButtons.classList.remove('not-hidden');
+        tooltip.style.opacity = 0;    
         tooltiptext.style.opacity = 0;
-    setTimeout(function() {
-            // tooltip.style.display = 'none';
-            // tooltiptext.style.display = 'none';
-            tooltiptext.style.opacity = 0;
-        }, 30000); // 30 seconds in milliseconds
+
     });
+    
+    image2.addEventListener('click', function () {
+        deviceButtons.classList.remove('not-hidden');
+        tooltip.style.opacity = 0;    
+        tooltiptext.style.opacity = 0;
+
+    });
+    image3.addEventListener('click', function () {
+        deviceButtons.classList.remove('not-hidden');
+        tooltip.style.opacity = 0;    
+        tooltiptext.style.opacity = 0;
+    });
+
+    setTimeout(function() {
+        tooltiptext[0].style.opacity = 0;
+    }, 30000); // 30 seconds in milliseconds
 });
     </script>
 
