@@ -1136,3 +1136,44 @@ function toggleInfoMenu(show){
         menuShowing = true;
     }
 }
+document.getElementById('click-detector').addEventListener('click', function() {
+    var button = document.getElementById('interest-finished');
+    if (button.disabled) {
+        document.getElementById('error-message').style.display = 'block';
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+var image1 = document.getElementById('follow');
+var image2 = document.getElementById('like');
+var image3 = document.getElementById('share');
+var tooltip = document.getElementsByClassName('tooltip')[0];
+var tooltiptext = document.getElementsByClassName('tooltiptext')[0];
+var deviceButtons = document.getElementById('device-buttons');
+var infoicon = document.getElementById('info-icon');
+var nudge = document.getElementsByClassName('nudge')[0];
+
+image1.addEventListener('click', function () {
+    console.log("hi")
+    deviceButtons.classList.remove('not-hidden');
+    tooltip.style.opacity = 0;    
+    tooltiptext.style.opacity = 0;
+
+});
+
+image2.addEventListener('click', function () {
+    deviceButtons.classList.remove('not-hidden');
+    tooltip.style.opacity = 0;    
+    tooltiptext.style.opacity = 0;
+
+});
+image3.addEventListener('click', function () {
+    deviceButtons.classList.remove('not-hidden');
+    tooltip.style.opacity = 0;    
+    tooltiptext.style.opacity = 0;
+});
+infoicon.addEventListener('click', function () {
+    nudge.style.display="none"
+    infoicon.classList.remove('not-hidden');    
+});
+});
