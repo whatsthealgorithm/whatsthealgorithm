@@ -626,8 +626,7 @@ function tryNextPost(){
         console.log("this is the current posts", currentPost)
         var tooltipElements = document.getElementsByClassName('tooltip');
         var tooltip2Elements = document.getElementsByClassName('tooltiptext');
-        var tooltipElements2 = document.getElementsByClassName('tooltip2');
-        var tooltip2Elements2 = document.getElementsByClassName('tooltiptext2');
+        var nudge = document.getElementsByClassName('nudge');
 
 
         var menuicon = document.getElementById('info-icon')
@@ -646,23 +645,16 @@ function tryNextPost(){
             tooltipElements[0].style.opacity = 0;    
             tooltip2Elements[0].style.opacity = 0;
         }
-        // if (currentPost == 18) {
-        //     console.log("menu should show now")
-        //     tooltipElements2[0].style.opacity = 1;
-        //     tooltip2Elements2[0].style.opacity = 1;
-        //     menuicon.classList.add('not-hidden');
-        // }
-        // else if (currentPost == 19) {
-        //     console.log("menu should go away now")
-        //     menuicon.classList.remove('not-hidden');
-        //     tooltipElements2[0].style.opacity = 0;    
-        //     tooltip2Elements2[0].style.opacity = 0;
-        // }
-        // else{
-        //     tooltipElements2[0].style.opacity = 0;    
-        //     tooltip2Elements2[0].style.opacity = 0;
-        // }
-
+        if (currentPost == 18) {
+            console.log("menu should show now")
+            nudge[0].style.display = "block";
+            menuicon.classList.add('not-hidden');
+        }
+        else if (currentPost == 19) {
+            console.log("menu should go away now")
+            menuicon.classList.remove('not-hidden');
+            nudge[0].style.display = "none";    
+        }
         // See if we need to load more posts
         if (currentPost + 1 >= totalPosts && totalPosts < maxPosts){
             var numPosts = Math.min(5, maxPosts - totalPosts);

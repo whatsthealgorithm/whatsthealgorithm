@@ -106,8 +106,9 @@
 .tooltip .tooltiptext {
   width: 500%;
   /* height: 20%; */
-  background-color: white;
+  background-color: #f0f0f0;
   color: black;
+  font-size: 0.8rem;
   text-align: center;
   border-radius: 6px;
   padding: 5px 0;
@@ -138,6 +139,23 @@
   right: 130%;
   opacity: 0;
   transition: opacity 2s ease;
+}
+
+.nudge {
+    display: flex;
+    flex-direction: column;
+    right: 21%;
+    top: 93%;
+    height: 4%;
+    width: 50%;
+    font-size: 0.8rem;
+    justify-content: center;
+    position: absolute;
+    align-items: center;
+    z-index: 4;
+    /* height: 100vh; */
+    background-color: #f0f0f0;
+    transition: opacity 1s ease;
 }
 
 
@@ -224,6 +242,9 @@
                           </div>    -->
                            <img id="share" class="device-button" src="images/share.png"\>
                         </div>    
+                        <div class="nudge" style="display: none;">
+                            <p>Click this icon to see the algorithm update!</p>
+                        </div>
                         <div class="swipe-tutorial-container">
                             <div id="swipe-animation" class="swipe-animation">
                                 <img src="swipe-up.png" alt="Swipe Up Icon">
