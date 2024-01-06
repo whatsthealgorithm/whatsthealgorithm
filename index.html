@@ -104,7 +104,7 @@
     }
 
 .tooltip .tooltiptext {
-  width: 570%;
+  width: 500%;
   /* height: 20%; */
   background-color: white;
   color: black;
@@ -114,36 +114,32 @@
   position: absolute;
   z-index: 1;
   top: -5px;
-  right: 110%;
+  right: 130%;
   opacity: 0;
   transition: opacity 2s ease;
 }
 
-/* .tooltip .tooltiptext::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 100%;
-  margin-top: -10px;
-  border-width: 10px;
-  border-style: solid;
-  border-color: transparent transparent transparent white;
-  opacity: 1;
-  transition: opacity 2s ease;
+.tooltip2 {
+  position: relative;
+  display: inline-block;
+    }
 
-} */
-/* .custom-tooltip-style::after {
-content: "";
+.tooltip2 .tooltiptext2 {
+  width: 500%;
+  /* height: 20%; */
+  background-color: white;
+  color: black;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
   position: absolute;
-  top: 50%;
-  left: 100%;
-  margin-top: -10px;
-  border-width: 10px;
-  border-style: solid;
-  border-color: transparent transparent transparent white;
-  opacity: 1;
+  z-index: 1;
+  top: -5px;
+  right: 130%;
+  opacity: 0;
   transition: opacity 2s ease;
-} */
+}
+
 
     </style>
 </head>
@@ -211,7 +207,7 @@ content: "";
                     </div>
 
                 </div>
-                <img id="info-icon" src="images/bar-graph.png"\>
+                <img id="info-icon" src="images/bar-graph.png">
                 <div id="info-column"><div id="info">
 
 
@@ -221,15 +217,19 @@ content: "";
                         <img id="follow" class="device-button" src="images/follow.png"\>
                         <div class="tooltip" >
                             <span class="tooltiptext" style="font-size: 70%;">Don't forget to press like, share, or bookmark!</span>
-                          </div>                       
+                          </div>                          
                            <img id="like" class="device-button" src="images/like.png"\>
-                        <img id="share" class="device-button" src="images/share.png"\>
-                        </div>
+                            <!-- <div class="tooltip">
+                            <span class="tooltiptext" style="font-size: 70%;">Check out this menu to see how the algorithm is changing!</span>
+                          </div>    -->
+                           <img id="share" class="device-button" src="images/share.png"\>
+                        </div>    
                         <div class="swipe-tutorial-container">
                             <div id="swipe-animation" class="swipe-animation">
                                 <img src="swipe-up.png" alt="Swipe Up Icon">
-                                <p style="color: grey">swipe up</p>
+                                <!-- <p style="color: grey;"">swipe up</p> -->
                             </div>
+    
                     </div>
                 </div>
             </div>
@@ -270,10 +270,6 @@ content: "";
         tooltip.style.opacity = 0;    
         tooltiptext.style.opacity = 0;
     });
-
-    setTimeout(function() {
-        tooltiptext[0].style.opacity = 0;
-    }, 30000); // 30 seconds in milliseconds
 });
     </script>
 

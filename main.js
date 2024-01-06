@@ -623,9 +623,14 @@ function tryNextPost(){
         var deviceButtons = document.getElementById('device-buttons');
         
         currentPost++;
+        console.log("this is the current posts", currentPost)
         var tooltipElements = document.getElementsByClassName('tooltip');
         var tooltip2Elements = document.getElementsByClassName('tooltiptext');
-        var tooltipAfterElement = document.querySelector('.tooltiptext::after');
+        var tooltipElements2 = document.getElementsByClassName('tooltip2');
+        var tooltip2Elements2 = document.getElementsByClassName('tooltiptext2');
+
+
+        var menuicon = document.getElementById('info-icon')
         if (currentPost == 1) {
             console.log("in there")
             tooltipElements[0].style.opacity = 1;
@@ -641,6 +646,22 @@ function tryNextPost(){
             tooltipElements[0].style.opacity = 0;    
             tooltip2Elements[0].style.opacity = 0;
         }
+        // if (currentPost == 18) {
+        //     console.log("menu should show now")
+        //     tooltipElements2[0].style.opacity = 1;
+        //     tooltip2Elements2[0].style.opacity = 1;
+        //     menuicon.classList.add('not-hidden');
+        // }
+        // else if (currentPost == 19) {
+        //     console.log("menu should go away now")
+        //     menuicon.classList.remove('not-hidden');
+        //     tooltipElements2[0].style.opacity = 0;    
+        //     tooltip2Elements2[0].style.opacity = 0;
+        // }
+        // else{
+        //     tooltipElements2[0].style.opacity = 0;    
+        //     tooltip2Elements2[0].style.opacity = 0;
+        // }
 
         // See if we need to load more posts
         if (currentPost + 1 >= totalPosts && totalPosts < maxPosts){

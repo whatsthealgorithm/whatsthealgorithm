@@ -260,7 +260,7 @@ body {
 .swipe-tutorial-container {
     display: flex;
     flex-direction: column;
-    right: 32%;
+    right: 38%;
     top: 75%;
     height: 30%;
     justify-content: center;
@@ -278,9 +278,10 @@ body {
 }
 
 .swipe-animation img {
-    width: 50px;
+    width: 70px;
     height: auto;
     margin-bottom: 10px;
+    filter: brightness(0) saturate(100%) invert(25%) sepia(0%) saturate(0%) hue-rotate(158deg) brightness(90%) contrast(88%);
 }
 
 .swipe-animation p {
