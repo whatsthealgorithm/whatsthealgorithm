@@ -78,8 +78,9 @@
         },
         {
             "index": "25",
-            "title": "<span class='smaller-title'>Thank you!</span>",
-            "body": "<span class='smaller-text'>We hope that providing some transparency on how we're interpreting your interactions and what data we collected can help you engage with our app with greater control. <br><br>Some field experts think users like you should have even greater choice over how the algorithm recommends content, so we're experimenting with that as well. <br><br>Here's a prototype for some features where you can customize your experience. The first is to get to choose what type of content or interactions your feed prioritizes.</span>",
+            "trigger": "hide-menu",
+            "title": "<span class='smaller-title'>New Feature</span>",
+            "body": "<span class='smaller-text'>We hope that providing some transparency on how we're interpreting your interactions and what data we collected can help you engage with our app with greater control. <br><br> We're experimenting with a new feature where you can select from a number of algorithms to use in our app. <br><br>Here's a sneak peak of some examples of what these algorithms can look like.</span>",
             "buttons": ["Explore"],
             "buttonTriggers": ["continue"]
         },

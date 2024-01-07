@@ -971,6 +971,10 @@ function processTrigger(trigger){
             createEl.remove();
         });
     }
+    else if (trigger === "hide-menu"){
+        menuButton.style.display = "none";
+
+    }
 }
 
 function onDeviceButtonClicked(e){

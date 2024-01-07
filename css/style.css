@@ -691,9 +691,11 @@ transition: opacity 2s ease;
 display: flex;
 flex-direction: column;
 right: 21%;
-top: 93%;
+top: 92%;
+border-radius: 6px;
 height: 4%;
 width: 50%;
+padding: 2%;
 font-size: 0.8rem;
 justify-content: center;
 position: absolute;
@@ -701,7 +703,7 @@ align-items: center;
 z-index: 4;
 /* height: 100vh; */
 background-color: #f0f0f0;
-transition: opacity 1s ease;
+transition: opacity 2s ease;
 }
 
 /* desktop */
