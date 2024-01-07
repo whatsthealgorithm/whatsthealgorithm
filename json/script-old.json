@@ -1,0 +1,112 @@
+{
+    "script": [
+        {
+            "index": "6", 
+            "title": "Good work!",
+            "body": "We're adjusting our recommendations based on your interactions. Don't forget to use the like, share, and bookmark buttons to give the algorithm a signal of what to prioritize.",
+            "buttons": ["Okay"],
+            "buttonTriggers":  ["continue"]
+        },
+
+
+        {
+            "index": "12",
+            "title": "Feedback",
+            "body": "Is this content matching your preferences?",
+            "buttons": ["Yes", "No", "Sometimes"],
+            "buttonTriggers": ["content-matches", "content-doesnt-match", "content-sometimes-matches"]
+        },
+
+
+        {
+            "trigger": "content-matches",
+            "title": "Great!",
+            "body": "This is because we've been learning from your interactions with content. Here are the preferences we recorded for you: ",
+            "buttons": ["See Data"],
+            "buttonTriggers": ["show-preferences"]
+        },
+
+        {
+            "trigger": "content-doesnt-match",
+            "title": "Got it.",
+            "body": "Your interactions may not represent what your preferences really are. Here's what we think your preferences are, which we're basing our recommendations on: ",
+            "buttons": ["See Data"],
+            "buttonTriggers": ["show-preferences"]
+        },
+
+        {
+            "trigger": "content-sometimes-matches",
+            "title": "Got it.",
+            "body": "We're trying to both adapt to your past preferences and introduce you to new content, but we might not be getting the balance right. We'll show you what we know about you: ",
+            "buttons": ["See Data"],
+            "buttonTriggers": ["show-preferences"]
+        },
+
+
+        {
+            "trigger": "show-preferences",
+            "dataId": "preferences-template",
+            "body": "While you've been clicking those buttons, we've crafted a profile of you based on those actions.",
+            "buttons": ["View"],
+            "buttonTriggers": ["show-assumptions"]
+        },
+        {
+            "trigger": "show-assumptions",
+            "dataId": "assumptions-template",
+            "buttons": ["Done"],
+            "buttonTriggers": ["feedback-needed"]
+        },
+        {
+            "trigger": "feedback-needed",
+            "title": "Feedback",
+            "body": "Are these assumptions accurate?",
+            "buttons": ["Yes", "No", "Some of them"],
+            "buttonTriggers": ["preferences-match", "preferences-dont-match", "preferences-dont-match"]
+        },
+        {
+            "trigger": "preferences-match",
+            "title": "Great!",
+            "body": "We're glad our measurements captured the right idea. <br> Here's how we've been weighing your interactions; knowing this can help you more intentionally customize your feed: ",
+            "buttons": ["See Data"],
+            "buttonTriggers": ["show-weightings"]
+        },
+        {
+            "trigger": "preferences-dont-match",
+            "title": "Got it.",
+            "body": "There can be a mismatch between the signals we pick up on and what you intend. <br> Here's how we've been weighing your interactions; knowing this can help you more intentionally customize your feed: ",
+            "buttons": ["See Data"],
+            "buttonTriggers": ["unlock-menu"]
+        },
+        {
+            "trigger": "show-weightings",
+            "dataId": "weightings-template",
+            "body": "You can review how your data is changing by clicking the icon on the lower left as you continue to scroll.",
+            "buttons": ["Show me more!"],
+            "buttonTriggers": ["unlock-menu"]
+        },
+        {
+            "index": "25",
+            "title": "<span class='smaller-title'>Thank you!</span>",
+            "body": "<span class='smaller-text'>We hope that providing some transparency on how we're interpreting your interactions and what data we collected can help you engage with our app with greater control. <br><br>Some field experts think users like you should have even greater choice over how the algorithm recommends content, so we're experimenting with that as well. <br><br>Here's a prototype for some features where you can customize your experience. The first is to get to choose what type of content or interactions your feed prioritizes.</span>",
+            "buttons": ["Explore"],
+            "buttonTriggers": ["continue"]
+        },
+        {
+            "index": "26",
+            "dataId": "algorithm-select-template"
+        },
+        {
+            "index": "27",
+            "dataId": "algorithm-create-template",
+            "buttons": ["Done"],
+            "buttonTriggers": ["create-my-algorithm"]
+        },
+        {
+            "index": "28",
+            "dataId": "algorithm-image-template",
+            "body": "Here's your algorithm! Save and share it with others.",
+            "buttons": ["Share"],
+            "buttonTriggers": ["save-algorithm"]
+        }
+    ]
+}

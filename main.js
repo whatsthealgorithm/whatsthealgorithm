@@ -198,6 +198,7 @@ function loadScript(){
                 scriptByTrigger[s.trigger] = s;
             }
         }
+        console.log(scriptByIndex);
     });
 }
 
