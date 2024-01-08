@@ -40,6 +40,9 @@ var simulatedWheelPos = 0;
 
 var interestsPicked = 0;
 
+const deviceIconFilterOn = 'drop-shadow(0 5px 10px black) brightness(100%)'
+const deviceIconFilterOff = 'drop-shadow(0 5px 10px black) brightness(0%)'
+
 import * as recSys from "recSys";
 import * as canvas from "html2canvas";
 
@@ -986,16 +989,16 @@ function onDeviceButtonClicked(e){
         if (!posts[currentPost].isFollowed){
             buttonCounts.follows++;
             $('#follow').css({
-                '-webkit-filter': 'invert(100%)',
-                'filter': 'invert(100%)'
+                '-webkit-filter': deviceIconFilterOn,
+                'filter': deviceIconFilterOn
             });
             recSys.onContentEngagement(posts[currentPost].id, "follow");
         }
         else{
             buttonCounts.follows--;
             $('#follow').css({
-                '-webkit-filter': 'none',
-                'filter': 'none'
+                '-webkit-filter': deviceIconFilterOff,
+                'filter': deviceIconFilterOff
             });
             recSys.onContentDisengagement(posts[currentPost].id, "follow");
         }
@@ -1006,16 +1009,16 @@ function onDeviceButtonClicked(e){
         if (!posts[currentPost].isLiked){
             buttonCounts.likes++;
             $('#like').css({
-                '-webkit-filter': 'invert(100%)',
-                'filter': 'invert(100%)'
+                '-webkit-filter': deviceIconFilterOn,
+                'filter': deviceIconFilterOn
             });
             recSys.onContentEngagement(posts[currentPost].id, "like");
         }
         else{
             buttonCounts.likes--;
             $('#like').css({
-                '-webkit-filter': 'none',
-                'filter': 'none'
+                '-webkit-filter': deviceIconFilterOff,
+                'filter': deviceIconFilterOff
             });
             recSys.onContentDisengagement(posts[currentPost].id, "like");
         }
@@ -1026,16 +1029,16 @@ function onDeviceButtonClicked(e){
         if (!posts[currentPost].isShared){
             buttonCounts.shares++;
             $('#share').css({
-                '-webkit-filter': 'invert(100%)',
-                'filter': 'invert(100%)'
+                '-webkit-filter': deviceIconFilterOn,
+                'filter': deviceIconFilterOn
             });
             recSys.onContentEngagement(posts[currentPost].id, "share");
         }
         else{
             buttonCounts.shares--;
             $('#share').css({
-                '-webkit-filter': 'none',
-                'filter': 'none'
+                '-webkit-filter': deviceIconFilterOff,
+                'filter': deviceIconFilterOff
             });
             recSys.onContentDisengagement(posts[currentPost].id, "share");
         }
@@ -1055,40 +1058,40 @@ function onDeviceButtonClicked(e){
 function setButtonInteractions(){
     if (!posts[currentPost].isFollowed){
         $('#follow').css({
-            '-webkit-filter': 'none',
-            'filter': 'none'
+            '-webkit-filter': deviceIconFilterOff,
+            'filter': deviceIconFilterOff
         });
     }
     else{
         $('#follow').css({
-            '-webkit-filter': 'invert(100%)',
-            'filter': 'invert(100%)'
+            '-webkit-filter': deviceIconFilterOn,
+            'filter': deviceIconFilterOn
         });
     }
     
     if (!posts[currentPost].isLiked){
         $('#like').css({
-            '-webkit-filter': 'none',
-            'filter': 'none'
+            '-webkit-filter': deviceIconFilterOff,
+            'filter': deviceIconFilterOff
         });
     }
     else{
         $('#like').css({
-            '-webkit-filter': 'invert(100%)',
-            'filter': 'invert(100%)'
+            '-webkit-filter': deviceIconFilterOn,
+            'filter': deviceIconFilterOn
         });
     }
 
     if (!posts[currentPost].isShared){
         $('#share').css({
-            '-webkit-filter': 'none',
-            'filter': 'none'
+            '-webkit-filter': deviceIconFilterOff,
+            'filter': deviceIconFilterOff
         });
     }
     else{
         $('#share').css({
-            '-webkit-filter': 'invert(100%)',
-            'filter': 'invert(100%)'
+            '-webkit-filter': deviceIconFilterOn,
+            'filter': deviceIconFilterOn
         });
     }
 }

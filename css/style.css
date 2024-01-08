@@ -83,9 +83,6 @@ body {
     width: 65%;
 
     border-radius: 30px;
-
-
-
 }
 
 .bar-fill{
@@ -243,6 +240,7 @@ body {
     height: 20%;
     width: auto;
     padding-bottom: 70%;
+    filter: drop-shadow(0 5px 10px white) brightness(0%);
 }
 
 .device-button:hover {
@@ -415,49 +413,47 @@ gap: 32px*/
     background-color: var(--bg-color);
     padding: 3% 3%;
     margin: 4% 4% 0 0;
-    border-radius: 5,%;
+    border-radius: 5%;
     font-size: 100%;
 
-padding: 12px, 42px, 12px, 42px;
-border-radius: 1000px;
+    padding: 12px, 42px, 12px, 42px;
+    border-radius: 1000px;
 
-border-color: black;
-gap: 10px;
+    border-color: black;
+    gap: 10px;
 
-border: 1px solid #000000;
+    border: 1px solid #000000;
 
-width: 29%;
+    width: 29%;
 
-box-shadow: 0px 8px 0px 0px #000000;
-margin-bottom: 1%;
+    box-shadow: 0px 8px 0px 0px #000000;
+    margin-bottom: 1%;
 
 
-/*width: 40%;*/
-
+    /*width: 40%;*/
 }
 
 .interest-selection2{
     background-color: var(--bg-color);
     padding: 3% 3%;
     margin: 4% 4% 0 0;
-    border-radius: 5,%;
+    border-radius: 5%;
     font-size: 100%;
 
-padding: 12px, 42px, 12px, 42px;
-border-radius: 1000px;
+    padding: 12px, 42px, 12px, 42px;
+    border-radius: 1000px;
 
-border-color: black;
-gap: 10px;
+    border-color: black;
+    gap: 10px;
 
-border: 1px solid #000000;
+    border: 1px solid #000000;
 
-width: 29%;
+    width: 29%;
 
-margin-bottom: 1%;
+    margin-bottom: 1%;
 
 
-/*width: 40%;*/
-
+    /*width: 40%;*/
 }
 
 .interest-selection2:hover {
@@ -743,7 +739,7 @@ transition: opacity 2s ease;
       transform: scale(1);
     }
     50% {
-      transform: scale(1.2);
+      transform: scale(1.35);
     }
     0% {
         transform: scale(1);
