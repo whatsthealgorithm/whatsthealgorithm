@@ -95,11 +95,7 @@ body {
 }
 
 #device{
-    aspect-ratio: 18 / 39;  /* Based off of iPhone device dimension, 19.5:9 */
     position: relative;
-    width: auto;
-    border: 7px solid black;
-    border-radius: 45px;
     overflow: hidden;
     max-width: 414px;
     max-height: 881px;
@@ -721,6 +717,10 @@ transition: opacity 2s ease;
 
     #device{
         height: 90%;
+        width: auto;
+        aspect-ratio: 18 / 39;  /* Based off of iPhone device dimension, 19.5:9 */
+        border: 7px solid black;
+        border-radius: 45px;
     }
 }
 
@@ -733,7 +733,8 @@ transition: opacity 2s ease;
     }
 
     #device{
-        height: 97%;
+        height: 100%;
+        width: 100%;
     }
 }
 
