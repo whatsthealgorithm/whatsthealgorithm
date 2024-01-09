@@ -235,7 +235,7 @@ function startIntro(){
         for (var i = 0; i < traits[traitName].length; i++){
             var trait = traits[traitName][i];
             var interestButton = document.createElement("button");
-            interestButton.className = "interest-selection";
+            interestButton.className = "interest-selection trait-" + traitName;
             interestButton.innerHTML = trait;
             interestButton.onclick = onIntroInterestButtonClicked;
             buttonContainer.appendChild(interestButton);
@@ -815,7 +815,7 @@ function setAlgorithmCreate(div){
         for (var i = 0; i < traits[traitName].length; i++){
             var trait = traits[traitName][i];
             var interestButton = document.createElement("button");
-            interestButton.className = "interest-selection";
+            interestButton.className = "interest-selection trait-" + traitName;
             interestButton.innerHTML = trait;
             interestButton.onclick = onSelectInterestButtonClicked;
             buttonContainer.appendChild(interestButton);

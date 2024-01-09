@@ -213,15 +213,17 @@ body {
 #device-buttons{
     display: flex;
     flex-direction: column;
-    right: 5%;
+    right: 15px;
     top: 35%;
     height: 30%;
     position: absolute;
     transition: opacity 0.1s ease-in-out;
     z-index: 4;
+    justify-content: center;
+    padding: 0 7px;
 }
 .not-hidden {
-    border-radius: 50%; 
+    border-radius: 30px; 
     /* padding: 10px;  */
     box-shadow: 0 0 15px 10px rgba(0, 0, 0, 0.7); 
     animation: border-pulse 0.5s infinite alternate; 
@@ -235,6 +237,9 @@ body {
     }
 }
 
+#share{
+    padding-bottom: 0%;
+}
 
 .device-button{
     height: 20%;
@@ -349,7 +354,6 @@ background-color: var(--main-blue);
 
 .intro-paragraph{
     font-size: 100%;
-    margin-bottom: 7%;
     font-family: 'JetBrains Mono', monospace;
     margin-left: 0%;
     letter-spacing: 0em;
@@ -410,61 +414,52 @@ gap: 32px*/
 .interest-selection{
     background-color: var(--bg-color);
     padding: 3% 3%;
-    margin: 4% 4% 0 0;
+    margin: 10% 4% 1% 0;
     border-radius: 5%;
     font-size: 100%;
-
-    padding: 12px, 42px, 12px, 42px;
     border-radius: 1000px;
-
     border-color: black;
     gap: 10px;
-
     border: 1px solid #000000;
-
     width: 29%;
-
     box-shadow: 0px 8px 0px 0px #000000;
-    margin-bottom: 1%;
-
-
-    /*width: 40%;*/
 }
 
 .interest-selection2{
     background-color: var(--bg-color);
     padding: 3% 3%;
-    margin: 4% 4% 0 0;
+    margin: 4% 4% 1% 0;
     border-radius: 5%;
     font-size: 100%;
-
-    padding: 12px, 42px, 12px, 42px;
     border-radius: 1000px;
-
     border-color: black;
     gap: 10px;
-
     border: 1px solid #000000;
-
     width: 29%;
-
-    margin-bottom: 1%;
-
-
-    /*width: 40%;*/
 }
 
 .interest-selection2:hover {
     background-color: var(--main-green);
 }
 
-
 .interest-selection:hover{
     background-color: var(--main-green);
 }
 
 #intro-button-container{
-    margin-bottom: 15%;
+    margin-bottom: 5%;
+}
+
+.trait-colors{
+    background: #b1bbdc;
+}
+
+.trait-shapes{
+    background: #a7a0bc;
+}
+
+.trait-speeds{
+    background: #868195;
 }
 
 #intro-loading-ring{
@@ -556,7 +551,7 @@ gap: 32px*/
 }
 
 .select-priorities{
-    margin: 0 3% 10% 3%;
+    margin: 0 3% 3% 3%;
 }
 
 .alg-image{
