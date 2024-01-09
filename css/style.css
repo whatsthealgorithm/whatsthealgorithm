@@ -240,7 +240,7 @@ body {
     height: 20%;
     width: auto;
     padding-bottom: 70%;
-    filter: drop-shadow(0 5px 10px black) brightness(500%);
+    filter: drop-shadow(0 5px 10px black) brightness(1000%);
 }
 
 .device-button:hover {
@@ -328,9 +328,9 @@ body {
 #intro-2 {
 background-color: var(--main-blue);
 }
+
 .intro-title{
     font-size: 380%;
-    margin-top: 70%;
     margin-bottom: 5%;
     margin-left: 0%;
     font-family: 'JetBrains Mono', monospace;
@@ -339,7 +339,6 @@ background-color: var(--main-blue);
 
 .welcome-title{
     font-size: 200%;
-    margin-top: 20%;
     font-weight: 100;
     margin-bottom: 5%;
     margin-left: 0%;
@@ -355,12 +354,11 @@ background-color: var(--main-blue);
     margin-left: 0%;
     letter-spacing: 0em;
     width: 100%;
-/*font-size: 20px;*/
-font-weight: 100 !important;
-line-height: 25px;
-letter-spacing: 0em;
-text-align: left;
-
+    /*font-size: 20px;*/
+    font-weight: 100 !important;
+    line-height: 25px;
+    letter-spacing: 0em;
+    text-align: left;
 }
 
 .loading {
@@ -369,12 +367,12 @@ text-align: left;
     font-family: 'JetBrains Mono', monospace;
     letter-spacing: 0em;
     width: 100%;
-/*font-size: 20px;*/
-font-weight: 100 !important;
-line-height: 30px;
-letter-spacing: 0em;
-text-align: center;
-color: white;
+    /*font-size: 20px;*/
+    font-weight: 100 !important;
+    line-height: 30px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: white;
 }
 
 .intro-button{
@@ -718,6 +716,18 @@ transition: opacity 2s ease;
         border: 7px solid black;
         border-radius: 45px;
     }
+
+    .intro-title{
+        margin-top: 70%;
+    }
+
+    .welcome-title{
+        margin-top: 20%;
+    }
+
+    #top-intro-pararaph{
+        margin-top: 40%;
+    }
 }
 
 /* mobile */
@@ -731,6 +741,18 @@ transition: opacity 2s ease;
     #device{
         height: 100%;
         width: 100%;
+    }
+
+    .intro-title{
+        margin-top: 50%;
+    }
+
+    .welcome-title{
+        margin-top: 0%;
+    }
+
+    #top-intro-pararaph{
+        margin-top: 20%;
     }
 }
 
