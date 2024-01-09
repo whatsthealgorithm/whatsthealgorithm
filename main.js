@@ -41,7 +41,7 @@ var simulatedWheelPos = 0;
 var interestsPicked = 0;
 
 const deviceIconFilterOn = 'drop-shadow(0 5px 10px black) brightness(100%)'
-const deviceIconFilterOff = 'drop-shadow(0 5px 10px black) brightness(1000%)'
+const deviceIconFilterOff = 'drop-shadow(0 5px 10px black) brightness(2000%)'
 
 import * as recSys from "recSys";
 import * as canvas from "html2canvas";
@@ -507,9 +507,8 @@ function dragStart(e){
     var img = new Image();
     img.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=';
     e.dataTransfer.setDragImage(img, 0, 0);
-
     e.dataTransfer.clearData();
-    e.dataTransfer.setData('text/plain', 'anything');
+    e.dataTransfer.setData('text/plain', '');
 }
 
 function drag(e) {

@@ -245,7 +245,7 @@ body {
     height: 20%;
     width: auto;
     padding-bottom: 70%;
-    filter: drop-shadow(0 5px 10px black) brightness(1000%);
+    filter: drop-shadow(0 5px 10px black) brightness(2000%);
 }
 
 .device-button:hover {
