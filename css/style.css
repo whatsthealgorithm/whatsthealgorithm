@@ -240,7 +240,7 @@ body {
     height: 20%;
     width: auto;
     padding-bottom: 70%;
-    filter: drop-shadow(0 5px 10px white) brightness(0%);
+    filter: drop-shadow(0 5px 10px black) brightness(500%);
 }
 
 .device-button:hover {
@@ -316,7 +316,7 @@ body {
 .intro-page{
     position: absolute;
     padding: 10vh 5%;
-    height: 80vh;
+    height: 80dvh;
     width: 90%;
     transition: opacity 0.1s ease-in-out;
     background-color: var(--bg-color);

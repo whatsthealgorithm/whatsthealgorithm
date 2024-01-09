@@ -41,7 +41,7 @@ var simulatedWheelPos = 0;
 var interestsPicked = 0;
 
 const deviceIconFilterOn = 'drop-shadow(0 5px 10px black) brightness(100%)'
-const deviceIconFilterOff = 'drop-shadow(0 5px 10px black) brightness(0%)'
+const deviceIconFilterOff = 'drop-shadow(0 5px 10px black) brightness(500%)'
 
 import * as recSys from "recSys";
 import * as canvas from "html2canvas";
