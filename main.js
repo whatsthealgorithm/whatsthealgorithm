@@ -95,10 +95,6 @@ async function initialize(){
     document.addEventListener("dragend", dragEnd);
     document.addEventListener("dragover", drag);
 
-    document.getElementById("title-div").addEventListener("click", ()=>{
-        window.location.href = '/index.html';
-    });
-
     let isFirstDrag = true;
 
     // Add an event listener for dragstart
