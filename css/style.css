@@ -1,10 +1,62 @@
-
-
 :root {
   --bg-color: #E6E6DE;
   --main-green: #20E864;
   --main-blue: #2251F8;
   --main-red: #EE4813;
+}
+
+a{
+    text-decoration: none;
+}
+
+.titles{
+    font-family: "Staatliches", sans-serif;
+    color: white;
+}
+
+.subtitles{
+    font-family: "Staatliches", sans-serif;
+    display: flex;
+    justify-content: center;
+    font-size: 200%;
+}
+
+.subtitle{
+    padding: 1vh 5%;
+    color: #b5e0ff;
+}
+
+.subtitle:hover{
+    padding: 1vh 5%;
+    color: #8cbadb;
+}
+
+#title-div{
+    position: absolute;
+    z-index: 10;
+}
+
+.info-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.info-body{
+    padding-top: 1vh;
+    font-family: Helvetica Neue, Arial, sans-serif;
+    color: white;
+    font-size: 120%;
+    line-height: 1.4em;
+}
+
+#get-started-title{
+    margin-top: 5vh;
+    margin-bottom: 3vh;
+}
+
+#get-started-title:hover{
+    color:rgba(137, 137, 137, 1)
 }
 
 body {
@@ -91,7 +143,7 @@ body {
     border-radius: 30px;
 }
 
-#device{
+.device{
     position: relative;
     overflow: hidden;
     max-width: 414px;
@@ -704,7 +756,7 @@ transition: opacity 2s ease;
         justify-content: center;
     }
 
-    #device{
+    .device{
         height: 90%;
         width: auto;
         aspect-ratio: 18 / 39;  /* Based off of iPhone device dimension, 19.5:9 */
@@ -723,6 +775,28 @@ transition: opacity 2s ease;
     #top-intro-pararaph{
         margin-top: 40%;
     }
+
+    .titles{
+        font-size: 400%;
+    }
+
+    #title-div{
+        padding: 10px 20px;
+    }   
+    
+    .info-body{
+        width: 40%;
+    }
+
+    .info-content{
+        padding-top: 10vh;
+        height: 150vh;
+    }
+
+    #landing-device{
+        filter: drop-shadow(0px 0px 10px #ffffff);
+        cursor: pointer;
+    }
 }
 
 /* mobile */
@@ -733,7 +807,7 @@ transition: opacity 2s ease;
         justify-content: center;
     }
 
-    #device{
+    .device{
         height: 100%;
         width: 100%;
     }
@@ -748,6 +822,42 @@ transition: opacity 2s ease;
 
     #top-intro-pararaph{
         margin-top: 20%;
+    }
+
+    .titles{
+        font-size: 350%;
+        width: 100%;
+        text-align: center;
+        z-index: 10;
+    }
+
+    #title-div{
+        font-size: 240%;
+        padding-top: 15px;
+        text-shadow: 2px 2px 3px #282828;
+    }
+    
+    .info-body{
+        width: 85%;
+    }    
+
+    .info-content{
+        padding-top: 6vh;
+    }
+
+    #landing-body{
+        overflow: scroll;
+    }
+
+    #landing-device{
+        filter: drop-shadow(0px 0px 10px #ffffff);
+        width: 80%;
+        height: auto;
+        aspect-ratio: 18 / 18;  /* Based off of iPhone device dimension, 19.5:9 */
+        border: 7px solid black;
+        border-bottom-style: none;
+        border-top-left-radius: 45px;
+        border-top-right-radius: 45px;
     }
 }
 

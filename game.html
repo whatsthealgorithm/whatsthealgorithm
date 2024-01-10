@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-161931112-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-161931112-1');
+    </script>
+
+    <title>The Algorithm</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script async src="https://ga.jspm.io/npm:es-module-shims@1.8.0/dist/es-module-shims.js"></script>
+    
+    <script type="importmap">
+        {
+          "imports": {
+            "recSys": "./modules/recSys.js",
+            "html2canvas": "./modules/html2canvas.js"
+          }
+        }
+     </script>
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script> -->
+
+    <!-- Andy is getting on a plane and so made local versions of p5 and jquery-->
+    <script src="offline/p5_v1-4-0.js"></script>
+    <script src="offline/jquery_v1-11-1.js" type="text/javascript"></script>
+
+
+    <script type="module" src="main.js"></script>
+    <script src="p5/testTemplate.js"></script>
+    <script src="p5/crimsonRoom.js"></script>
+    <script src="p5/leParc.js"></script>
+    <script src="p5/emojiSpiral.js"></script>
+    <script src="p5/emojiGrid.js"></script>
+    <script src="p5/emojiBounce.js"></script>
+    <script src="p5/emojiMandala.js"></script>
+    <script src="p5/vaporwave.js"></script>
+    <script src="p5/reactorChamber.js"></script>
+    <script src="p5/cubeStructure.js"></script>
+    <script src="p5/tunnel.js"></script>
+    <script src="p5/textSwipe.js"></script>
+    <script src="p5/textPop.js"></script>
+    <script src="p5/textSpotlight.js"></script>
+    <script src="p5/textBounce.js"></script>
+    <script src="p5/threeChambers.js"></script>
+    <script src="p5/threeGrids.js"></script>
+
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/contentStyle.css">
+    <link href='https://fonts.googleapis.com/css?family=JetBrains Mono' rel='stylesheet'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Staatliches">
+</head>
+
+<body>
+    <div id="title-div" class="titles">What's the Algorithm?</div>
+    <div id="debug">Follows: <span id="debug-follows"> 0 </span> <br> 
+                    Likes: <span id="debug-likes"> 0 </span><br> 
+                    Shares: <span id="debug-shares"> 0 </span><br> 
+                    <div id="debug-content"></div>
+                    <div id="debug-post-count"></div>
+                    <div id="debug-traits"></div>
+    </div>
+    <div id="content">
+        <div class="column" id="device-column">
+
+            <div class="device" id="device">
+                <div id="intro">
+                    <!-- <div id="intro-00" class="intro-page" style="display:none; background-color: #2251F8;">
+                        <div class="intro-title" style="font-size: 4rem; margin-top: 4%; color: #E6E6DE; font-style: bold; margin-left: 5%;">What's The Algo<br>rithm?</div>
+                        <button class="intro-button">Begin</button>
+                    </div> -->
+
+                    <div id="intro-0" class="intro-page" style="display:none">
+                        <div class="intro-title">Welcome!</div>
+                        <div class="intro-paragraph">You are helping test our social media app to inform how it's developed. </div><br>
+                        <div class="intro-paragraph">We'll explain what you need to know about the app's technology as you go.</div>
+                        <!-- <div class="intro-paragraph">Click below to start.</div> -->
+                        <button class="intro-button">Start</button>
+                    </div>
+
+                    <div id="intro-1" class="intro-page" style="display:none">
+                        
+                        <div class="welcome-title">Getting <br>started</div>
+                        <div style="width: 100%; margin-bottom: 5%; border: 1px; border: 1px solid #000000;"></div>
+                        <div class="intro-paragraph">Select your preferred color, shape, and speed of content so we can get you started with some recommendations.</div>                        
+                        <div id="intro-button-container"></div>                  
+                        <!-- <div id="lujain">  -->
+                        <div class="button-container">  
+                            <span id="error-message" style="color: red; display: none; font-size: 80%; position: absolute; margin-bottom: 10%;">Select one of each trait before continuing.</span>
+                    
+                        <div id="click-detector" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0;"></div>
+                        <button class="intro-button" id="interest-finished" disabled>Done</button>
+                    </div>
+
+                        <!-- </div> -->
+
+    
+                    </div>
+
+                    <div id="intro-2" class="intro-page" style="display:none">
+                        <div id="intro-loading-ring">
+                            <div class="ring" id="ring1"></div>
+                            <div class="ring" id="ring2"></div>
+                            <div class="ring" id="ring3"></div>
+                            <div class="ring" id="ring4"></div>
+                         </div>
+                        <div class="loading">Gathering more information about you...</div>
+                    </div>
+
+                    <div id="intro-3" class="intro-page" style="display:none">
+                        <div class="intro-paragraph" id="top-intro-paragraph">We found too many posts that match your interests and what we think you'd like to see.</div><br>
+                        <div class="intro-paragraph">We will start by showing you a random selection. We built a software program, "the algorithm", which will monitor how you interact with this content.</div><br>
+                        <div class="intro-paragraph">Make sure to like, share, and bookmark content you're intersted in, so the program can recommend new content accordingly.</div>
+                        <button class="intro-button">See content</button>
+                    </div>
+
+                </div>
+                <img id="info-icon" src="images/bar-graph.png">
+                <div id="info-column"><div id="info">
+
+
+                </div></div> 
+                <div id="device-screen"> 
+                    <div id="device-buttons">
+                        <img id="follow" class="device-button" src="images/follow.png"\>
+                        <div class="tooltip" >
+                            <span class="tooltiptext" style="font-size: 70%;">Don't forget to press like, share, or bookmark!</span>
+                          </div>                          
+                           <img id="like" class="device-button" src="images/like.png"\>
+                            <!-- <div class="tooltip">
+                            <span class="tooltiptext" style="font-size: 70%;">Check out this menu to see how the algorithm is changing!</span>
+                          </div>    -->
+                           <img id="share" class="device-button" src="images/bookmark.png"\>
+                        </div>    
+                        <div class="nudge" style="display: none;">
+                            <p style="margin-top: 0; margin-bottom: 0;">Click this icon to see the algorithm update!</p>
+                        </div>
+                        <div class="swipe-tutorial-container">
+                            <div id="swipe-animation" class="swipe-animation">
+                                <img src="swipe-up.png" alt="Swipe Up Icon">
+                                <!-- <p style="color: grey;"">swipe up</p> -->
+                            </div>
+    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<template id="weightings-template">
+    <div class="top-info-row info-row">
+        <div class="weightings info-subtitle">
+            Weightings
+        </div>
+        <div class="info-exit-button">x</div>
+    </div>
+
+    <div class="info-row bar-container"> Likes:
+         <div class="bar">
+            <div class="bar-fill likes-bar"></div> 
+         </div> 
+    </div>
+
+    <div class="info-row bar-container"> Shares:
+        <div class="bar">
+           <div class="bar-fill shares-bar"></div> 
+        </div> 
+   </div>
+
+   <div class="info-row bar-container"> Follows:
+        <div class="bar">
+            <div class="bar-fill follows-bar"></div> 
+        </div> 
+    </div>
+</template>
+
+<template id="preferences-template">
+    <div class="preferences info-subtitle info-row">
+        Your Preferences
+    </div>
+
+    <div class="info-row bar-container pref-0"> <span class="param-0">???:</span> 
+        <div class="bar">
+           <div class="bar-fill" style="background-color: #EE4813;"></div> 
+        </div> 
+    </div>
+
+    <div class="info-row bar-container pref-1"> <span class="param-1">???:</span> 
+       <div class="bar">
+          <div class="bar-fill" style="background-color: #EE4813;"></div> 
+       </div> 
+   </div>
+
+    <div class="info-row bar-container pref-2"> <span class="param-2">???:</span> 
+       <div class="bar">
+           <div class="bar-fill" style="background-color: #EE4813;"></div> 
+       </div> 
+    </div>
+
+    <div class="info-row bar-container pref-3"> <span class="param-3">???:</span> 
+        <div class="bar">
+            <div class="bar-fill" style="background-color: #EE4813;"></div> 
+        </div> 
+     </div>
+</template>
+
+<template id="assumptions-template">
+    <div class="message-title">Our Assumptions</div>
+    <div class="assumption-subtitle">Your favorite color is <span class="assumption-color"></span>; we think this makes you <span class="assumption-color-analysis"></span>.</div>
+    <div class="assumption-subtitle">Your favorite shape is <span class="assumption-shape"></span>; we can tell you're probably <span class="assumption-shape-analysis"></span>.</div>
+    <div class="assumption-subtitle">Your favorite speed is <span class="assumption-speed"></span>; we think that you like to <span class="assumption-speed-analysis"></span>.</div>
+</template>
+
+<template id="algorithm-select-template">
+    <div class="alg-card">
+        <div class="alg-title">Algorithm X</div>
+        <div class="alg-subtitle">Key Preferences</div>
+        <div class="alg-interest-list"></div>
+        <div class="alg-weightings"><!-- Weightings chart goes in here --></div>
+    </div>
+</template>
+
+<template id="algorithm-create-template">
+    <div id="algorithm-create-card">
+        <div class="message-title" style="font-size: 200%; margin-left: 5%">
+            Create Your Algorithm
+        </div>
+        <div class="create-weightings">
+        </div>
+        <div class="message-subtitle" style="font-size: 200%; margin-left: 5%">Your Priorities</div>
+        <div class="select-priorities"></div>
+    </div>
+</template>
+
+<template id="algorithm-image-template">
+    <div class="my-alg"></div>
+    <div class="share-icons">
+        <img class="share-icon" src="images/fb.png"\>
+        <img class="share-icon" src="images/insta.png"\>
+        <img class="share-icon" src="images/tik_tok.png"\>
+        <img class="share-icon" src="images/twitter.png"\>
+    </div>
+</template>
+
+</html>

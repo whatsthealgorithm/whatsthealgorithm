@@ -95,6 +95,10 @@ async function initialize(){
     document.addEventListener("dragend", dragEnd);
     document.addEventListener("dragover", drag);
 
+    document.getElementById("title-div").addEventListener("click", ()=>{
+        window.location.href = '/index.html';
+    });
+
     let isFirstDrag = true;
 
     // Add an event listener for dragstart
@@ -147,6 +151,7 @@ async function initialize(){
     isMobile = $(window).width() < 767;
     menuButton.addEventListener("click", () => { toggleInfoMenu(true)} );
     exit.addEventListener("click", () => { toggleInfoMenu(false) });
+    console.log("Offset height: " + info.offsetHeight)
     menu.style.top = info.offsetHeight + "px";
     exit.style.display = "block";
     toggleInfoMenu(false);
@@ -304,7 +309,7 @@ function onIntroInterestButtonClicked(e) {
             // Update button style for the deselected trait
             Array.from(document.getElementsByTagName('button')).forEach(button => {
                 if (button.innerHTML === key) {
-                    button.style.backgroundColor = "antiquewhite";
+                    button.style.backgroundColor = "";
                 }
             });
         }
@@ -312,7 +317,7 @@ function onIntroInterestButtonClicked(e) {
 
     // Toggle the selected trait
     interestDict[trait] = !interestDict[trait];
-    e.target.style.backgroundColor = interestDict[trait] ? "#1ad631" : "antiquewhite";
+    e.target.style.backgroundColor = interestDict[trait] ? "#1ad631" : "";
     
     const isOneOfEachTypeSelected = checkIfOneOfEachTypeSelected();
     // Check if one of each type is selected
@@ -359,7 +364,7 @@ function onSelectInterestButtonClicked(e){
         selectInterestDict[e.target.innerHTML] = true;
     }
     else{
-        e.target.style.backgroundColor = "antiquewhite";
+        e.target.style.backgroundColor = "";
         selectInterestDict[e.target.innerHTML] = false;
     }
 }
