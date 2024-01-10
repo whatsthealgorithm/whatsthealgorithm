@@ -7,6 +7,11 @@
 
 a{
     text-decoration: none;
+    color: white;
+}
+
+a:hover{
+    color:rgba(137, 137, 137, 1) 
 }
 
 .titles{
@@ -27,7 +32,6 @@ a{
 }
 
 .subtitle:hover{
-    padding: 1vh 5%;
     color: #8cbadb;
 }
 
@@ -53,10 +57,6 @@ a{
 #get-started-title{
     margin-top: 5vh;
     margin-bottom: 3vh;
-}
-
-#get-started-title:hover{
-    color:rgba(137, 137, 137, 1)
 }
 
 body {

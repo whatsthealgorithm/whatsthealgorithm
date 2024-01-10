@@ -7,10 +7,8 @@ document.addEventListener("DOMContentLoaded", () => {
     template.userShape = "circle";
     template.userSpeedF = 1.0;
     device.appendChild(post);
-    device.addEventListener("click", goToGame);
-    document.getElementById("get-started-title").addEventListener("click", goToGame);
+    device.addEventListener("click", () =>{
+        document.getElementById("game-link").click();
+    });
 });
 
-function goToGame(){
-    window.location.href = './game.html';
-}
