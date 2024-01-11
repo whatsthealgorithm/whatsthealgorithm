@@ -248,6 +248,8 @@ function startIntro(){
 
 function onIntroButtonClicked(){
     var page =  introSequence[introIndex];
+    var arrow = document.getElementById("swipe-animation");
+    arrow.style.display="block";
     page.style.opacity = 0;
     setTimeout(() => { page.style.display = "none"; }, 100);
     introIndex++;
@@ -625,7 +627,6 @@ function tryNextPost(){
     if (currentPost + 1 < totalPosts && !waitingForMessage() && currentPost < maxPosts) {
         //update render here
         var deviceButtons = document.getElementById('device-buttons');
-        
         currentPost++;
         console.log("this is the current posts", currentPost)
         var tooltipElements = document.getElementsByClassName('tooltip');
@@ -635,7 +636,6 @@ function tryNextPost(){
 
         var menuicon = document.getElementById('info-icon')
         if (currentPost == 1) {
-            console.log("in there")
             tooltipElements[0].style.opacity = 1;
             tooltip2Elements[0].style.opacity = 1;
             deviceButtons.classList.add('not-hidden');
@@ -650,12 +650,10 @@ function tryNextPost(){
             tooltip2Elements[0].style.opacity = 0;
         }
         if (currentPost == 18) {
-            console.log("menu should show now")
             nudge[0].style.display = "block";
             menuicon.classList.add('not-hidden');
         }
         else if (currentPost == 19) {
-            console.log("menu should go away now")
             menuicon.classList.remove('not-hidden');
             nudge[0].style.display = "none";    
         }
