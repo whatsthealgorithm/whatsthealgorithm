@@ -35,6 +35,10 @@ a:hover{
     color: #8cbadb;
 }
 
+.subtitle.selected{
+    color: #5d8cae;;
+}
+
 #title-div{
     position: absolute;
     z-index: 10;
@@ -46,7 +50,7 @@ a:hover{
     align-items: center;
 }
 
-.info-body{
+#landing-body-div{
     padding-top: 1vh;
     font-family: Helvetica Neue, Arial, sans-serif;
     color: white;
@@ -55,8 +59,9 @@ a:hover{
 }
 
 #get-started-title{
-    margin-top: 5vh;
-    margin-bottom: 3vh;
+    margin-top: 7vh;
+    width: 100%;
+    text-align: center;
 }
 
 body {
@@ -68,6 +73,14 @@ body {
     overflow: hidden;
     touch-action: manipulation;
     background: url('../images/empty_background.png') no-repeat center center fixed; 
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+}
+
+#game-body{
+    background: url('../images/background.png') no-repeat center center fixed; 
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;
@@ -784,8 +797,8 @@ transition: opacity 2s ease;
         padding: 10px 20px;
     }   
     
-    .info-body{
-        width: 40%;
+    #landing-body-div{
+        width: 35%;
     }
 
     .info-content{
@@ -793,9 +806,24 @@ transition: opacity 2s ease;
         height: 150vh;
     }
 
-    #landing-device{
+    #landing-device{  
         filter: drop-shadow(0px 0px 10px #ffffff);
         cursor: pointer;
+        height: 100%;
+    }
+
+    #landing-device-section{
+        padding-left: 5%;
+    }
+
+    #info-body{
+        padding-top: 5vh;
+        display: flex;
+        justify-content: center;
+    }
+
+    #get-started-title{
+        margin-bottom: 5vh;
     }
 }
 
@@ -837,8 +865,12 @@ transition: opacity 2s ease;
         text-shadow: 2px 2px 3px #282828;
     }
     
-    .info-body{
-        width: 85%;
+    #info-body{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-bottom: 10%;
     }    
 
     .info-content{
@@ -849,15 +881,35 @@ transition: opacity 2s ease;
         overflow: scroll;
     }
 
+    #landing-body-div{
+        padding: 7%;
+    }
+
     #landing-device{
         filter: drop-shadow(0px 0px 10px #ffffff);
         width: 80%;
         height: auto;
-        aspect-ratio: 18 / 18;  /* Based off of iPhone device dimension, 19.5:9 */
+        aspect-ratio: 18 / 39;  /* Based off of iPhone device dimension, 19.5:9 */
         border: 7px solid black;
-        border-bottom-style: none;
-        border-top-left-radius: 45px;
-        border-top-right-radius: 45px;
+        border-radius: 45px;
+        margin: auto;
+    }
+
+    #get-started-title{
+        margin-top: 5vh;
+        margin-bottom: 1vh;
+    }
+
+    .subtitles{
+        flex-wrap: wrap;
+    }
+
+    #landing-device-section{
+        width: 100%;
+    }
+
+    #start-arrow{
+        display: none;
     }
 }
 
