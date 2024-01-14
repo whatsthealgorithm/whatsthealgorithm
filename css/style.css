@@ -67,7 +67,7 @@ body {
     font-family: 'JetBrains Mono', monospace;
     overflow: hidden;
     touch-action: manipulation;
-    background: url('../images/background.png') no-repeat center center fixed; 
+    background: url('../images/empty_background.png') no-repeat center center fixed; 
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;
@@ -149,7 +149,7 @@ body {
     max-width: 414px;
     max-height: 881px;
     z-index: 1;
-    background-image: url('../images/background.png');
+    background-image: url('../images/empty_background.png');
 }
 
 #device-screen{
