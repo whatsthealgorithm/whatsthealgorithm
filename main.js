@@ -386,6 +386,10 @@ function loadContent(amount, idList){
         post.setAttribute('draggable', true);
         device.appendChild(post);
         var entry = {id: id, div: post, type: isMessagePost ? "message" : "content", confirmed: false, isFollowed: false, isLiked: false, isShared: false};
+        // Make user able to scroll past algorithm cards
+        if (isMessagePost && scriptByIndex[totalPosts + i].dataId == "algorithm-select-template"){
+            entry.confirmed = true;
+        }
         posts.push(entry);
         contentIndex += isMessagePost ? 0 : 1;
         // If we just made a message post, still make sure we create the specified amount of content posts

@@ -27,8 +27,9 @@ a:hover{
 }
 
 .subtitle{
-    padding: 1vh 5%;
+    padding: 1vh 0;
     color: #b5e0ff;
+    margin-right: 10%;
 }
 
 .subtitle:hover{
@@ -187,7 +188,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    background-color: var(--bg-color)
+    background-color: var(--bg-color);
     text-align: center;
     width: 100%;
     align-items: center;
@@ -392,7 +393,6 @@ body {
     background-color: var(--bg-color);
     flex-direction: column;
     justify-content: center;
-
 }
 
 #intro-2 {
@@ -756,6 +756,10 @@ background-color: #f0f0f0;
 transition: opacity 2s ease;
 }
 
+#landing-body{
+    overflow: scroll;
+}
+
 /* desktop */
 @media only screen and (min-width: 768px) {
     #content{
@@ -775,6 +779,23 @@ transition: opacity 2s ease;
         aspect-ratio: 18 / 39;  /* Based off of iPhone device dimension, 19.5:9 */
         border: 7px solid black;
         border-radius: 45px;
+    }
+
+    @supports not (height: 100dvh) {
+        #device-column{
+            height: 100vh;
+        }
+
+        .intro-page{
+            height: 80vh;
+        }
+    }
+
+    @supports not (aspect-ratio: 18 / 39) {
+        .device{
+            height: 90%;
+            width: 43%;
+        }
     }
 
     .intro-title{
@@ -803,7 +824,6 @@ transition: opacity 2s ease;
 
     .info-content{
         padding-top: 10vh;
-        height: 150vh;
     }
 
     #landing-device{  
@@ -814,6 +834,7 @@ transition: opacity 2s ease;
 
     #landing-device-section{
         padding-left: 5%;
+        max-height: 70vh;
     }
 
     #info-body{
@@ -824,6 +845,7 @@ transition: opacity 2s ease;
 
     #get-started-title{
         margin-bottom: 5vh;
+        line-height: 1;
     }
 }
 
@@ -875,10 +897,6 @@ transition: opacity 2s ease;
 
     .info-content{
         padding-top: 6vh;
-    }
-
-    #landing-body{
-        overflow: scroll;
     }
 
     #landing-body-div{
