@@ -78,7 +78,7 @@
             "index": "27",
             "dataId": "algorithm-image-template",
             "title": "<span class='smaller-title'>Thanks for helping us make our app better!</span>",
-            "body": "Curious about what we've covered? Check out the debrief <br> Want to learn more about algorithms, how they work, and their impact on our lives? Here are some resources. <br> Wondering how if you made different choices things would've looked different? Replay the game."
+            "body": "<span>Curious about what we've covered? Check out the debrief <br> Want to learn more about algorithms, how they work, and their impact on our lives? Here are some resources. <br> Wondering how if you made different choices things would've looked different? <a href='./game.html' style='color: #2251F8'>Replay the game. </a></span>"
         }
     ]
 }
