@@ -96,12 +96,11 @@ body {
 }
 
 #info-column{
-    align-items: center;
     justify-content: center;
     display: flex;
     position: absolute;
     z-index: 5;
-    align-items: end;
+    align-items: flex-end;
     width: 100%;
     height: 100%;
     pointer-events: none; 
@@ -795,6 +794,15 @@ transition: opacity 2s ease;
         .device{
             height: 90%;
             width: 43%;
+        }
+
+        #landing-device-section{
+            height: 485px;
+            width: 231px;
+        }
+
+        #landing-device{
+            width: 100%;
         }
     }
 
