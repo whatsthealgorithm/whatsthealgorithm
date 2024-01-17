@@ -24,6 +24,10 @@ const emojiBounce = ( sketch ) => {
 
         let speed = device.offsetWidth * 0.66 ;
 
+        // Reset sketch in case we're returning after a while
+        if (sketch.deltaTime > 30){
+            sketch.deltaTime = 0;
+        }
         let delta_time = sketch.deltaTime / 1000.0;
 
         //initialize if we're on frame 1
