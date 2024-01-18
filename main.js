@@ -515,10 +515,16 @@ function dragStart(e){
 
 function drag(e) {
     e.preventDefault();
+    if (e.target.classList.contains("message-button")){
+        return;
+    }
     move(e.pageY);
 }
 
 function touchMove(e){
+    if (e.target.classList.contains("message-button")){
+        return;
+    }
     move(e.touches[0].screenY);
 }
 

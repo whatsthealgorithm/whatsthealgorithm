@@ -33,7 +33,7 @@ button{
 .subtitle{
     padding: 1vh 0;
     color: #b5e0ff;
-    margin-right: 10%;
+    margin: 0 5%;
 }
 
 .subtitle:hover{
@@ -228,6 +228,7 @@ body {
 
 .smaller-title{
     font-size: 70%;
+    line-height: 0%;
 }
 
 .smaller-text{

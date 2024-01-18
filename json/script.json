@@ -32,7 +32,7 @@
         {
             "trigger": "preferences-dont-match",
             "title": "Got it.",
-            "body": "There can be a mismatch between the signals we pick up on and what you intend. <br> Here's how we've been weighing your interactions; knowing this can help you more intentionally customize your feed: ",
+            "body": "There can be a mismatch between the signals we pick up on and what you intend. <br><br> Here's how we've been weighing your interactions; knowing this can help you more intentionally customize your feed: ",
             "buttons": ["Continue"],
             "buttonTriggers": ["show-preferences"]
         },
@@ -40,7 +40,7 @@
         {
             "trigger": "show-preferences",
             "dataId": "preferences-template",
-            "body": "While you've been clicking those buttons, we've crafted a profile of you based on those actions.",
+            "body": "<br>While you've been clicking those buttons, we've crafted a profile of you based on those actions.",
             "buttons": ["View"],
             "buttonTriggers": ["show-weightings"]
         },
@@ -48,7 +48,7 @@
         {
             "trigger": "show-weightings",
             "dataId": "weightings-template",
-            "body": "You can review how your data is changing by clicking the icon on the lower left as you continue to scroll.",
+            "body": "<br>You can review how your data is changing by clicking the icon on the lower left as you continue to scroll.",
             "buttons": ["Show me more!"],
             "buttonTriggers": ["algo-create"]
         },
@@ -78,7 +78,7 @@
             "index": "27",
             "dataId": "algorithm-image-template",
             "title": "<span class='smaller-title'>Thanks for helping us make our app better!</span>",
-            "body": "<span>Curious about what we've covered? Check out the debrief <br> Want to learn more about algorithms, how they work, and their impact on our lives? Here are some resources. <br> Wondering how if you made different choices things would've looked different? <a href='./game.html' style='color: #2251F8'>Replay the game. </a></span>"
+            "body": "<span>Curious about what we've covered? Check out the debrief <br><br> Want to learn more about algorithms, how they work, and their impact on our lives? Here are some resources. <br><br> Wondering how if you made different choices things would've looked different? <a href='./game.html' style='color: #2251F8'>Replay the game. </a></span>"
         }
     ]
 }
