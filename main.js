@@ -580,15 +580,21 @@ function move(currentY){
 
 function dragEnd(e) {
     e.preventDefault();
+    if (e.target.classList.contains("message-button")){
+        return;
+    }
     moveEnd();
 }
 
 function touchEnd(e){
+    if (e.target.classList.contains("message-button")){
+        return;
+    }
     moveEnd();
 }
 
 function moveEnd(){
-    if (inIntro){
+    if (inIntro || disableMessages){
         return;
     }
 
@@ -695,7 +701,6 @@ function snapToCurrentPost(){
             'opacity': '0',
         });
     });
-    console.log("Current post is " + currentPost + " and snapping to target margin " + targetMarginTop);
 
     if (posts[currentPost].type == "message"){
         setTimeout(() => {
@@ -1096,12 +1101,17 @@ function setButtonInteractions(){
 }
 
 function onAlgorithmCardClicked(e){
+    if (disableMessages){
+        return;
+    }
+    disableMessages = true;
     //Extract index from id
     var id = e.target.closest(".alg-card").id;
     var index = parseInt(e.target.id.split("-").slice(-1));
     posts[currentPost].confirmed = true;
     tryNextPost();
     snapToCurrentPost();
+    setTimeout(() => { disableMessages = false; }, pageSwipeTime);
 }
 
 function toggleDebug(){
@@ -1161,7 +1171,6 @@ document.addEventListener('DOMContentLoaded', function () {
     nudge = document.getElementsByClassName('nudge')[0];
 
     image1.addEventListener('click', function () {
-        console.log("hi")
         deviceButtons.classList.remove('not-hidden');
         tooltip.style.opacity = 0;    
     tooltip.style.opacity = 0;    
