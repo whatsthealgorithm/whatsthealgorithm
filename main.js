@@ -594,7 +594,7 @@ function touchEnd(e){
 }
 
 function moveEnd(){
-    if (inIntro || disableMessages){
+    if (inIntro || disableMessages || animating){
         return;
     }
 
