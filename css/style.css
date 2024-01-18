@@ -14,6 +14,10 @@ a:hover{
     color:rgba(137, 137, 137, 1) 
 }
 
+button{
+    color: black;
+}
+
 .titles{
     font-family: "Staatliches", sans-serif;
     color: white;

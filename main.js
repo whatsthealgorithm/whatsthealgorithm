@@ -6,6 +6,7 @@ var debugMenu;
 var introPages;
 var deviceButtons;
 var scrollTimeout;
+var nudge;
 
 var posts = [];
 var buttonCounts = {follows: 0, likes: 0, shares: 0};
@@ -63,12 +64,6 @@ const disable_scroll_up = 0;
 //     'userColor': 'blue',
 //     'userShape': 'triangle'
 // }
-
-// On Page Load
-$(document).ready(function() { 
-    initialize();
-});
-
 
  // to show tutorial on page 2
 // if (contentIndex === 2) {
@@ -635,10 +630,7 @@ function tryNextPost(){
         console.log("this is the current posts", currentPost)
         var tooltipElements = document.getElementsByClassName('tooltip');
         var tooltip2Elements = document.getElementsByClassName('tooltiptext');
-        var nudge = document.getElementsByClassName('nudge');
 
-
-        var menuicon = document.getElementById('info-icon')
         if (currentPost == 1) {
             tooltipElements[0].style.opacity = 1;
             tooltip2Elements[0].style.opacity = 1;
@@ -654,12 +646,12 @@ function tryNextPost(){
             tooltip2Elements[0].style.opacity = 0;
         }
         if (currentPost == 18) {
-            nudge[0].style.display = "block";
-            menuicon.classList.add('not-hidden');
+            nudge.style.display = "block";
+            menuButton.classList.add('not-hidden');
         }
         else if (currentPost == 19) {
-            menuicon.classList.remove('not-hidden');
-            nudge[0].style.display = "none";    
+            menuButton.classList.remove('not-hidden');
+            nudge.style.display = "none";    
         }
         // See if we need to load more posts
         if (currentPost + 1 >= totalPosts && totalPosts < maxPosts){
@@ -677,6 +669,9 @@ function tryNextPost(){
 function tryLastPost(){
     if (currentPost != 0){
         currentPost--;
+    }
+    if (currentPost == 25){
+        menuButton.style.display = "block";
     }
 }
 
@@ -700,6 +695,7 @@ function snapToCurrentPost(){
             'opacity': '0',
         });
     });
+    console.log("Current post is " + currentPost + " and snapping to target margin " + targetMarginTop);
 
     if (posts[currentPost].type == "message"){
         setTimeout(() => {
@@ -925,7 +921,7 @@ function onMessageButtonClicked(e){
         }
     }
     if (button === "Explore") {
-        document.getElementById("info-icon").style.display = "none";
+        menuButton.style.display = "none";
     }
 
     if (!posts[currentPost].confirmed){
@@ -1138,6 +1134,7 @@ function toggleInfoMenu(show){
     if (!show){
         menu.style.top = info.offsetHeight + "px";
         menuButton.style.opacity = 1;
+        nudge.style.display = "none";
         menuShowing = false;
     }
     else{
@@ -1155,36 +1152,39 @@ document.getElementById('click-detector').addEventListener('click', function() {
 });
 
 document.addEventListener('DOMContentLoaded', function () {
-var image1 = document.getElementById('follow');
-var image2 = document.getElementById('like');
-var image3 = document.getElementById('share');
-var tooltip = document.getElementsByClassName('tooltip')[0];
-var tooltiptext = document.getElementsByClassName('tooltiptext')[0];
-var deviceButtons = document.getElementById('device-buttons');
-var infoicon = document.getElementById('info-icon');
-var nudge = document.getElementsByClassName('nudge')[0];
+    var image1 = document.getElementById('follow');
+    var image2 = document.getElementById('like');
+    var image3 = document.getElementById('share');
+    var tooltip = document.getElementsByClassName('tooltip')[0];
+    var tooltiptext = document.getElementsByClassName('tooltiptext')[0];
+    var deviceButtons = document.getElementById('device-buttons');
+    nudge = document.getElementsByClassName('nudge')[0];
 
-image1.addEventListener('click', function () {
-    console.log("hi")
-    deviceButtons.classList.remove('not-hidden');
+    image1.addEventListener('click', function () {
+        console.log("hi")
+        deviceButtons.classList.remove('not-hidden');
+        tooltip.style.opacity = 0;    
     tooltip.style.opacity = 0;    
-    tooltiptext.style.opacity = 0;
+        tooltip.style.opacity = 0;    
+        tooltiptext.style.opacity = 0;
 
-});
+    });
 
-image2.addEventListener('click', function () {
-    deviceButtons.classList.remove('not-hidden');
+    image2.addEventListener('click', function () {
+        deviceButtons.classList.remove('not-hidden');
+        tooltip.style.opacity = 0;    
     tooltip.style.opacity = 0;    
-    tooltiptext.style.opacity = 0;
+        tooltip.style.opacity = 0;    
+        tooltiptext.style.opacity = 0;
 
-});
-image3.addEventListener('click', function () {
-    deviceButtons.classList.remove('not-hidden');
+    });
+    image3.addEventListener('click', function () {
+        deviceButtons.classList.remove('not-hidden');
+        tooltip.style.opacity = 0;    
     tooltip.style.opacity = 0;    
-    tooltiptext.style.opacity = 0;
-});
-infoicon.addEventListener('click', function () {
-    nudge.style.display="none"
-    infoicon.classList.remove('not-hidden');    
-});
+        tooltip.style.opacity = 0;    
+        tooltiptext.style.opacity = 0;
+    });
+
+    initialize();
 });
