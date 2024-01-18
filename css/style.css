@@ -611,7 +611,11 @@ gap: 32px*/
 }
 
 .create-weightings{
-    margin-bottom: 10%;
+    margin-bottom: 5%;
+}
+
+.create{
+    margin: 5% 4% 1% 0;
 }
 
 .select-priorities{
@@ -936,6 +940,17 @@ transition: opacity 2s ease;
 
     #start-arrow{
         display: none;
+    }
+
+    .alg-card {
+        padding-top: 2%;
+        padding-bottom: 2%;
+        margin: 0 5% 2% 5%;
+    }
+
+    .interest-selection2{
+        padding: 1%;
+        width: 26%;
     }
 }
 
