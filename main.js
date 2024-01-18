@@ -595,6 +595,9 @@ function touchEnd(e){
 
 function moveEnd(){
     if (inIntro || disableMessages || animating){
+        if (waitingForMessage()){
+            snapToCurrentPost();
+        }
         return;
     }
 
