@@ -787,6 +787,7 @@ function setAlgorithmsForSelection(div){
         }
         var weightingsMenu = document.getElementById("weightings-template").content.cloneNode(true);
         var weightingsContainer = algCards[i].getElementsByClassName("alg-weightings")[0];
+        weightingsContainer.classList.add("alg-select-weightings");
         weightingsContainer.appendChild(weightingsMenu);
         weightingsContainer.getElementsByClassName("top-info-row")[0].style.display = "none";
         setWeightings(weightingsContainer, i);

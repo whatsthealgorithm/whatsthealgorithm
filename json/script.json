@@ -65,7 +65,7 @@
             "index": "25",
             "trigger": "hide-menu",
             "title": "<span class='smaller-title'>New Feature</span>",
-            "body": "<span class='smaller-text'>We hope that providing some transparency on how we're interpreting your interactions and what data we collected can help you engage with our app with greater control. <br><br> We're experimenting with a new feature where you can select from a number of algorithms to use in our app. <br><br>Here's a sneak peak of some examples of what these algorithms can look like.</span>",
+            "body": "We hope that providing some transparency on how we're interpreting your interactions and what data we collected can help you engage with our app with greater control. <br><br> We're experimenting with a new feature where you can select from a number of algorithms to use in our app. <br><br>Here's a sneak peak of some examples of what these algorithms can look like.",
             "buttons": ["Explore"],
             "buttonTriggers": ["continue"]
         },
