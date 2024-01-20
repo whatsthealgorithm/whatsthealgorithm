@@ -57,7 +57,7 @@ const crimsonRoom = ( sketch ) => {
         }
 
         sketch.fill(0);
-        sketch.text("fps "+sketch.frameRate(), w-150, device.offsetHeight-40);
+        // sketch.text("fps "+sketch.frameRate(), w-150, device.offsetHeight-40);
     };
 
 

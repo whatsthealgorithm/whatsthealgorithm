@@ -81,8 +81,8 @@
 
                     <div id="intro-0" class="intro-page" style="display:none">
                         <div class="intro-title">Welcome!</div>
-                        <div class="intro-paragraph">You are helping test our social media app to inform how it's developed. </div><br>
-                        <div class="intro-paragraph">We'll explain what you need to know about the app's technology as you go.</div>
+                        <div class="intro-paragraph">We're testing our algorithm, and want your help.</div><br>
+                        <div class="intro-paragraph">We'll show you sample content featuring animations of different colors, shapes, and speeds to test our recommender system's logic, while explaining how it works.</div>
                         <!-- <div class="intro-paragraph">Click below to start.</div> -->
                         <button class="intro-button">Start</button>
                     </div>
@@ -91,11 +91,11 @@
                         
                         <div class="welcome-title">Getting <br>started</div>
                         <div style="width: 100%; margin-bottom: 5%; border: 1px; border: 1px solid #000000;"></div>
-                        <div class="intro-paragraph">Select your preferred color, shape, and speed of content so we can get you started with some recommendations.</div>                        
+                        <div class="intro-paragraph">Select a preferred color, shape, and speed.</div>                        
                         <div id="intro-button-container"></div>                  
                         <!-- <div id="lujain">  -->
                         <div class="button-container">  
-                            <span id="error-message" style="color: red; display: none; font-size: 80%; position: absolute; margin-bottom: 10%;">Select one of each trait before continuing.</span>
+                            <span id="error-message" style="color: red; display: none; font-size: 80%; position: absolute; margin-bottom: 10%;">Select one of each trait.</span>
                     
                         <div id="click-detector" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0;"></div>
                         <button class="intro-button" id="interest-finished" disabled>Done</button>
@@ -113,13 +113,13 @@
                             <div class="ring" id="ring3"></div>
                             <div class="ring" id="ring4"></div>
                          </div>
-                        <div class="loading">Gathering more information about you...</div>
+                        <div class="loading">Collecting data about you...</div>
                     </div>
 
                     <div id="intro-3" class="intro-page" style="display:none">
-                        <div class="intro-paragraph" id="top-intro-paragraph">We found too many posts that match your interests and what we think you'd like to see.</div><br>
-                        <div class="intro-paragraph">We will start by showing you a random selection. We built a software program, "the algorithm", which will monitor how you interact with this content.</div><br>
-                        <div class="intro-paragraph">Make sure to like, share, and bookmark content you're intersted in, so the program can recommend new content accordingly.</div>
+                        <div class="intro-paragraph" id="top-intro-paragraph">First, our algorithm will randomly select content that matches your interests, and a few extra pieces to explore what else you like. </div><br>
+                        <div class="intro-paragraph"></div><br>
+                        <div class="intro-paragraph">Press follow, like, and bookmark for content you want to see more of, so the algorithm can calculate what type of content to keep showing you.</div>
                         <button class="intro-button">See content</button>
                     </div>
 
@@ -215,10 +215,13 @@
 </template>
 
 <template id="assumptions-template">
-    <div class="message-title">Our Assumptions</div>
-    <div class="assumption-subtitle">Your favorite color is <span class="assumption-color"></span>; we think this makes you <span class="assumption-color-analysis"></span>.</div>
-    <div class="assumption-subtitle">Your favorite shape is <span class="assumption-shape"></span>; we can tell you're probably <span class="assumption-shape-analysis"></span>.</div>
-    <div class="assumption-subtitle">Your favorite speed is <span class="assumption-speed"></span>; we think that you like to <span class="assumption-speed-analysis"></span>.</div>
+    <div class="message-title">Your Profile</div>
+    <div class="assumption-subtitle">Your favorite color is <span class="assumption-color"></span>; we think this makes you <span class="assumption-color-analysis"></span>. <br> <br> <b>Is that correct?</b></div>
+
+<!--     <div class="assumption-subtitle">Your favorite shape is <span class="assumption-shape"></span>; we can tell you're probably <span class="assumption-shape-analysis"></span>.</div>
+
+    <div class="assumption-subtitle">Your favorite speed is <span class="assumption-speed"></span>; we think that you like to <span class="assumption-speed-analysis"></span>.</div> -->
+
 </template>
 
 <template id="algorithm-select-template">
@@ -233,11 +236,11 @@
 <template id="algorithm-create-template">
     <div id="algorithm-create-card">
         <div class="message-title" style="font-size: 200%; margin-left: 5%; padding-bottom: 0;">
-            Create Your Algorithm
+            Behind the Algorithm
         </div>
         <div class="create-weightings">
         </div>
-        <div class="message-subtitle" style="font-size: 200%; margin-left: 5%">Your Priorities</div>
+        <!-- <div class="message-subtitle" style="font-size: 200%; margin-left: 5%">Your Priorities</div> -->
         <div class="select-priorities"></div>
     </div>
 </template>

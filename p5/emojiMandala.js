@@ -103,7 +103,7 @@ const emojiMandala = ( sketch ) => {
 
         sketch.fill(0)
         sketch.textSize(20)
-        sketch.text("fps "+sketch.frameRate(), device.offsetWidth-150, device.offsetHeight-40);
+        // sketch.text("fps "+sketch.frameRate(), device.offsetWidth-150, device.offsetHeight-40);
     };
 
 

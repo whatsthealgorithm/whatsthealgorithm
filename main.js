@@ -806,11 +806,16 @@ function setAlgorithmsForSelection(div){
 
 function setAlgorithmCreate(div){
     var weightingsDiv = div.getElementsByClassName("create-weightings")[0];
+
     var weightingsMenu = document.getElementById("weightings-template").content.cloneNode(true);
+
     weightingsDiv.append(weightingsMenu);
+
     div.getElementsByClassName("weightings")[0].style.display = "none";
     var bars = div.getElementsByClassName("bar");
+
     for (var i = 0; i < bars.length; i++){
+
         bars[i].id = "bar-" + i;
         bars[i].setAttribute('draggable', true);
         bars[i].addEventListener("click", onWeightingsBarClicked);
@@ -821,20 +826,31 @@ function setAlgorithmCreate(div){
         bars[i].addEventListener("touchend", onWeightingsBarTouchEnd);
     }
 
-    var buttonContainer = div.getElementsByClassName("select-priorities")[0];
+    var algoWeightings = recSys.ALGORITHMS[0][0];
 
-    var traits = recSys.getAllTraits();
-    for (var traitName in traits){
-        for (var i = 0; i < traits[traitName].length; i++){
-            var trait = traits[traitName][i];
-            var interestButton = document.createElement("button");
-            interestButton.className = "interest-selection create trait-" + traitName;
-            interestButton.innerHTML = trait;
-            interestButton.onclick = onSelectInterestButtonClicked;
-            buttonContainer.appendChild(interestButton);
-            selectInterestDict[trait] = false;
-        }
-    }
+    var likesBar = div.getElementsByClassName("likes-bar")[0];
+    likesBar.style.width = (35 * algoWeightings[0]) + "%";
+
+    var sharesBar = div.getElementsByClassName("shares-bar")[0];
+    sharesBar.style.width = (35 * algoWeightings[1]) + "%";
+
+    var followsBar = div.getElementsByClassName("follows-bar")[0];
+    followsBar.style.width = (35 * algoWeightings[2]) + "%"
+
+    // var buttonContainer = div.getElementsByClassName("select-priorities")[0];
+
+    // var traits = recSys.getAllTraits();
+    // for (var traitName in traits){
+    //     for (var i = 0; i < traits[traitName].length; i++){
+    //         var trait = traits[traitName][i];
+    //         var interestButton = document.createElement("button");
+    //         interestButton.className = "interest-selection create trait-" + traitName;
+    //         interestButton.innerHTML = trait;
+    //         interestButton.onclick = onSelectInterestButtonClicked;
+    //         buttonContainer.appendChild(interestButton);
+    //         selectInterestDict[trait] = false;
+    //     }
+    // }
 }
 
 function onWeightingsBarClicked(e){
@@ -903,11 +919,11 @@ function setAssumptions(div){
     var topShape = recSys.getTopTrait("shapes");
     var topSpeed = recSys.getTopTrait("speeds");
     div.getElementsByClassName("assumption-color")[0].innerHTML = topColor;
-    div.getElementsByClassName("assumption-shape")[0].innerHTML = topShape;
-    div.getElementsByClassName("assumption-speed")[0].innerHTML = topSpeed;
+    // div.getElementsByClassName("assumption-shape")[0].innerHTML = topShape;
+    // div.getElementsByClassName("assumption-speed")[0].innerHTML = topSpeed;
     div.getElementsByClassName("assumption-color-analysis")[0].innerHTML = recSys.getAssumption(topColor);
-    div.getElementsByClassName("assumption-shape-analysis")[0].innerHTML = recSys.getAssumption(topShape);
-    div.getElementsByClassName("assumption-speed-analysis")[0].innerHTML = recSys.getAssumption(topSpeed);
+    // div.getElementsByClassName("assumption-shape-analysis")[0].innerHTML = recSys.getAssumption(topShape);
+    // div.getElementsByClassName("assumption-speed-analysis")[0].innerHTML = recSys.getAssumption(topSpeed);
 }
 
 function onMessageButtonClicked(e){

@@ -12,8 +12,8 @@
         {
             "index": "12",
             "dataId": "assumptions-template",
-            "buttons": ["Done"],
-            "buttonTriggers": ["feedback-needed"]
+            "buttons": ["Yes", "No"],
+            "buttonTriggers": ["preferences-match", "preferences-dont-match"]
         },
         {
             "trigger": "feedback-needed",
@@ -25,14 +25,14 @@
         {
             "trigger": "preferences-match",
             "title": "Great!",
-            "body": "We're glad our measurements captured the right idea. <br> Here's how we've been weighing your interactions; knowing this can help you more intentionally customize your feed: ",
+            "body": "We're using the data we're collecting about you to make some assumptions about you, but these aren't always accurate. Here's the data we have on your preferences:",
             "buttons": ["Continue"],
             "buttonTriggers": ["show-preferences"]
         },
         {
             "trigger": "preferences-dont-match",
             "title": "Got it.",
-            "body": "There can be a mismatch between the signals we pick up on and what you intend. <br><br> Here's how we've been weighing your interactions; knowing this can help you more intentionally customize your feed: ",
+            "body": "There can be a mismatch between the signals we pick up on and what they really mean. <br><br> Here's the data we have on your preferences: ",
             "buttons": ["Continue"],
             "buttonTriggers": ["show-preferences"]
         },
@@ -40,22 +40,15 @@
         {
             "trigger": "show-preferences",
             "dataId": "preferences-template",
-            "body": "<br>While you've been clicking those buttons, we've crafted a profile of you based on those actions.",
+            "body": "<br>This is based on your interactions, here's how we've been weighing them:",
             "buttons": ["View"],
-            "buttonTriggers": ["show-weightings"]
-        },
-
-        {
-            "trigger": "show-weightings",
-            "dataId": "weightings-template",
-            "body": "<br>You can review how your data is changing by clicking the icon on the lower left as you continue to scroll.",
-            "buttons": ["Show me more!"],
             "buttonTriggers": ["algo-create"]
         },
 
         {
             "trigger": "algo-create",
             "dataId": "algorithm-create-template",
+            "body": "<br>Drag the bars above to change what the algorithm values more. <br> <br> On the next screens, click the menu on the bottom to see the data we collect on you in real time.",
             "buttons": ["Done"],
             "buttonTriggers": ["unlock-menu"]
         },
