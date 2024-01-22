@@ -23,6 +23,23 @@ button{
     color: white;
 }
 
+.onboarding {
+    position: relative;
+    overflow: hidden;
+}
+
+#onboarding_text {
+    text-align: center;
+    background: white;
+    color: black;
+
+    margin-top: 35%;
+    margin-left: 25%;
+    height: 15rem;
+    width: 50%;
+
+}
+
 .subtitles{
     font-family: "Staatliches", sans-serif;
     display: flex;

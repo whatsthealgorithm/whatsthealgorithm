@@ -77,6 +77,8 @@ const disable_scroll_up = 0;
 
 
 async function initialize(){
+
+
     await loadScript();
     
     device = document.getElementById("device-screen");
@@ -91,6 +93,11 @@ async function initialize(){
     document.addEventListener("dragover", drag);
 
     let isFirstDrag = true;
+
+
+    var onboardingButton = document.getElementsByClassName("onboarding-button")[0];
+    onboardingButton.addEventListener("click", onOnboardingClicked);
+
 
     // Add an event listener for dragstart
     document.addEventListener("dragend", function(event) {
@@ -115,6 +122,7 @@ async function initialize(){
     for (var i = 0; i < buttons.length; i++){
         buttons[i].addEventListener("click", onDeviceButtonClicked);
     };
+
 
     var introButtons = document.getElementsByClassName("intro-button");
     for (var i = 0; i < introButtons.length; i++){
@@ -239,6 +247,20 @@ function startIntro(){
         }
     }
     $("#interest-finished")[0].disabled = true;
+}
+
+
+function onOnboardingClicked() {
+
+    var onboarding = document.getElementsByClassName("onboarding")[0];
+
+    var device = document.getElementsByClassName("device")[0];
+
+    onboarding.style.display = "none";
+
+    device.style.display = "block";
+    toggleInfoMenu(false);
+
 }
 
 function onIntroButtonClicked(){
