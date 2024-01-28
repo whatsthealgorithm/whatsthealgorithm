@@ -683,11 +683,11 @@ function tryNextPost(){
             tooltipElements[0].style.opacity = 0;    
             tooltip2Elements[0].style.opacity = 0;
         }
-        if (currentPost == 18) {
+        if (currentPost == 16) {
             nudge.style.display = "block";
             menuButton.classList.add('not-hidden');
         }
-        else if (currentPost == 19) {
+        else if (currentPost == 17) {
             menuButton.classList.remove('not-hidden');
             nudge.style.display = "none";    
         }
