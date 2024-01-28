@@ -667,12 +667,13 @@ function tryNextPost(){
         console.log("this is the current posts", currentPost)
         var tooltipElements = document.getElementsByClassName('tooltip');
         var tooltip2Elements = document.getElementsByClassName('tooltiptext');
+        var arrow = document.getElementById("swipe-animation");
 
         if (currentPost == 1) {
             tooltipElements[0].style.opacity = 1;
             tooltip2Elements[0].style.opacity = 1;
-            deviceButtons.classList.add('not-hidden');
-        }
+            arrow.style.display="none";
+                }
         else if (currentPost ==2) {
             deviceButtons.classList.remove('not-hidden');
             tooltipElements[0].style.opacity = 0;    
