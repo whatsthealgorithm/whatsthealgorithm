@@ -3,7 +3,7 @@
         {
             "index": "6", 
             "title": "Good work!",
-            "body": "Our algorithm is adjusting its recommendations based on your interactions. Don't forget to use the like, share, and bookmark buttons to give the algorithm a signal of what to prioritize.",
+            "body": "Our algorithm is adjusting its recommendations based on your interactions. <br><br>Don't forget to use the like, share, and bookmark buttons to give the algorithm a signal of what to prioritize.",
             "buttons": ["Okay"],
             "buttonTriggers":  ["continue"]
         },
@@ -25,7 +25,7 @@
         {
             "trigger": "preferences-match",
             "title": "Great!",
-            "body": "We're using the data we're collecting about you to make some assumptions about you, but these aren't always accurate. Here's the data we have on your preferences:",
+            "body": "We use the data we're collecting about you to make some <span class='keyword'>assumptions</span>, but these aren't always accurate. <br> <br> Seeing what data we collected might help you understand how we got there: ",
             "buttons": ["Continue"],
             "buttonTriggers": ["show-preferences"]
         },
@@ -40,7 +40,7 @@
         {
             "trigger": "show-preferences",
             "dataId": "preferences-template",
-            "body": "<br>This is based on your interactions that signal to us your engagement with different types of content, here's how we've been weighing them:",
+            "body": "<br>This is based on your interactions, which signal to us your engagement with different types of content. <br><br>Here's how we've been weighing them:",
             "buttons": ["View"],
             "buttonTriggers": ["algo-create"]
         },
@@ -48,7 +48,7 @@
         {
             "trigger": "algo-create",
             "dataId": "algorithm-create-template",
-            "body": "<br>We think we should start letting people change these numbers. You can try dragging the bars above to change what the algorithm values more. <br> <br> On the upciming screens, we try to be more transparent and let you click the menu on the bottom to see the data we collect on you in real time.",
+            "body": "<br>What if you could <span class='keyword'>control</span> these weightings? You can drag the bars above to change what the algorithm values more. <br> <br> On the upcoming screens, we try to be <span class='keyword'>more transparent</span>, too; click the menu on the bottom left to see the data we collect on you in real time.",
             "buttons": ["Done"],
             "buttonTriggers": ["unlock-menu"]
         },
