@@ -95,7 +95,7 @@ async function initialize(){
     let isFirstDrag = true;
 
 
-    var onboardingButton = document.getElementsByClassName("onboarding-button")[0];
+    var onboardingButton = document.getElementsByClassName("onboarding_button")[0];
     onboardingButton.addEventListener("click", onOnboardingClicked);
 
 

@@ -4,10 +4,10 @@ const emojiSpiral = ( sketch ) => {
 
     let characters = [];
 
-    let grow_time = 4.0;
+    let grow_time = 4.0; //was 4.0
 
     //changed from 0.5 to 1.3
-    let spacing = 1.3;
+    let spacing = .5;
 
     let timer = 0;
 
@@ -25,6 +25,7 @@ const emojiSpiral = ( sketch ) => {
 
     sketch.draw = () => {
 
+        sketch.background(220);
         //generic emoji choices
         emoji_choices = ["😀","💩","😈","😻","🤡","🤮","😇","🤬",,"😱"];
 
@@ -42,7 +43,8 @@ const emojiSpiral = ( sketch ) => {
             emoji_choices = ["🌻","🍋","⭐","🍯","🌕","🍌","🔔","🐥","😀","😸"]
         }
 
-        let delta_t = sketch.deltaTime / 1000.0;
+        // let delta_t = sketch.deltaTime / 1000.0;
+        let delta_t = sketch.deltaTime / 6000.0;
         delta_t *= sketch.userSpeedF
         timer += delta_t;
 
@@ -61,6 +63,8 @@ const emojiSpiral = ( sketch ) => {
         }
 
         //update and draw
+
+        // for (let i=0; i<5; i++){
         for (let i=0; i<characters.length; i++){
             characters[i].timer += delta_t;
 
@@ -86,7 +90,7 @@ const emojiSpiral = ( sketch ) => {
         }
 
         //if it is time to kill our oldest, do that
-        if (characters[0].timer > grow_time){
+        if (characters[0].timer > grow_time / 3){
             characters.shift();
         }
 
