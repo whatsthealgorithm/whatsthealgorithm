@@ -670,6 +670,7 @@ function tryNextPost(){
         var arrow = document.getElementById("swipe-animation");
 
         if (currentPost == 1) {
+            deviceButtons.classList.add('not-hidden');
             tooltipElements[0].style.opacity = 1;
             tooltip2Elements[0].style.opacity = 1;
             arrow.style.display="none";
