@@ -3,7 +3,7 @@
         {
             "index": "6", 
             "title": "Good work!",
-            "body": "Our algorithm is adjusting its recommendations based on your interactions and other data such as your watch time, scrolling patterns, and what people with similar behavior patterns liked. <br><br>Don't forget to continue using the like, share, and bookmark buttons to signal to the algorithm what to prioritize!",
+            "body": "Our algorithm is adjusting its recommendations based on your interactions and other data such as your <span class='keyword'>watch time</span>, <span class='keyword'>scrolling patterns</span>, and what people with <span class='keyword'>similar profiles</span> liked.",
             "buttons": ["Okay"],
             "buttonTriggers":  ["continue"]
         },
@@ -25,8 +25,8 @@
         {
             "trigger": "preferences-match",
             "title": "Great!",
-            "body": "We use the data we're collecting about you to make some <span class='keyword'>assumptions</span>, but these aren't always accurate. <br> <br> On other apps, this can correspond to your gender, age, race, or even favorite hobbies, leading to recommendations that may feel eerily specific. <br><br> Seeing what data we collected might help you understand how we got there: ",
-            "buttons": ["Continue"],
+            "body": "We use the data we're collecting to make some <span class='keyword'>assumptions</span>. <br> <br> Beyond this simulation, this can correspond to your age, location, or hobbies, leading to recommendations that may feel eerily specific. <br><br> Seeing the data might help you understand how we got there: ",
+            "buttons": ["View Data"],
             "buttonTriggers": ["show-preferences"]
         },
         {
@@ -40,8 +40,8 @@
         {
             "trigger": "show-preferences",
             "dataId": "preferences-template",
-            "body": "<br>Learning what type of content you interact with most can help us understand what keeps you on our platform longest, regardless how you feel about it. <br><br>Here's how we've been weighing your interactions:",
-            "buttons": ["View"],
+            "body": "<br>Learning what content you interact with most can help us keep you on our platform longest. <br><br>Here's how we've been weighing your interactions:",
+            "buttons": ["View Breakdown "],
             "buttonTriggers": ["algo-create"]
         },
 

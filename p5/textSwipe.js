@@ -46,8 +46,8 @@ let thirdWords = [
         wordIndex = sketch.floor(sketch.random(1, 21));
 
           firstWord = firstWords[wordIndex];
-    secondWord = secondWords[wordIndex];
-thirdWord = thirdWords[wordIndex];
+            secondWord = secondWords[wordIndex];
+            thirdWord = thirdWords[wordIndex];
 
         // console.log(firstWord);
 
