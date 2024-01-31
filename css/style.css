@@ -553,11 +553,12 @@ gap: 32px*/
 }
 
 .interest-selection{
+    font-family: 'JetBrains Mono', monospace;
     background-color: var(--bg-color);
     padding: 3% 3%;
     margin: 10% 4% 1% 0;
     border-radius: 5%;
-    font-size: 100%;
+    font-size: 90%;
     border-radius: 1000px;
     border-color: black;
     gap: 10px;
@@ -592,15 +593,16 @@ gap: 32px*/
 }
 
 .trait-colors{
-    background: #b1bbdc;
+/*    background: #b1bbdc;*/
+background: #f0f0e1;
 }
 
 .trait-shapes{
-    background: #a7a0bc;
+    background: #dedece;
 }
 
 .trait-speeds{
-    background: #868195;
+    background: #c2c2b2;
 }
 
 #intro-loading-ring{

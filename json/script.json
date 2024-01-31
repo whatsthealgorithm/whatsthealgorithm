@@ -32,8 +32,8 @@
         {
             "trigger": "preferences-dont-match",
             "title": "Got it.",
-            "body": "There can be a mismatch between the signals the algorithm picks up on and what we think they mean. <br><br> This can lead apps to incorrectly assuming your interests, characteristics, or demographics. <br><br>We'll want to try sharing the data we have on our users' preferences which go into these profiles. Click continue to see yours: ",
-            "buttons": ["Continue"],
+            "body": "There can be a mismatch between the signals the algorithm picks up on and what we think they mean. <br><br>We want to try sharing the data that goes into these profiles. ",
+            "buttons": ["View Data"],
             "buttonTriggers": ["show-preferences"]
         },
 
