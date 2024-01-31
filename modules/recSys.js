@@ -28,7 +28,7 @@ function setup(){
     {
         assumptions = jsonData.assumptions;
     });
-    return $.getJSON('json/sketch_testing.json', function(jsonData, status, xhr)
+    return $.getJSON('json/sketches_safe.json', function(jsonData, status, xhr)
     {
         traits = jsonData.traits;
         styles = jsonData.styles;
