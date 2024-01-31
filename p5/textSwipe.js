@@ -6,6 +6,30 @@ const textSwipe = ( sketch ) => {
 
     var imgs = [];
 
+    let firstWord, secondWord, thirdWord;
+
+    let wordIndex = sketch.floor(sketch.random(1, 21));
+
+    let firstWords = [ "Bright", "Peaceful", "Colorful", "Joyful", "Secret", "Dancing", "Lighthouse", "Whispering", "Winter", "Playful", "Gentle", "Crispy", "Thunderstorm", "Morning", "Starlit", "Coffee", "Hidden", "Rustling", "Chirping", "Butterfly"];
+
+let secondWords = [
+  "morning", "river", "flowers", "laughter", "garden", "butterflies",
+  "guides", "wind", "snow", "kittens", "waves", "autumn",
+  "clears", "dew", "sky", "aroma", "waterfall", "palm",
+  "crickets", "wings"
+];
+
+let thirdWords = [
+  "sun", "flows", "bloom", "echoes", "whispers", "flutter",
+  "sailors", "soothes", "blankets", "frolic", "lull", "leaves",
+  "clears", "sparkles", "glows", "comforts", "cascades", "leaves",
+  "sing", "flutter"
+];
+
+  
+
+
+
     sketch.setup = () => {
         var deviceScreen = document.getElementById("device-screen");
         var canvas = sketch.createCanvas(deviceScreen.offsetWidth, deviceScreen.offsetHeight);
@@ -14,9 +38,18 @@ const textSwipe = ( sketch ) => {
     
         sketch.smooth();
         sketch.noStroke(); 
+
     };
 
     sketch.draw = () => {
+
+        wordIndex = sketch.floor(sketch.random(1, 21));
+
+          firstWord = firstWords[wordIndex];
+    secondWord = secondWords[wordIndex];
+thirdWord = thirdWords[wordIndex];
+
+        // console.log(firstWord);
 
         //console.log(device.offsetHeight);
 
@@ -35,9 +68,9 @@ const textSwipe = ( sketch ) => {
                 else        g.fill(255);
 
                 //could be any text here. could be randomzied too
-                g.text("JUNGLE", device.offsetWidth/2, device.offsetHeight/2 - y_spacing);
-                g.text("IS", device.offsetWidth/2, device.offsetHeight/2);
-                g.text("MASSIVE", device.offsetWidth/2, device.offsetHeight/2 + y_spacing);
+                g.text(firstWord, device.offsetWidth/2, device.offsetHeight/2 - y_spacing);
+                g.text(secondWord, device.offsetWidth/2, device.offsetHeight/2);
+                g.text(thirdWord, device.offsetWidth/2, device.offsetHeight/2 + y_spacing);
 
                 //put some shapes along the top and bottom
                 let shape_size = device.offsetHeight * 0.05;
