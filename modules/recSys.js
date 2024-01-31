@@ -1,5 +1,5 @@
 //ORDER: [[like weight, share weight, follow weight], [prioritizations]]
-const ALG_1 = [[1, 0.5, 2.5], []];
+const ALG_1 = [[2.5, 1, 0.5], []];
 const ALG_2 = [[0.5, 2, 1], ["science", "sports", "MENA"]];
 const ALG_3 = [[1, 1, 1], ["USA", "food", "travel"]];
 
