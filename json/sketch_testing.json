@@ -1,8 +1,8 @@
 {
     "sketches": [
         {
-            "id": "emojiBounce",
-            "style": "emoji"
+            "id": "textPop",
+            "style": "text"
         },
         {
             "id": "emojiSpiral",

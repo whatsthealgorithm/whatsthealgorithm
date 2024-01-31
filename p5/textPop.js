@@ -20,11 +20,37 @@ const textPop = ( sketch ) => {
         //do whatever you want with this raw text!
 
         //let raw_text = ["give", "me", "some", "pizza"];
-        let raw_text = ["can","I", "pet", "your", "dog?"];
+        let dict = [
+            ['a', 'cat', 'is', 'soft', 'and'],
+            ['dogs', 'run', 'fast', 'through', 'fields'],
+            ['code', 'is', 'fun', 'to', 'write'],
+            ['rain', 'falls', 'gently', 'on', 'green'],
+            ['tiny', 'ants', 'march', 'in', 'line'],
+            ['sun', 'sets', 'with', 'golden', 'glow'],
+            ['moon', 'glows', 'bright', 'in', 'sky'],
+            ['kids', 'play', 'happily', 'in', 'park'],
+            ['bugs', 'crawl', 'slowly', 'on', 'leaf'],
+            ['mice', 'hide', 'quietly', 'in', 'holes'],
+            ['wind', 'blows', 'through', 'rustling', 'trees'],
+            ['fish', 'swim', 'gracefully', 'in', 'pond'],
+            ['stars', 'shine', 'twinkling', 'in', 'night'],
+            ['dew', 'forms', 'glistening', 'on', 'green'],
+            ['bees', 'buzz', 'around', 'colorful', 'flower'],
+            ['frogs', 'jump', 'splashing', 'in', 'pond'],
+            ['fire', 'warms', 'cold', 'nights', 'cozily'],
+            ['books', 'tell', 'many', 'interesting', 'tales'],
+             ['time', 'flies', 'without', 'a', 'notice'],
+            ['dreams', 'spark', 'imagination', 'vividly', 'always'],
+            ['street','cat','stays','on','top'],
+            ['are','the','bird','sounds','real']
+];
+        // let raw_text = ["can","I", "pet", "your", "dog?"];
 
         words = [];
 
         let x_wander = device.offsetWidth * 0.22;
+
+        let raw_text = sketch.random(dict);
 
         for (let i=0; i<raw_text.length; i++){
             words.push({
