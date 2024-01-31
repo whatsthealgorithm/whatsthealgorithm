@@ -1,11 +1,11 @@
 {
     "sketches": [
         {
-            "id": "textSwipe",
-            "style": "text"
+            "id": "emojiSpiral",
+            "style": "emoji"
         },
         {
-            "id": "emojiSpiral",
+            "id": "emojiBounce",
             "style": "emoji"
         }
     ],

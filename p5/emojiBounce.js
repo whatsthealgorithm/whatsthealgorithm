@@ -32,7 +32,7 @@ const emojiBounce = ( sketch ) => {
 
         //initialize if we're on frame 1
         if (objs.length == 0){
-            for (let i=0; i<10; i++){
+            for (let i=0; i<8; i++){
 
                 let o = {
                     x: sketch.random(-padding, device.offsetWidth+padding),
@@ -78,8 +78,8 @@ const emojiBounce = ( sketch ) => {
             o.hit_time ++;
 
             //update
-            o.x += o.vx * speed * delta_time * sketch.userSpeedF;
-            o.y += o.vy * speed * delta_time * sketch.userSpeedF;
+            o.x += o.vx * speed * delta_time *.6 * sketch.userSpeedF;
+            o.y += o.vy * speed * delta_time *.6 * sketch.userSpeedF;
 
             //bounce on walls
             if (o.x < -padding)                     o.vx = 1;
