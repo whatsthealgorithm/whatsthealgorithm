@@ -25,7 +25,7 @@
         {
             "trigger": "preferences-match",
             "title": "Great!",
-            "body": "We use the data we're collecting to make some <span class='keyword'>assumptions</span>. <br> <br> Beyond this simulation, this can correspond to your age, location, or hobbies, leading to recommendations that may feel eerily specific. <br><br> Seeing the data might help you understand how we got there: ",
+            "body": "We use the data we're collecting to make some <span class='keyword'>assumptions</span>. <br> <br> Beyond this simulation, this can include your age, location, or hobbies, leading to recommendations that may feel eerily specific. <br><br> Seeing your data might help you understand how we got there: ",
             "buttons": ["View Data"],
             "buttonTriggers": ["show-preferences"]
         },
@@ -40,7 +40,7 @@
         {
             "trigger": "show-preferences",
             "dataId": "preferences-template",
-            "body": "<br>Learning what content you interact with most can help us keep you on our platform longest. <br><br>Here's how we've been weighing your interactions:",
+            "body": "<br>This is based on your interactions; here's how we've been weighting them:",
             "buttons": ["View Breakdown "],
             "buttonTriggers": ["algo-create"]
         },
@@ -48,7 +48,7 @@
         {
             "trigger": "algo-create",
             "dataId": "algorithm-create-template",
-            "body": "<br>What if you could <span class='keyword'>control</span> these weightings? You can drag the bars above to change what the algorithm values more. <br> <br> On the upcoming screens, we try to be <span class='keyword'>more transparent</span>, too; click the menu on the bottom left to see the data we collect on you in real time.",
+            "body": "You can drag the bars above to change what the algorithm values, and see the data in real time on future screens.",
             "buttons": ["Done"],
             "buttonTriggers": ["unlock-menu"]
         },
