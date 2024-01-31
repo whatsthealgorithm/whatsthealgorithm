@@ -44,7 +44,7 @@ const emojiSpiral = ( sketch ) => {
         }
 
         // let delta_t = sketch.deltaTime / 1000.0;
-        let delta_t = sketch.deltaTime / 8000.0;
+        let delta_t = sketch.deltaTime / 2000.0;
         delta_t *= sketch.userSpeedF
         timer += delta_t;
 
