@@ -48,7 +48,7 @@
         {
             "trigger": "algo-create",
             "dataId": "algorithm-create-template",
-            "body": "You can drag the bars above to change what the algorithm values, and see the data in real time on future screens.",
+            "body": "You can drag the bars above to change what the algorithm values, and see the data in real time in the final upcoming screens.",
             "buttons": ["Done"],
             "buttonTriggers": ["unlock-menu"]
         },
