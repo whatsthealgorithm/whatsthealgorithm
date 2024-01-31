@@ -9,6 +9,14 @@
             "style": "emoji"
         },
         {
+            "id":"emojiBounce",
+            "style": "emoji"
+        },
+        {
+            "id":"emojiSpiral",
+            "style": "emoji"
+        },
+        {
             "id": "leParc",
             "style": "hypnotic"
         },

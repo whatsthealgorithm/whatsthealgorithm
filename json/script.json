@@ -3,7 +3,7 @@
         {
             "index": "6", 
             "title": "Good work!",
-            "body": "Our algorithm is adjusting its recommendations based on your interactions. Don't forget to use the like, share, and bookmark buttons to give the algorithm a signal of what to prioritize.",
+            "body": "Our algorithm is adjusting its recommendations based on your interactions and other data such as your <span class='keyword'>watch time</span>, <span class='keyword'>scrolling patterns</span>, and what people with <span class='keyword'>similar profiles</span> liked.",
             "buttons": ["Okay"],
             "buttonTriggers":  ["continue"]
         },
@@ -25,14 +25,14 @@
         {
             "trigger": "preferences-match",
             "title": "Great!",
-            "body": "We're using the data we're collecting about you to make some assumptions about you, but these aren't always accurate. Here's the data we have on your preferences:",
-            "buttons": ["Continue"],
+            "body": "We use the data we're collecting to make some <span class='keyword'>assumptions</span>. <br> <br> Beyond this simulation, this can correspond to your age, location, or hobbies, leading to recommendations that may feel eerily specific. <br><br> Seeing the data might help you understand how we got there: ",
+            "buttons": ["View Data"],
             "buttonTriggers": ["show-preferences"]
         },
         {
             "trigger": "preferences-dont-match",
             "title": "Got it.",
-            "body": "There can be a mismatch between the signals the algorithm picks up on and what we think they mean. <br><br> We want to try something new and share the data we have on our users' preferences which go into these profiles. Click continue to see yours: ",
+            "body": "There can be a mismatch between the signals the algorithm picks up on and what we think they mean. <br><br> This can lead apps to incorrectly assuming your interests, characteristics, or demographics. <br><br>We'll want to try sharing the data we have on our users' preferences which go into these profiles. Click continue to see yours: ",
             "buttons": ["Continue"],
             "buttonTriggers": ["show-preferences"]
         },
@@ -40,15 +40,15 @@
         {
             "trigger": "show-preferences",
             "dataId": "preferences-template",
-            "body": "<br>This is based on your interactions that signal to us your engagement with different types of content, here's how we've been weighing them:",
-            "buttons": ["View"],
+            "body": "<br>Learning what content you interact with most can help us keep you on our platform longest. <br><br>Here's how we've been weighing your interactions:",
+            "buttons": ["View Breakdown "],
             "buttonTriggers": ["algo-create"]
         },
 
         {
             "trigger": "algo-create",
             "dataId": "algorithm-create-template",
-            "body": "<br>We think we should start letting people change these numbers. You can try dragging the bars above to change what the algorithm values more. <br> <br> On the upciming screens, we try to be more transparent and let you click the menu on the bottom to see the data we collect on you in real time.",
+            "body": "<br>What if you could <span class='keyword'>control</span> these weightings? You can drag the bars above to change what the algorithm values more. <br> <br> On the upcoming screens, we try to be <span class='keyword'>more transparent</span>, too; click the menu on the bottom left to see the data we collect on you in real time.",
             "buttons": ["Done"],
             "buttonTriggers": ["unlock-menu"]
         },

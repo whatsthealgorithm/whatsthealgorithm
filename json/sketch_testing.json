@@ -1,8 +1,12 @@
 {
     "sketches": [
         {
-            "id": "threeGrids",
-            "style": "3D"
+            "id": "textSwipe",
+            "style": "text"
+        },
+        {
+            "id": "emojiSpiral",
+            "style": "emoji"
         }
     ],
     "traits": {
