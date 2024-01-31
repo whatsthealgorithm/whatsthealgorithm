@@ -44,7 +44,7 @@ const emojiSpiral = ( sketch ) => {
         }
 
         // let delta_t = sketch.deltaTime / 1000.0;
-        let delta_t = sketch.deltaTime / 6000.0;
+        let delta_t = sketch.deltaTime / 8000.0;
         delta_t *= sketch.userSpeedF
         timer += delta_t;
 
@@ -90,7 +90,7 @@ const emojiSpiral = ( sketch ) => {
         }
 
         //if it is time to kill our oldest, do that
-        if (characters[0].timer > grow_time / 3){
+        if (characters[0].timer > grow_time / 4){
             characters.shift();
         }
 

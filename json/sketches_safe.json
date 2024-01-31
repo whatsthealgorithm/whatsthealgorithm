@@ -13,6 +13,10 @@
             "style": "emoji"
         },
         {
+            "id":"emojiSpiral",
+            "style": "emoji"
+        },
+        {
             "id": "leParc",
             "style": "hypnotic"
         },
