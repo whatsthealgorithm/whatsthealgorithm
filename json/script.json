@@ -32,7 +32,7 @@
         {
             "trigger": "preferences-dont-match",
             "title": "Got it.",
-            "body": "There can be a mismatch between the signals the algorithm picks up on and what we think they mean. <br><br>We want to try sharing the data that goes into these profiles. ",
+            "body": "There can be a mismatch between the signals the algorithm picks up on and what we think they mean. <br><br>For more trasparency, we'll share the data that goes into these profiles. ",
             "buttons": ["View Data"],
             "buttonTriggers": ["show-preferences"]
         },
@@ -57,8 +57,8 @@
         {
             "index": "25",
             "trigger": "hide-menu",
-            "title": "<span class='smaller-title'>New Feature</span>",
-            "body": "We hope that providing some transparency on how we're interpreting your interactions and what data we collected can help you engage with our app with greater control. <br><br> We're experimenting with a new feature where you can select from a number of algorithms to use in our app. <br><br>Here's a sneak peak of some examples of what these algorithms can look like.",
+            "title": "<span class='smaller-title'>Almost there!</span>",
+            "body": "We hope that being more <span id='class'>transparent</span> gives you better understanding and control. <br><br> To give you more <span class='keyword'>choice</span>, we're prototyping a feature where you can select from a number of algorithm designs. <br><br>Here's a sneak peak of some examples:",
             "buttons": ["Explore"],
             "buttonTriggers": ["continue"]
         },
