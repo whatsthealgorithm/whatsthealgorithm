@@ -150,13 +150,17 @@ async function initialize(){
     isMobile = $(window).width() < 767;
     menuButton.addEventListener("click", () => { toggleInfoMenu(true)} );
     exit.addEventListener("click", () => { toggleInfoMenu(false) });
+    console.log("Offset height: " + info.offsetHeight)
+    menu.style.top = info.offsetHeight + "px";
     exit.style.display = "block";
+    toggleInfoMenu(false);
 
     await recSys.setup();
 
     if(feed_testing === 1) {
         recSys.createNewUser(interestDict);
         setPreferences(menu);
+        toggleInfoMenu(false);
         var contentIdList = recSys.initializeFeed();
         console.log("this is the id list", contentIdList)
         loadContent(initialPostLoad, contentIdList);
@@ -255,6 +259,7 @@ function onOnboardingClicked() {
     onboarding.style.display = "none";
 
     device.style.display = "block";
+    toggleInfoMenu(false);
 
 }
 
