@@ -371,10 +371,10 @@ body {
 }
 @keyframes border-pulse {
     0%, 100% {
-        box-shadow: 0 0 15px 10px rgba(0, 0, 0, 0.7);
+        box-shadow: 0 0 15px 10px rgba(77, 170, 34, 0.7);
     }
     50% {
-        box-shadow: 0 0 30px 20px rgba(0, 0, 0, 1); /* More dramatic shadow change */
+        box-shadow: 0 0 30px 20px rgba(77, 170, 34, 1); /* More dramatic shadow change */
     }
 }
 

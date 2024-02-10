@@ -45,6 +45,8 @@ const deviceIconFilterOn = 'drop-shadow(0 5px 10px black) brightness(100%)'
 const deviceIconFilterOff = 'drop-shadow(0 5px 10px black) brightness(2000%)'
 
 import * as recSys from "recSys";
+import { updateAlg1 } from "recSys";
+import { ALGORITHMS } from "recSys";
 import * as canvas from "html2canvas";
 
 // FOR TESTING
@@ -854,12 +856,15 @@ function setAlgorithmCreate(div){
 
     var likesBar = div.getElementsByClassName("likes-bar")[0];
     likesBar.style.width = (35 * algoWeightings[0]) + "%";
+    // print( likesBar.style.width)
 
     var sharesBar = div.getElementsByClassName("shares-bar")[0];
     sharesBar.style.width = (35 * algoWeightings[1]) + "%";
+    // print(sharesBar.style.width)
 
     var followsBar = div.getElementsByClassName("follows-bar")[0];
     followsBar.style.width = (35 * algoWeightings[2]) + "%"
+    // print(followsBar.style.width)
 
     // var buttonContainer = div.getElementsByClassName("select-priorities")[0];
 
@@ -908,6 +913,56 @@ function moveWeightingsBar(x, bar){
     }
     var barFill = bar.getElementsByClassName("bar-fill")[0];
     barFill.style.width = (100 * x / bar.offsetWidth) + "%";
+}
+
+
+function updateAlgorithm(){
+    console.log("I DID IT MOM HADHAKJHFBADUGHGLAH")
+    // var createCard = $("#algorithm-create-card")[0];
+    // // var myAlgCard = createCard.cloneNode(true);
+    // // var myAlgBars = myAlgCard.getElementsByClassName("bar");
+    // // var createCardBars = createCard.getElementsByClassName("bar");
+    var createCard = document.getElementById("algorithm-create-card");
+    var likeBar = document.getElementsByClassName("bar-fill likes-bar")[0];
+    console.log("hi liyan,", likeBar.style.width)
+
+    var shareBar = document.getElementsByClassName("bar-fill shares-bar")[0];
+    var followBar = document.getElementsByClassName("bar-fill follows-bar")[0];
+    var newLike = createCard.getElementsByClassName("bar-fill likes-bar")[0];
+    console.log("hi lujain,", newLike.style.width)
+    var newShare = createCard.getElementsByClassName("bar-fill shares-bar")[0];
+    var newFollow = createCard.getElementsByClassName("bar-fill follows-bar")[0];
+    likeBar.style.width = newLike.style.width;
+    shareBar.style.width = newShare.style.width;
+    followBar.style.width = newFollow.style.width;
+
+    // Call the function in recSys.js to update ALG_1
+    console.log("this is the new algorithm, ", ALGORITHMS[0][0])
+
+    // Get the style width values (assuming they are in percentage)
+    var newLikeWidth = parseFloat(newLike.style.width); // Extract numerical value from style width
+    var newShareWidth = parseFloat(newShare.style.width);
+    var newFollowWidth = parseFloat(newFollow.style.width);
+
+    // Check if the extracted values are valid numbers before dividing
+    if (!isNaN(newLikeWidth) && !isNaN(newShareWidth) && !isNaN(newFollowWidth)) {
+        // Perform the division by 35
+        var newLikeDivided = newLikeWidth / 35;
+        var newShareDivided = newShareWidth / 35;
+        var newFollowDivided = newFollowWidth / 35;
+
+        // Use the divided values as needed
+        updateAlg1([newLikeDivided, newShareDivided, newFollowDivided]);
+    } else {
+        console.log("Error: Invalid style width values");
+    }
+
+
+
+
+    // updateAlg1([newLike/35, newShare/35, newFollow/35]);
+    console.log("this is the new algorithm, ", ALGORITHMS[0][0])
+
 }
 
 function setMyAlgorithm(div){
@@ -1016,6 +1071,8 @@ function processTrigger(trigger){
     }
     else if (trigger == "create-my-algorithm"){
         setMyAlgorithm($("#algorithm-image-template-div")[0]);
+        console.log("I DID IT MOM")
+        updateAlgorithm();
     }
     else if (trigger == "save-algorithm"){
         html2canvas($("#my-alg-card")[0]).then(function(canvas) {
@@ -1214,6 +1271,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var image1 = document.getElementById('follow');
     var image2 = document.getElementById('like');
     var image3 = document.getElementById('share');
+    var image4 = document.getElementById('info-icon');
     var tooltip = document.getElementsByClassName('tooltip')[0];
     var tooltiptext = document.getElementsByClassName('tooltiptext')[0];
     var deviceButtons = document.getElementById('device-buttons');
@@ -1222,7 +1280,7 @@ document.addEventListener('DOMContentLoaded', function () {
     image1.addEventListener('click', function () {
         deviceButtons.classList.remove('not-hidden');
         tooltip.style.opacity = 0;    
-    tooltip.style.opacity = 0;    
+        tooltip.style.opacity = 0;    
         tooltip.style.opacity = 0;    
         tooltiptext.style.opacity = 0;
 
@@ -1231,7 +1289,7 @@ document.addEventListener('DOMContentLoaded', function () {
     image2.addEventListener('click', function () {
         deviceButtons.classList.remove('not-hidden');
         tooltip.style.opacity = 0;    
-    tooltip.style.opacity = 0;    
+        tooltip.style.opacity = 0;    
         tooltip.style.opacity = 0;    
         tooltiptext.style.opacity = 0;
 
@@ -1239,10 +1297,23 @@ document.addEventListener('DOMContentLoaded', function () {
     image3.addEventListener('click', function () {
         deviceButtons.classList.remove('not-hidden');
         tooltip.style.opacity = 0;    
-    tooltip.style.opacity = 0;    
+        tooltip.style.opacity = 0;    
         tooltip.style.opacity = 0;    
         tooltiptext.style.opacity = 0;
     });
+
+    image4.addEventListener('click', function () {
+        image4.classList.remove('not-hidden');
+
+    });
+
+    document.addEventListener('click', function(event) {
+        if (event.target && event.target.id === 'Done-20') {
+            updateAlgorithm();
+        }
+    });
+
+    // document.getElementById('Done-20').addEventListener('click', updateAlgorithm);
 
     initialize();
 });

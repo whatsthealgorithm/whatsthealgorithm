@@ -509,4 +509,9 @@ function selectAtRandom(array, num){
     return selection;
 }
 
-export { ALGORITHMS, setup, createNewUser, initializeFeed, onContentSeen, onContentEngagement, onContentDisengagement, recommend, getAllTraits, getContentTraits, getTopInterests, getTopTrait, getAssumption, getContentSketchName };
+function updateAlg1 (newValues){
+    // ALGORITHMS[0] = newValues; // Update the values of ALG_1
+    ALG_1[0] = [newValues];
+}
+
+export { ALGORITHMS, updateAlg1, setup, createNewUser, initializeFeed, onContentSeen, onContentEngagement, onContentDisengagement, recommend, getAllTraits, getContentTraits, getTopInterests, getTopTrait, getAssumption, getContentSketchName };
