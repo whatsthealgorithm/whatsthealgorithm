@@ -521,7 +521,7 @@ background-color: var(--main-blue);
 }
 
 .intro-button{
-    height: 12%;
+    height: 8%;
     font-size: 150%;
     padding: 0 8%;
     margin-left: 5%;
@@ -759,7 +759,7 @@ background: #f0f0e1;
 #interest-finished {
     position: relative;
     z-index: 0;
-    height: 70%;
+    height: 100%;
     font-size: 150%;
     padding: 0 8%;
     margin-left: 5%;
