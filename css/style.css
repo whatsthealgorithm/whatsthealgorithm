@@ -10,6 +10,10 @@ a{
     color: white;
 }
 
+.about-links {
+    color: #b5e0ff;
+}
+
 a:hover{
     color:rgba(137, 137, 137, 1) 
 }
