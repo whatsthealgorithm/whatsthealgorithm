@@ -1,9 +1,11 @@
 //ORDER: [[like weight, share weight, follow weight], [prioritizations]]
 const ALG_1 = [[2.5, 1, 0.5], []];
-const ALG_2 = [[0.5, 2, 1], ["science", "sports", "MENA"]];
-const ALG_3 = [[1, 1, 1], ["USA", "food", "travel"]];
+const ALG_2 = [[0.5, 2, 1], ["🎶 music", "🛹 skate-boarding", "😌 ASMR"]];
+const ALG_3 = [[1, 1, 1], ["🥐 baking", "🚄 travel", "☕️ cafes"]];
+const ALG_4 = [[0.5, 0.5, 2.5], ["🔬 science", "📰 news", "🌿 nature"]];
 
-const ALGORITHMS = [ALG_1, ALG_2, ALG_3];
+
+const ALGORITHMS = [ALG_1, ALG_2, ALG_3, ALG_4];
 
 const MATCH_THRESHOLD = 2;
 const INITIAL_MATCHING_AMOUNT = 3;

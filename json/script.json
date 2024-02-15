@@ -32,7 +32,7 @@
         {
             "trigger": "preferences-dont-match",
             "title": "Got it.",
-            "body": "There can be a mismatch between the signals the algorithm picks up on and what we think they mean. <br><br>For more trasparency, we'll share the data that goes into these profiles. ",
+            "body": "There can be a mismatch between the signals the algorithm picks up on and what we think they mean. <br><br>For more <span class='keyword'>transparency</span>, we'll share the data that goes into these profiles. ",
             "buttons": ["View Data"],
             "buttonTriggers": ["show-preferences"]
         },
@@ -40,7 +40,7 @@
         {
             "trigger": "show-preferences",
             "dataId": "preferences-template",
-            "body": "<br>This is based on your interactions; here's how we've been weighting them:",
+            "body": "<br>This is based on <span class='keyword'>feedback loops</span> between the algorithm's recommendations and your interactions; click to see how we've been weighing your different interactions:",
             "buttons": ["View Breakdown "],
             "buttonTriggers": ["algo-create"]
         },
@@ -48,7 +48,7 @@
         {
             "trigger": "algo-create",
             "dataId": "algorithm-create-template",
-            "body": "You can drag the bars above to change what the algorithm values, and see the data in real time in the final upcoming screens.",
+            "body": "We are experimenting with giving people more <span class='keyword'>control</span>. You can drag the bars above to change what the algorithm values, and then see the data in real time.",
             "buttons": ["Done"],
             "buttonTriggers": ["unlock-menu"]
         },
@@ -58,7 +58,7 @@
             "index": "25",
             "trigger": "hide-menu",
             "title": "<span class='smaller-title'>Almost there!</span>",
-            "body": "We hope that being more <span id='class'>transparent</span> gives you better understanding and control. <br><br> To give you more <span class='keyword'>choice</span>, we're prototyping a feature where you can select from a number of algorithm designs. <br><br>Here's a sneak peak of some examples:",
+            "body": "We hope that being more <span id='class'>transparent</span> gives you better understanding and control. <br><br> To give you more <span class='keyword'>choices</span>, we're prototyping a feature where you can select from a number of algorithms designed by other people. <br><br>Here's a sneak peak of some examples:",
             "buttons": ["Explore"],
             "buttonTriggers": ["continue"]
         },
