@@ -71,7 +71,7 @@
             "index": "27",
             "dataId": "algorithm-image-template",
             "title": "<span class='smaller-title'>Thanks for helping us make our app better!</span>",
-            "body": "Wondering whether if you made different choices things would've looked different? <a href='./game.html' style='color: #2251F8'>Replay the game. </a><br><br> Here through Prolific? Complete the post-survey and finish the experiment <a href='https://nyu.qualtrics.com/jfe/form/SV_9NseWiefQcX0n5k'>here</a>. </span>"
+            "body": "Wondering whether if you made different choices things would've looked different? <a href='./game.html' style='color: #2251F8'>Replay the game. </a><br><br> Here through Prolific? Complete the post-survey and finish the experiment <a href='https://nyu.qualtrics.com/jfe/form/SV_9NseWiefQcX0n5k' style='color: #2251F8'>here</a>. </span>"
         }
     ]
 }
