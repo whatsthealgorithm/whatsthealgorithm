@@ -3,7 +3,7 @@
         {
             "index": "6", 
             "title": "Good work!",
-            "body": "Our algorithm is adjusting its recommendations based on your interactions and other data such as your <span class='keyword'>watch time</span>, <span class='keyword'>scrolling patterns</span>, and what people with <span class='keyword'>similar profiles</span> liked.",
+            "body": "Our algorithm is adjusting its recommendations based on your interactions and other data such as: <ul style='text-align: left'><li>watch time</li><li> scrolling patterns</li><li>what people with similar profiles liked</li><li>your behavior on other sites</li></ul>",
             "buttons": ["Okay"],
             "buttonTriggers":  ["continue"]
         },
@@ -25,14 +25,14 @@
         {
             "trigger": "preferences-match",
             "title": "Great!",
-            "body": "We use the data we're collecting to make some <span class='keyword'>assumptions</span>. <br> <br> Beyond this simulation, this can include your age, location, or hobbies, leading to recommendations that may feel eerily specific. <br><br> Seeing your data might help you understand how we got there: ",
+            "body": "We use the data we're collecting to make some <span class='keyword'>assumptions</span>. <br> <br> Outside this simulation, this can include your age, location, or hobbies, leading to recommendations that may feel eerily specific. <br><br> More <span id='keyword'>transparency</span> might help you understand how we got there: ",
             "buttons": ["View Data"],
             "buttonTriggers": ["show-preferences"]
         },
         {
             "trigger": "preferences-dont-match",
             "title": "Got it.",
-            "body": "There can be a mismatch between the signals the algorithm picks up on and what we think they mean. <br><br>For more <span class='keyword'>transparency</span>, we'll share the data that goes into these profiles. ",
+            "body": "There can be a mismatch between the signals the algorithm picks up on and what we think they mean. This can result in <span class='keyword'>inaccurate assumptions</span> about your demographics or interests. <br><br>For more <span class='keyword'>transparency</span>, we'll share the data that goes into these profiles. ",
             "buttons": ["View Data"],
             "buttonTriggers": ["show-preferences"]
         },
@@ -40,7 +40,7 @@
         {
             "trigger": "show-preferences",
             "dataId": "preferences-template",
-            "body": "<br>This is based on <span class='keyword'>feedback loops</span> between the algorithm's recommendations and your interactions; click to see how we've been weighing your different interactions:",
+            "body": "<br>This is based on <span class='keyword'>feedback loops</span> between the algorithm's recommendations and your interactions. <br><br> Click below to see how we've been weighing your different interactions:",
             "buttons": ["View Breakdown "],
             "buttonTriggers": ["algo-create"]
         },
@@ -48,7 +48,7 @@
         {
             "trigger": "algo-create",
             "dataId": "algorithm-create-template",
-            "body": "We are experimenting with giving people more <span class='keyword'>control</span>. You can drag the bars above to change what the algorithm values, and then see the data in real time.",
+            "body": "These weightings depend on what content and behavior our <span class='keyword'>company prioritizes</span>.<br><br>We're experimenting with giving users more <span class='keyword'>control</span>. You can <b>drag the bars above</b> to change what the algorithm values.",
             "buttons": ["Done"],
             "buttonTriggers": ["unlock-menu"]
         },
@@ -58,7 +58,7 @@
             "index": "25",
             "trigger": "hide-menu",
             "title": "<span class='smaller-title'>Almost there!</span>",
-            "body": "We hope that being more <span id='class'>transparent</span> gives you better understanding and control. <br><br> To give you more <span class='keyword'>choices</span>, we're prototyping a feature where you can select from a number of algorithms designed by other people. <br><br>Here's a sneak peak of some examples:",
+            "body": "We hope that being more <span class='keyword'>transparent</span> gives you better <span class='keyword'>understanding</span> and <span class='keyword'>control</span>. <br><br> To give you more <span class='keyword'>choices</span>, we're prototyping a feature where you can select from a number of algorithms designed by other people. <br><br>Here's a sneak peak of some examples:",
             "buttons": ["Explore"],
             "buttonTriggers": ["continue"]
         },
@@ -71,7 +71,7 @@
             "index": "27",
             "dataId": "algorithm-image-template",
             "title": "<span class='smaller-title'>Thanks for helping us make our app better!</span>",
-            "body": "Wondering whether if you made different choices things would've looked different? <a href='./game.html' style='color: #2251F8'>Replay the game. </a><br><br> Here through Prolific? Complete the post-survey and finish the experiment <a href='https://nyu.qualtrics.com/jfe/form/SV_9NseWiefQcX0n5k' style='color: #2251F8'>here</a>. </span>"
+            "body": "Wondering whether if you made different choices things would've looked different? <a href='./game.html' style='color: #2251F8'>Replay the game. </a>. </span>"
         }
     ]
 }
