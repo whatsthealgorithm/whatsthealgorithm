@@ -807,7 +807,7 @@ function setAlgorithmsForSelection(div){
     }
     // now go in and set all data for the algorithms 
     var algCards = div.getElementsByClassName("alg-card");
-    for (var i = 0; i < algCards.length; i++){
+    for (var i = 1; i < algCards.length; i++){
         algCards[i].id = "alg-" + i;
         algCards[i].addEventListener("click", onAlgorithmCardClicked);
         algCards[i].getElementsByClassName("alg-title")[0].innerHTML = "Algorithm " + i;
