@@ -1071,3 +1071,6 @@ transition: opacity 2s ease;
     }
   }
 
+#alg-0 {
+    display: none;
+}

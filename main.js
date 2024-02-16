@@ -670,6 +670,7 @@ function tryNextPost(){
         var tooltipElements = document.getElementsByClassName('tooltip');
         var tooltip2Elements = document.getElementsByClassName('tooltiptext');
         var arrow = document.getElementById("swipe-animation");
+        var infoIcon = document.getElementById("info-icon");
 
         if (currentPost == 1) {
             deviceButtons.classList.add('not-hidden');
@@ -693,6 +694,9 @@ function tryNextPost(){
         else if (currentPost == 17) {
             menuButton.classList.remove('not-hidden');
             nudge.style.display = "none";    
+        }
+        else if (currentPost ==25) {
+            infoIcon.style.opacity=0;
         }
         // See if we need to load more posts
         if (currentPost + 1 >= totalPosts && totalPosts < maxPosts){
@@ -802,6 +806,7 @@ function setPreferences(div){
 function setAlgorithmsForSelection(div){
     // populate the algorithms div with the rest of the algorithms 
     var algCard = div.querySelector(".alg-card");
+    var element = document.getElementById("alg-0");
     for (var i = 1; i < recSys.ALGORITHMS.length; i++){
         div.appendChild(algCard.cloneNode(true));
     }
