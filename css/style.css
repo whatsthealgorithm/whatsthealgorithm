@@ -12,6 +12,13 @@ a{
 
 .about-links {
     color: #b5e0ff;
+    text-decoration: none;
+}
+
+.about-links:hover {
+    text-decoration: underline;
+    text-decoration-style: wavy;
+    color: #b5e0ff !important;
 }
 
 a:hover{
