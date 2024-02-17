@@ -158,7 +158,7 @@ body {
     font-family: 'JetBrains Mono', monospace;
     overflow: hidden;
     touch-action: manipulation;
-    background: url('../images/empty_background.png') no-repeat center center fixed; 
+    background: #080416 url('../images/empty_background.png') no-repeat center center fixed; 
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;
