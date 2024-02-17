@@ -247,7 +247,7 @@ body {
     max-width: 414px;
     max-height: 881px;
     z-index: 1;
-    background-image: url('../images/empty_background.png');
+    background-image: #080416 url('../images/empty_background.png');
 }
 
 #device-screen{
