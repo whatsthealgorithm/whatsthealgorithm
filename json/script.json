@@ -71,7 +71,7 @@
             "index": "27",
             "dataId": "algorithm-image-template",
             "title": "<span class='smaller-title'>Thanks for helping us make our app better!</span>",
-            "body": "Wondering whether if you made different choices things would've looked different? <a href='./game.html' style='color: #2251F8'>Replay the game. </a></span> <br> Curious about the topics we've explored and what was going on behind the scenes? <a href='./debrief.html' style='color: #2251F8'>Check out the game debrief. </a>"
+            "body": "Wondering whether if you made different choices things would've looked different? <a href='./game.html' style='color: #2251F8'>Replay the game. </a></span> <br><br> Curious about the topics we've explored and what was going on behind the scenes? <a href='./debrief.html' style='color: #2251F8'>Check out the game debrief. </a>"
         }
     ]
 }
