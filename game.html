@@ -74,14 +74,14 @@
 
     <div class="onboarding" style="display:block"> 
         <div id="onboarding_text">
-        <p style="padding-top: 10px"><span style="background: black; color: #E6E6DE">FROM:</span> <span style="text-decoration:underline;"><b>Decifer Corp. Testing Center </b></span></p>
+        <p style="padding-top: 5px;"><span><b>FROM</b></span>: <span style=" background: #E6E6DE; color: #2251F8"><span style="border-bottom: dashed 1px"><b>DECIFER COMPANY TESTING CENTER </b></span></span></p>
         <p style="padding-top: 10px">
             Hi there! We run a popular social media app, but we've been getting more complaints recently about <span class="keyword">"the algorithm"</span> which plays an important role in what people see and experience. </p>
 
             <p style="padding-top: 10px"> People don't understand what the algorithm is, why it shows them certain things, and think it might be contributing to bigger problems in the world. </p>
 
         <p style="padding-top: 10px">
-            To make our app better, we built a simulation to test our algorithm's logic, explain how it works, and <span style="color: #EE4813">seek your input</span>. </p>
+            To make our app better, we built a simulation to test our <b>algorithm's logic</b>, explain <b>how it works</b>, and <b>seek your input</b>. </p>
 
         <button class="onboarding_button"> OPEN APP </button>
 
@@ -239,11 +239,22 @@
 
 <template id="assumptions-template">
     <div class="message-title">Your Profile</div>
-    <div class="assumption-subtitle">Our algorithm says your favorite color is <b><span class="assumption-color"></span></b>. <br><br> We think this makes you <b><span class="assumption-color-analysis"></span></b>. <br> <br> <span class="question">Is that correct?</span></div>
 
-<!--     <div class="assumption-subtitle">Your favorite shape is <span class="assumption-shape"></span>; we can tell you're probably <span class="assumption-shape-analysis"></span>.</div>
+    <script> 
 
-    <div class="assumption-subtitle">Your favorite speed is <span class="assumption-speed"></span>; we think that you like to <span class="assumption-speed-analysis"></span>.</div> -->
+        let assumption_index = Math.floor(Math.random() * 3);
+        console.log("assumption_index: ", assumption_index);
+        let selected_assumption = document.getElementsByClassName("assumption-subtitle")[assumption_index];
+        selected_assumption.style.display = "block";
+
+
+    </script>
+
+    <div class="assumption-subtitle" >Our algorithm says your favorite color is <b><span class="assumption-color"></span></b>. <br><br> We think this makes you <b><span class="assumption-color-analysis"></span></b>. <br> <br> <span class="question">Is that correct?</span></div>
+
+   <div class="assumption-subtitle">Your favorite shape is <b><span class="assumption-shape"></span></b>. <br> <br> We think this means you are <b><span class="assumption-shape-analysis"></span></b>.<br><br><span class="question">Is that correct? </span></div>
+
+    <div class="assumption-subtitle">Your favorite speed is <b><span class="assumption-speed"></span><b>.<br><br> We think you like to <b><span class="assumption-speed-analysis"></span><b>.<<br><br><span class="question">Is that correct?</span></div> 
 
 </template>
 

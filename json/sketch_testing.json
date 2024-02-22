@@ -12,7 +12,7 @@
     "traits": {
         "colors": ["red", "blue", "green"],
         "shapes": ["circle", "square", "triangle"],
-        "speeds": ["slow", "normal", "fast"]
+        "speeds": ["slow", "medium", "fast"]
     },
     "styles": ["emoji", "vaporwave", "hypnotic", "3D", "text"]
 }

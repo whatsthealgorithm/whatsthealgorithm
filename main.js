@@ -307,7 +307,7 @@ function getTraitType(trait){
         case "triangle":
             return "shape";
         case "slow":
-        case "normal":
+        case "medium":
         case "fast":
             return "speed";
         default:
@@ -1003,11 +1003,11 @@ function setAssumptions(div){
     var topShape = recSys.getTopTrait("shapes");
     var topSpeed = recSys.getTopTrait("speeds");
     div.getElementsByClassName("assumption-color")[0].innerHTML = topColor;
-    // div.getElementsByClassName("assumption-shape")[0].innerHTML = topShape;
-    // div.getElementsByClassName("assumption-speed")[0].innerHTML = topSpeed;
+    div.getElementsByClassName("assumption-shape")[0].innerHTML = topShape;
+    div.getElementsByClassName("assumption-speed")[0].innerHTML = topSpeed;
     div.getElementsByClassName("assumption-color-analysis")[0].innerHTML = recSys.getAssumption(topColor);
-    // div.getElementsByClassName("assumption-shape-analysis")[0].innerHTML = recSys.getAssumption(topShape);
-    // div.getElementsByClassName("assumption-speed-analysis")[0].innerHTML = recSys.getAssumption(topSpeed);
+    div.getElementsByClassName("assumption-shape-analysis")[0].innerHTML = recSys.getAssumption(topShape);
+    div.getElementsByClassName("assumption-speed-analysis")[0].innerHTML = recSys.getAssumption(topSpeed);
 }
 
 function onMessageButtonClicked(e){
