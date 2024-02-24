@@ -1,12 +1,28 @@
 {
     "sketches": [
         {
-            "id": "emojiSpiral",
-            "style": "emoji"
+            "id": "textSwipe",
+            "style": "text"
         },
         {
-            "id": "emojiBounce",
-            "style": "emoji"
+            "id": "textSwipe",
+            "style": "text"
+        },
+        {
+            "id": "textSwipe",
+            "style": "text"
+        },
+        {
+            "id": "textSwipe",
+            "style": "text"
+        },
+        {
+            "id": "textSwipe",
+            "style": "text"
+        },
+        {
+            "id": "textSwipe",
+            "style": "text"
         }
     ],
     "traits": {

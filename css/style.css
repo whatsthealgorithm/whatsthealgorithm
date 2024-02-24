@@ -48,13 +48,19 @@ button{
     color: #ff316a;
 }
 
-.onboarding {
+.onboarding{
     position: relative;
     overflow: hidden;
 }
 
 
-.onboarding_button {
+.offboarding {
+    position: relative;
+    overflow: hidden;
+    display: none;
+}
+
+.onboarding-button {
     background-color: var(--main-green);
     color: black;
 
@@ -82,12 +88,12 @@ button{
 
 }
 
-.onboarding_button:hover {
+.onboarding-button:hover {
     color: black;
     background-color: white;
 }
 
-#onboarding_text {
+#onboarding-text, #offboarding-text {
     text-align: center;
     color: black;
     background-color: var(--bg-color);
@@ -105,7 +111,7 @@ button{
 
 
 @media only screen and (max-width: 500px) {
-    #onboarding_text {
+    #onboarding-text, #offboarding-text {
         width: 75%;
         margin-left: 10%;
         margin-top: 5%;
@@ -113,7 +119,7 @@ button{
 }
 
 @media only screen and (min-width: 2000px) {
-    #onboarding_text {
+    #onboarding-text, #offboarding-text {
         width: 40%;
         margin-left: 30%;
         padding: 25px;
@@ -122,13 +128,13 @@ button{
 }
 
 @media only screen and (min-height: 1500px) {
-    #onboarding_text {
+    #onboarding-text, #offboarding-text {
         margin-top: 35%;
     }
 }
 
 @media only screen and (max-width: 450px) {
-    #onboarding_text {
+    #onboarding-text, #offboarding-text {
         height: 70%;
         margin-top: 30%;
     }
@@ -589,6 +595,13 @@ background-color: var(--main-blue);
 /*border: 1px;*/
 gap: 32px;
 
+}
+
+.finish-button {
+    border: none;
+    background: none;
+    font-size: 140%;
+     font-family: 'JetBrains Mono', monospace;
 }
 
 .intro-button:hover {

@@ -58,7 +58,7 @@
             "index": "25",
             "trigger": "hide-menu",
             "title": "<span class='smaller-title'>Almost there!</span>",
-            "body": "We hope that being more <span class='keyword'>transparent</span> gives you better <span class='keyword'>understanding</span> and <span class='keyword'>control</span>. <br><br> To give you more <span class='keyword'>choices</span>, we're prototyping a feature where you can select from a number of algorithms designed by other people. <br><br>Here's a sneak peak of some examples:",
+            "body": "We hope that being more <span class='keyword'>transparent</span> gives you better <span class='keyword'>understanding</span> and <span class='keyword'>control</span>. <br><br> To give you more <span class='keyword'>choices</span>, we're prototyping a feature where you can select from a number of algorithms designed by other people. <br><br>Before you go, here's a sneak peak of some examples:",
             "buttons": ["Explore"],
             "buttonTriggers": ["continue"]
         },
@@ -70,9 +70,9 @@
         {
             "index": "27",
             "dataId": "algorithm-image-template",
-            "title": "<span class='smaller-title'>Thanks for helping us make our app better!</span>",
-            "body": "Wondering whether if you made different choices things would've looked different? <a href='./game.html' style='color: #2251F8'>Replay the game. </a></span> <br><br> Curious about the topics we've explored and what was going on behind the scenes? <a href='./debrief.html' style='color: #2251F8'>Check out the game debrief. </a>",
-            "buttons": ["<button id='complete'>Complete</button>"] 
+            "title": "<span class='smaller-title'>Thank you!</span>",
+            "body": "Wondering how different decisions would've changed your experience? <a href='./game.html' style='color: #2251F8'>Replay here</a></span>. <br><br> Otherwise, click below. </a>",
+            "buttons": ["<button class='finish-button' id='complete'>Complete</button>"] 
         }
     ]
 }

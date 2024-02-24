@@ -68,6 +68,7 @@ let thirdWords = [
                 else        g.fill(255);
 
                 //could be any text here. could be randomzied too
+                console.log("HERE")
                 g.text(firstWord, device.offsetWidth/2, device.offsetHeight/2 - y_spacing);
                 g.text(secondWord, device.offsetWidth/2, device.offsetHeight/2);
                 g.text(thirdWord, device.offsetWidth/2, device.offsetHeight/2 + y_spacing);

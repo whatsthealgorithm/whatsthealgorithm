@@ -250,23 +250,23 @@ function startIntro(){
 }
 
 
-function onOnboardingClicked() {
+// function onOnboardingClicked() {
 
-    var onboarding = document.getElementsByClassName("onboarding")[0];
+//     var onboarding = document.getElementsByClassName("onboarding")[0];
 
-    var device = document.getElementsByClassName("device")[0];
+//     var device = document.getElementsByClassName("device")[0];
 
-    onboarding.style.display = "none";
+//     onboarding.style.display = "none";
 
-    device.style.display = "block";
+//     device.style.display = "block";
 
-    // cheap fix for menu appearing bug 
-    menu.style.top = "500px";
-        menuButton.style.opacity = 1;
-        nudge.style.display = "none";
-        menuShowing = false;
+//     // cheap fix for menu appearing bug 
+//     menu.style.top = "500px";
+//         menuButton.style.opacity = 1;
+//         nudge.style.display = "none";
+//         menuShowing = false;
 
-}
+// }
 
 function onIntroButtonClicked(){
     var page =  introSequence[introIndex];
@@ -1014,6 +1014,8 @@ function setAssumptions(div){
 }
 
 function onMessageButtonClicked(e){
+
+
     if (disableMessages){
         return;
     }
@@ -1022,9 +1024,20 @@ function onMessageButtonClicked(e){
 
     //Extract index from id
     var index = parseInt(e.target.id.split("-").slice(-1));
+
     var message = scriptByIndex[index];
     if (message == null){
         console.log("ERROR: Cannot find message at index " + index);
+        document.getElementsByClassName("device")[0].style.display = "none";
+        document.getElementsByClassName("offboarding")[0].style.display = "block";
+
+        var this_color = recSys.getTopTrait("colors");
+
+        var color_text = document.getElementsByClassName("assumption-color")[0];
+        color_text.innerHTML = this_color;
+        color_text.style.color = this_color;
+
+
         return;
     }
 
@@ -1053,6 +1066,7 @@ function onMessageButtonClicked(e){
 
     //lighten screen
     document.getElementById("info").style.backgroundColor = "";
+
 
 }
 
@@ -1291,7 +1305,7 @@ else {
 
 function runOnStart() {
 
-     var onboardingButton = document.getElementsByClassName("onboarding_button")[0];
+    var onboardingButton = document.getElementsByClassName("onboarding-button")[0];
 
 
     var image1 = document.getElementById('follow');
@@ -1303,18 +1317,15 @@ function runOnStart() {
     var deviceButtons = document.getElementById('device-buttons');
     nudge = document.getElementsByClassName('nudge')[0];
 
-     onboardingButton.addEventListener("click", function () {
+    onboardingButton.addEventListener("click", function () {
         
-          var onboarding = document.getElementsByClassName("onboarding")[0];
+        var onboarding = document.getElementsByClassName("onboarding")[0];
+        var device = document.getElementsByClassName("device")[0];
+        onboarding.style.display = "none";
+        device.style.display = "block";
 
-    var device = document.getElementsByClassName("device")[0];
-
-    onboarding.style.display = "none";
-
-    device.style.display = "block";
-
-    // cheap fix for menu appearing bug 
-    menu.style.top = "500px";
+        // cheap fix for menu appearing bug 
+        menu.style.top = "500px";
         menuButton.style.opacity = 1;
         nudge.style.display = "none";
         menuShowing = false;
@@ -1362,4 +1373,5 @@ function runOnStart() {
     initialize();
         // Run your code here
 }
+
 
