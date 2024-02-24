@@ -82,7 +82,7 @@ async function initialize(){
 
 
     await loadScript();
-    
+
     device = document.getElementById("device-screen");
     menu = document.getElementById("info");
     menuButton = document.getElementById("info-icon");
@@ -97,8 +97,6 @@ async function initialize(){
     let isFirstDrag = true;
 
 
-    var onboardingButton = document.getElementsByClassName("onboarding_button")[0];
-    onboardingButton.addEventListener("click", onOnboardingClicked);
 
 
     // Add an event listener for dragstart
@@ -261,7 +259,12 @@ function onOnboardingClicked() {
     onboarding.style.display = "none";
 
     device.style.display = "block";
-    toggleInfoMenu(false);
+
+    // cheap fix for menu appearing bug 
+    menu.style.top = "500px";
+        menuButton.style.opacity = 1;
+        nudge.style.display = "none";
+        menuShowing = false;
 
 }
 
@@ -1272,7 +1275,25 @@ document.getElementById('click-detector').addEventListener('click', function() {
     }
 });
 
-document.addEventListener('DOMContentLoaded', function () {
+if(document.readyState !== 'loading') {
+    runOnStart();
+}
+else {
+    document.addEventListener('DOMContentLoaded', function () {
+        runOnStart();
+    });
+}
+
+// document.addEventListener('DOMContentLoaded', function () {
+    
+   
+// });
+
+function runOnStart() {
+
+     var onboardingButton = document.getElementsByClassName("onboarding_button")[0];
+
+
     var image1 = document.getElementById('follow');
     var image2 = document.getElementById('like');
     var image3 = document.getElementById('share');
@@ -1281,6 +1302,24 @@ document.addEventListener('DOMContentLoaded', function () {
     var tooltiptext = document.getElementsByClassName('tooltiptext')[0];
     var deviceButtons = document.getElementById('device-buttons');
     nudge = document.getElementsByClassName('nudge')[0];
+
+     onboardingButton.addEventListener("click", function () {
+        
+          var onboarding = document.getElementsByClassName("onboarding")[0];
+
+    var device = document.getElementsByClassName("device")[0];
+
+    onboarding.style.display = "none";
+
+    device.style.display = "block";
+
+    // cheap fix for menu appearing bug 
+    menu.style.top = "500px";
+        menuButton.style.opacity = 1;
+        nudge.style.display = "none";
+        menuShowing = false;
+
+    });
 
     image1.addEventListener('click', function () {
         deviceButtons.classList.remove('not-hidden');
@@ -1321,4 +1360,6 @@ document.addEventListener('DOMContentLoaded', function () {
     // document.getElementById('Done-20').addEventListener('click', updateAlgorithm);
 
     initialize();
-});
+        // Run your code here
+}
+

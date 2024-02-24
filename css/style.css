@@ -49,6 +49,7 @@ button{
     overflow: hidden;
 }
 
+
 .onboarding_button {
     background-color: var(--main-green);
     color: black;
@@ -58,7 +59,9 @@ button{
     padding: 0 3%;
     margin-left: 0%;
     margin-top: 1%;
-    margin-bottom: 2%;
+    margin-bottom: 3%;
+   
+
 /*    width: fit-content;*/
     
     width: 35%;
@@ -85,7 +88,7 @@ button{
     color: black;
     background-color: var(--bg-color);
 
-    margin-top: 15%;
+    margin-top: 13%;
     margin-left: 25%;
 /*    height: 25rem;*/
     width: 50%;
@@ -94,8 +97,8 @@ button{
     border: 20px var(--main-blue);
     border-style: solid none none none;
     text-wrap: balance;
-
 }
+
 
 @media only screen and (max-width: 500px) {
     #onboarding_text {
@@ -104,6 +107,29 @@ button{
         margin-top: 5%;
     }
 }
+
+@media only screen and (min-width: 2000px) {
+    #onboarding_text {
+        width: 40%;
+        margin-left: 30%;
+        padding: 25px;
+        font-size: 1.5rem;
+    }
+}
+
+@media only screen and (min-height: 1500px) {
+    #onboarding_text {
+        margin-top: 35%;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    #onboarding_text {
+        height: 70%;
+        margin-top: 30%;
+    }
+}
+
 
 .subtitles{
     font-family: "Staatliches", sans-serif;
@@ -475,7 +501,8 @@ body {
 .intro-page{
     position: absolute;
     padding: 10vh 5%;
-    height: 80dvh;
+/*    height: 80dvh;*/
+height: 100%;
     width: 90%;
     transition: opacity 0.1s ease-in-out;
     background-color: var(--bg-color);
@@ -536,11 +563,12 @@ background-color: var(--main-blue);
     height: 8%;
     font-size: 150%;
     padding: 0 8%;
-    margin-left: 5%;
+    margin-left: 10%;
     margin-top: 10%;
-    margin-bottom: -4%;
-/*    width: fit-content;*/    
-    width: 90%;
+/*    margin-bottom: 5%;*/
+/*    margin-bottom: -4%;*/
+    width: fit-content;    
+    width: 80%;
     background-color: var(--main-green);
     border-radius: 36px;
 
@@ -550,13 +578,11 @@ background-color: var(--main-blue);
 
     border: 1px solid #000000;
 
-    box-shadow: 0px 10px 0px 0px #000000;
+    box-shadow: 0px 6px 0px 0px #000000;
 
 
-/*
-border: 1px
-gap: 32px*/
-
+/*border: 1px;*/
+gap: 32px;
 
 }
 
