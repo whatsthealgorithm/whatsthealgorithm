@@ -932,12 +932,10 @@ function updateAlgorithm(){
     // // var createCardBars = createCard.getElementsByClassName("bar");
     var createCard = document.getElementById("algorithm-create-card");
     var likeBar = document.getElementsByClassName("bar-fill likes-bar")[0];
-    console.log("hi liyan,", likeBar.style.width)
 
     var shareBar = document.getElementsByClassName("bar-fill shares-bar")[0];
     var followBar = document.getElementsByClassName("bar-fill follows-bar")[0];
     var newLike = createCard.getElementsByClassName("bar-fill likes-bar")[0];
-    console.log("hi lujain,", newLike.style.width)
     var newShare = createCard.getElementsByClassName("bar-fill shares-bar")[0];
     var newFollow = createCard.getElementsByClassName("bar-fill follows-bar")[0];
     likeBar.style.width = newLike.style.width;
@@ -1371,7 +1369,6 @@ function runOnStart() {
     // document.getElementById('Done-20').addEventListener('click', updateAlgorithm);
 
     initialize();
-        // Run your code here
 }
 
 
