@@ -982,7 +982,8 @@ transition: opacity 2s ease;
     
     #landing-body-div {
 
-        width: 30%;
+/*        width: 30%;*/
+width: 50%;
     }
 
     #landing-body-div-home {
