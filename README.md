@@ -13,6 +13,12 @@ While research on how recommender systems function is prevalent in computer scie
 
 ## How did we build "The Algorithm"?
 
+The Algorithm was built following a research period, where we synthesized literature from across computer science, law, policy, and the social sciences, and attended conferences such as the <a href="https://knightcolumbia.org/events/optimizing-for-what-algorithmic-amplification-and-society" target="_blank" class="about-links">Algorithmic Amplification Symposium.
+
+We then wanted to build a first-person experience that uses the format people engage with these algorithsm in (i.e., a video-based social media feed) as the medium. To create a feed that would both be usable by people of different demographics, we used p5.jsanimations of different aesthetics (e.g., emoji, 3D, text-based), colors, speeds, and shapes.
+
+Using code-based animations allowed us to both change the meta features to create personalized content, and reproduce our animation pieces into a larger number of content pieces. Throughout the experience, our "algorithm" keeps track of what style, shape, color, and speed the user interacts with, and changes the recommendations accordingly.
+
 ## How to use "The Algorithm"
 You can access the game [here](www.whatsthealgorithm.com). If you want to use the codebase to build a new game/experience or to run experiments and user studies, make sure to cite the game/this repo!
 
