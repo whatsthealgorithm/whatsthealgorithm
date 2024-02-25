@@ -174,13 +174,14 @@ color: #ff316a;
     align-items: center;
 }
 
-#landing-body-div{
-    padding-top: 1vh;
+#landing-body-div,  #landing-body-div-home{
+/*    padding-top: 1vh;*/
     font-family: 'JetBrains Mono', monospace;
     color: white;
     font-size: 120%;
     line-height: 1.4em;
 }
+
 
 #get-started-title{
     margin-top: 7vh;
@@ -906,6 +907,9 @@ transition: opacity 2s ease;
 
 #landing-body{
     overflow: scroll;
+/*    width: 100%;*/
+/*    padding-left: 30%;*/
+/*    padding-right: 30%;*/
 }
 
 /* desktop */
@@ -946,13 +950,14 @@ transition: opacity 2s ease;
         }
 
         #landing-device-section{
-            height: 485px;
+            height: 465px;
             width: 231px;
         }
 
         #landing-device{
             width: 100%;
         }
+
     }
 
     .intro-title{
@@ -975,8 +980,14 @@ transition: opacity 2s ease;
         padding: 10px 20px;
     }   
     
-    #landing-body-div{
-        width: 35%;
+    #landing-body-div {
+
+        width: 30%;
+    }
+
+    #landing-body-div-home {
+        width: 27%;
+        margin-left: -18%;
     }
 
     .info-content{
@@ -1003,11 +1014,35 @@ transition: opacity 2s ease;
     #get-started-title{
         margin-bottom: 5vh;
         line-height: 1;
+        font-size: 5vh;
+    }
+
+}
+@media only screen and (min-width: 940px) {
+
+    #get-started-title{
+        font-size: 7vh;
     }
 }
 
+@media only screen and (min-width: 1430px) {
+
+    #get-started-title{
+        font-size: 7.5vh;
+    }
+}
+
+
+
 /* mobile */
 @media only screen and (max-width: 767px) {
+
+        #get-started-title{
+        margin-bottom: 5vh;
+        line-height: 1;
+        font-size: 6vh;
+    }
+
     #device-column{
         width: 100vw;
         height: 100dvh;
@@ -1044,6 +1079,9 @@ transition: opacity 2s ease;
         text-shadow: 2px 2px 3px #282828;
     }
     
+    .subtitles {
+/*        margin-bottom: -3dvh;*/
+    }
     #info-body{
         width: 100%;
         display: flex;
@@ -1058,7 +1096,15 @@ transition: opacity 2s ease;
 
     #landing-body-div{
         padding: 7%;
+        padding-top: 0dvh;
     }
+  #landing-body-div-home {
+    padding: 7%;
+    padding-top: 1.5dvh;
+  }
+    #landing-home {
+    padding-top: 10dvh;
+}
 
     #landing-device{
         filter: drop-shadow(0px 0px 10px #ffffff);
