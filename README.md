@@ -24,11 +24,11 @@ You can access the game [here](https://www.whatsthealgorithm.com). If you want t
 
 ```BibTeX
 @misc{thealgorithmexplainer_2024,
-  author = {Doe, John},
+  author = {Elkattan, Alia and Ibrahim, Lujain and Lee, Isabel and Wallace, Andy},
   title = {"The Algorithm"},
   year = {2024},
   publisher = {GitHub},
-  howpublished = {\url{https://github.com/whatsthealgorithm}},
+  howpublished = {\url{https://github.com/whatsthealgorithm/whatsthealgorithm}},
 }
 ```
 ## Contact
