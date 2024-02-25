@@ -29,6 +29,15 @@ button{
     color: black;
 }
 
+    .embed-form {
+        width: 100%;
+}   
+
+@media only screen and (max-width: 500px) {
+
+}
+
+
 .keyword {
     background: var(--main-green);
     color: black;
@@ -987,7 +996,7 @@ width: 50%;
     }
 
     #landing-body-div-home {
-        width: 27%;
+        width: 35%;
         margin-left: -18%;
     }
 
