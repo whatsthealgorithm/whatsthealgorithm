@@ -151,7 +151,7 @@ button{
 @media only screen and (max-width: 450px) {
     #onboarding-text, #offboarding-text {
         height: 65%;
-        margin-top: 20%;
+    margin-top: 45%;
     }
     .onboarding-button {
         margin-top: 7%;
@@ -159,19 +159,62 @@ button{
     }
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 400px) and (min-height: 700px) {
     #onboarding-text, #offboarding-text {
-        height: 80%;
-        margin-top: 10%;
+        height: 70%;
+        margin-top: 20%;
+/*        margin-top: 10%;*/
+        width: 80%;
+        margin-left: 7.5%;
     }
     .onboarding-button {
-        margin-top: 7%;
+        margin-top: 3%;
         width: 50%;
     }
 }
 
 
 
+@media only screen and (max-height: 680px) {
+    #onboarding-text, #offboarding-text {
+        height: 88%;
+        margin-top: 25px;
+        width: 80%;
+        margin-left: 7.5%;
+    }
+    .onboarding-button {
+        margin-top: 3%;
+        width: 50%;
+    }
+}
+
+
+
+@media only screen and (min-width: 800px) and (min-height: 1000px) {
+    #onboarding-text, #offboarding-text {
+        height: 35%;
+        margin-top: 40%;
+        width: 80%;
+        margin-left: 7.5%;
+    }
+    .onboarding-button {
+        margin-top: 3%;
+        width: 50%;
+    }
+}
+
+@media only screen and (min-width: 800px) and (min-height: 1300px) {
+    #onboarding-text, #offboarding-text {
+        height: 30%;
+        margin-top: 45%;
+        width: 80%;
+        margin-left: 7.5%;
+    }
+    .onboarding-button {
+        margin-top: 3%;
+        width: 50%;
+    }
+}
 
 .subtitles{
     font-family: "Staatliches", sans-serif;
