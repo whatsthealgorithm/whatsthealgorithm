@@ -161,11 +161,11 @@ button{
 
 @media only screen and (max-width: 400px) and (min-height: 700px) {
     #onboarding-text, #offboarding-text {
-        height: 70%;
-        margin-top: 20%;
+        height: 80%;
+        margin-top: 10%;
 /*        margin-top: 10%;*/
-        width: 80%;
-        margin-left: 7.5%;
+        width: 90%;
+        margin-left:  2.5%;
     }
     .onboarding-button {
         margin-top: 3%;
