@@ -25,7 +25,7 @@
         {
             "trigger": "preferences-match",
             "title": "Great!",
-            "body": "We use the data we're collecting to make some <span class='keyword'>assumptions</span>. <br> <br> Outside this simulation, this can include your age, location, or hobbies, leading to recommendations that may feel eerily specific. <br><br> More <span id='keyword'>transparency</span> might help you understand how we got there: ",
+            "body": "We use the data we're collecting to make some <span class='keyword'>assumptions</span>. <br> <br> Outside this simulation, this can include your age, location, or hobbies, leading to recommendations that may feel eerily specific. <br><br> More <span class='keyword'>transparency</span> might help you understand how we got there: ",
             "buttons": ["View Data"],
             "buttonTriggers": ["show-preferences"]
         },
