@@ -6,7 +6,7 @@ It would not have been possible without the contributions of these incredibly ta
 
 * [Isabel Lee](http://isabellee.me/), web & game development
 * [Andy Wallace](https://andymakes.com/), game design & development
-* [Gabriel Silveria](https://gabrielsilveira.com/), design & illustration
+* [Gabriel Silveira](https://gabrielsilveira.com/), design & illustration
 
 ## Why "The Algorithm"? 
 While research on how recommender systems function is prevalent in computer science and related fields, the public's understanding of “The Algorithm” is extremely limited. This project aims to change that. "The Algorithm" is a part of our greater mission of demystifying emerging technologies like algorithms and artificial intelligence, explaining both how they work and do not work, to the general public. We believe an informed public can more meaningfully participate in the development and regulation of these technologies, and that we can collectively shape our technological futures.
