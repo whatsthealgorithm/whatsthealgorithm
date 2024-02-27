@@ -58,7 +58,7 @@
             "index": "25",
             "trigger": "hide-menu",
             "title": "<span class='smaller-title'>Almost there!</span>",
-            "body": "We hope that being more <span class='keyword'>transparent</span> gives you better <span class='keyword'>understanding</span> and <span class='keyword'>control</span>. <br><br> To give you more <span class='keyword'>choices</span>, we're prototyping a feature where you can select from a number of algorithms designed by other people. <br><br>Before you go, here's a sneak peak of some examples:",
+            "body": "We hope that being more <span class='keyword'>transparent</span> gives you better <span class='keyword'>understanding</span> and <span class='keyword'>control</span>. <br><br> To give you more <span class='keyword'>choices</span>, we're prototyping a feature where you can select from a number of algorithms designed by other people. <br><br>Before you go, here's a quick sneak peak of what it might look like:",
             "buttons": ["Explore"],
             "buttonTriggers": ["continue"]
         },
