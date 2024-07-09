@@ -20,6 +20,9 @@ We then wanted to build a first-person experience that uses the format people en
 Using code-based animations allowed us to both change the meta features to create personalized content as well as multiply our animation pieces into a larger number of content pieces. Throughout the experience, our "algorithm" keeps track of what style, shape, color, and speed the user interacts with, and adjusts its recommendations accordingly.
 
 ## How to use "The Algorithm"
+
+The Algorithm © 2024 by Decifer Studio, Alia ElKattan, Lujain Ibrahim, Isabel Lee, Andy Wallace is licensed under CC BY-NC 4.0 
+
 You can access the game [here](https://www.whatsthealgorithm.com). If you want to use the codebase to build a new game/experience or to run experiments and user studies, make sure to cite the this repository:
 
 ```BibTeX
