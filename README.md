@@ -21,7 +21,7 @@ Using code-based animations allowed us to both change the meta features to creat
 
 ## How to use "The Algorithm"
 
-The Algorithm © 2024 by Decifer Studio, Alia ElKattan, Lujain Ibrahim, Isabel Lee, Andy Wallace is licensed under CC BY-NC 4.0 
+The Algorithm © 2024 by Decifer Studio, Alia ElKattan, Lujain Ibrahim, Isabel Lee, Andy Wallace is licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/)
 
 You can access the game [here](https://www.whatsthealgorithm.com). If you want to use the codebase to build a new game/experience or to run experiments and user studies, make sure to cite the this repository:
 
